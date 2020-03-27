@@ -5,6 +5,7 @@
  * @author WestLangley / http://github.com/WestLangley
  * @author erich666 / http://erichaines.com
  * @author ScieCode / http://github.com/sciecode
+ * @author DanZen / http://github.com/danzen/zimjs
  */
 
 // This set of controls performs orbiting, dollying (zooming), and panning.
@@ -14,13 +15,50 @@
 //    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
 //    Pan - right mouse, or left mouse + ctrl/meta/shiftKey, or arrow keys / touch: two-finger move
 
-THREE.OrbitControls = function ( object, domElement ) {
+THREE.OrbitControls = function ( object, domElement, zimControl ) {
 
-	if ( domElement === undefined ) console.warn( 'THREE.OrbitControls: The second parameter "domElement" is now mandatory.' );
-	if ( domElement === document ) console.error( 'THREE.OrbitControls: "document" should not be used as the target "domElement". Please use "renderer.domElement" instead.' );
+	// ZIM ADD ON to allow mouse and press moves on a ZIM object (such as stage) to control ThreeJS OrbitControls
+	if (zimControl) {
+
+		var isStage = zimControl.type.indexOf("Stage")>=0;
+
+		zimControl.on((isStage?"stagemousedown":"mousedown"), function(e) {
+			onMouseDown(e.nativeEvent); // declared below... as with the others
+			onTouchStart(e.nativeEvent);
+		});
+		zimControl.on(isStage?"stagemousemove":"pressmove", function(e) {
+			onTouchMove(e.nativeEvent);
+		});
+		zimControl.on(isStage?"stagemouseup":"pressup", function(e) {
+			onTouchEnd(e.nativeEvent);
+		});
+	}
+	// END ZIM ADD ON
+
+	// Function to add touches array to a pointer event - Dan Zen 10/24/2019
+	// Used in onMouseDown(), onTouchStart(), onTouchMove() and onTouchEnd()
+	// OrbitControls uses touch event objects with a TouchList of pageX and pageY data
+	// Current browsers use pointer event objects with a pointerId for each touch
+	// This function prepares a touches with pageX and pageY properties per touch
+	// and adds it to a pointer event.  It does nothing if event is touch based
+
+	var pointers = {}; // collect pointer data for active pointerIds
+	function addTouches(e) {
+		if (!e.touches) {
+			if (e.type == "pointerup") {
+				delete pointers[e.pointerId]; // note lowercase d
+			} else { // for pointerdown and pointermove
+				pointers[e.pointerId] = {pageX:e.pageX, pageY:e.pageY};
+			}
+			e.touches = [];
+			for(var pointer in pointers) {e.touches.push(pointers[pointer]);}
+		}
+	} // End Dan Zen change - see also onMouseDown(), onTouchStart(), onTouchMove() and onTouchEnd()
+
 
 	this.object = object;
-	this.domElement = domElement;
+
+	this.domElement = ( domElement !== undefined ) ? domElement : document;
 
 	// Set to false to disable this control
 	this.enabled = true;
@@ -258,7 +296,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 		document.removeEventListener( 'mousemove', onMouseMove, false );
 		document.removeEventListener( 'mouseup', onMouseUp, false );
 
-		scope.domElement.removeEventListener( 'keydown', onKeyDown, false );
+		window.removeEventListener( 'keydown', onKeyDown, false );
 
 		//scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
 
@@ -380,7 +418,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		return function pan( deltaX, deltaY ) {
 
-			var element = scope.domElement;
+			var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
 
 			if ( scope.object.isPerspectiveCamera ) {
 
@@ -484,7 +522,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
 
-		var element = scope.domElement;
+		var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
 
 		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientHeight ); // yes, height
 
@@ -630,6 +668,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	function handleTouchStartDolly( event ) {
 
+		if (!event.touches[ 1 ]) return; // Dan Zen
 		var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
 		var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
 
@@ -672,7 +711,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
 
-		var element = scope.domElement;
+		var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
 
 		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientHeight ); // yes, height
 
@@ -707,6 +746,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	function handleTouchMoveDolly( event ) {
 
+		if (!event.touches[ 1 ]) return; // Dan Zen
 		var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
 		var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
 
@@ -755,6 +795,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 		// Prevent the browser from scrolling.
 
 		event.preventDefault();
+
+		addTouches(event); // Dan Zen
 
 		// Manually set the focus since calling preventDefault above
 		// prevents the browser from setting it automatically.
@@ -968,6 +1010,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		event.preventDefault();
 
+		addTouches(event); // Dan Zen
+
 		switch ( event.touches.length ) {
 
 			case 1:
@@ -1055,6 +1099,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 		event.preventDefault();
 		event.stopPropagation();
 
+		addTouches(event); // Dan Zen
+
 		switch ( state ) {
 
 			case STATE.TOUCH_ROTATE:
@@ -1109,6 +1155,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		if ( scope.enabled === false ) return;
 
+		addTouches(event); // Dan Zen
+
 		handleTouchEnd( event );
 
 		scope.dispatchEvent( endEvent );
@@ -1125,7 +1173,6 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	}
 
-	//
 
 	scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
 
@@ -1136,15 +1183,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 	scope.domElement.addEventListener( 'touchend', onTouchEnd, false );
 	scope.domElement.addEventListener( 'touchmove', onTouchMove, false );
 
-	scope.domElement.addEventListener( 'keydown', onKeyDown, false );
-
-	// make sure element can receive keys.
-
-	if ( scope.domElement.tabIndex === - 1 ) {
-
-		scope.domElement.tabIndex = 0;
-
-	}
+	window.addEventListener( 'keydown', onKeyDown, false );
 
 	// force an update at start
 

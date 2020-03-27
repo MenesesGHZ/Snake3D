@@ -4,11 +4,18 @@
 window.addEventListener('load',()=>{
 
 
+
+
 let geometry_cube = new THREE.BoxGeometry(),
     geometry = new THREE.EdgesGeometry( geometry_cube ),
     material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 let wireframe = new THREE.LineSegments( geometry, material );
-scene.add( wireframe );
+
+
+scene.add(wireframe);
+
+
+
 
 
 /*Animation of Cell*/
