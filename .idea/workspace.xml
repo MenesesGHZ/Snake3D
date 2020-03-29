@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +111,7 @@
       <workItem from="1585118104989" duration="3775000" />
       <workItem from="1585172271922" duration="13961000" />
       <workItem from="1585255590861" duration="10893000" />
-      <workItem from="1585427997447" duration="8420000" />
+      <workItem from="1585427997447" duration="21889000" />
     </task>
     <servers />
   </component>
@@ -148,6 +150,10 @@
       <screen x="0" y="27" width="1307" height="741" />
     </state>
     <state x="308" y="224" key="com.intellij.ide.util.TipDialog/0.27.1307.741@0.27.1307.741" timestamp="1585427997708" />
+    <state x="301" y="136" width="704" height="522" key="find.popup" timestamp="1585506622810">
+      <screen x="0" y="27" width="1307" height="741" />
+    </state>
+    <state x="301" y="136" width="704" height="522" key="find.popup/0.27.1307.741@0.27.1307.741" timestamp="1585506622810" />
     <state x="316" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1585173166071">
       <screen x="0" y="27" width="1307" height="741" />
     </state>

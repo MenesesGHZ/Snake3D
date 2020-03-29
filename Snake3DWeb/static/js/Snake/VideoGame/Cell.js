@@ -4,12 +4,11 @@ window.addEventListener('load',()=>{
 
 let geometry_cube = new THREE.BoxGeometry(),
     geometry = new THREE.EdgesGeometry( geometry_cube ),
-    material = new THREE.LineBasicMaterial( { color: 0x000000} );
+    material = new THREE.LineBasicMaterial( { color: 0x000000,  transparent:true, opacity:0.15} );
 let wireframe = new THREE.LineSegments( geometry, material );
 
 
-
-let x = 4, y = 4, z = 4,
+let x = 3, y = 3, z = 3,
     x_index = 0, y_index = 0, z_index = 0,
     wireframeArray = triDimensionalArray(x,y,z);
 
