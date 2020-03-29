@@ -13,7 +13,7 @@ window.addEventListener("load",()=>{
     canvas = document.getElementById('canvas');
 
     camera = new THREE.PerspectiveCamera( 75, window_relation, 0.1, 1000 );
-    camera.position.set( 2, 2, 2 );
+    camera.position.set( 6, 6, 6 );
 	camera.rotation.y = Math.PI / 4;
 	camera.rotation.x = Math.atan( - 1 / Math.sqrt( 2 ) );
 
@@ -37,9 +37,6 @@ window.addEventListener("load",()=>{
         renderer.render( scene, camera );
     };
     animate();
-    setInterval(()=>{
-	console.log(camera.rotation.z);
-	},2000);
 
 });
 
