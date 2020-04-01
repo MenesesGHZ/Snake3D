@@ -5,7 +5,7 @@ window.addEventListener('load',()=>{
 
 let geometry_cube = new THREE.BoxGeometry(),
     geometry = new THREE.EdgesGeometry( geometry_cube ),
-    material = new THREE.LineBasicMaterial( { color: 0x000000,  transparent:true, opacity:0.15} );
+    material = new THREE.LineBasicMaterial( { color: 0x000000,  transparent:true, opacity:0.1} );
 let wireframe = new THREE.LineSegments( geometry, material );
 
 

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/GameLogic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Apple.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Apple.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" afterDir="false" />
@@ -115,7 +116,7 @@
       <workItem from="1585427997447" duration="21978000" />
       <workItem from="1585707448862" duration="8498000" />
       <workItem from="1585760800245" duration="693000" />
-      <workItem from="1585763243442" duration="2504000" />
+      <workItem from="1585763243442" duration="5157000" />
     </task>
     <servers />
   </component>
