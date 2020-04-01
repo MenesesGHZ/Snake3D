@@ -1,3 +1,4 @@
+let x = 4, y = 4, z = 4;
 
 
 window.addEventListener('load',()=>{
@@ -8,8 +9,7 @@ let geometry_cube = new THREE.BoxGeometry(),
 let wireframe = new THREE.LineSegments( geometry, material );
 
 
-let x = 6, y = 4, z = 5,
-    x_index = 0, y_index = 0, z_index = 0,
+let x_index = 0, y_index = 0, z_index = 0,
     wireframeArray = triDimensionalArray(x,y,z);
 
 wireframeArray = cellPositioner(x,y,z,wireframe,wireframeArray);

@@ -8,10 +8,9 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.snakeHead = new THREE.Mesh( new THREE.BoxGeometry(), this.material );
          this.lenght = 1;
          this.speed = 0.05;
-         this.direction = ['a','d','w','s','x','z']; //Necessary for AI
+         this.direction = ['a','d','w','s','e','q']; //Necessary for AI
          this.currentDirection = [0,0,0];
          this.chosenDirection = [0,0,0];
-         this.currentPosition = [0,0,0];
          this.debug = true;
          this.translationError = 0.01;
          this.isValidTransition = [true,true,true]
@@ -26,35 +25,26 @@ window.addEventListener('DOMContentLoaded', ()=>{
                this.chosenDirection = [0,0,1];
           else if(keyCode === 's') //back
              this.chosenDirection = [0,0,-1];
-          else if (keyCode === 'x') // up
+          else if (keyCode === 'e') // up
                this.chosenDirection = [0,1,0];
-          else if (keyCode === 'z') //down
+          else if (keyCode === 'q') //down
                this.chosenDirection = [0,-1,0];
       }
 
-
-
-
-
-
       move(){
          this.isValidTransition = [
-             Math.abs(this.currentPosition[0]-Math.round(this.currentPosition[0])) < this.translationError,
-             Math.abs(this.currentPosition[1]-Math.round(this.currentPosition[1])) < this.translationError,
-             Math.abs(this.currentPosition[2]-Math.round(this.currentPosition[2])) < this.translationError
+             Math.abs(this.snakeHead.position.x-Math.round(this.snakeHead.position.x)) < this.translationError,
+             Math.abs(this.snakeHead.position.y-Math.round(this.snakeHead.position.y)) < this.translationError,
+             Math.abs(this.snakeHead.position.z-Math.round(this.snakeHead.position.z)) < this.translationError
              ];
              if(this.isValidTransition[0] && this.isValidTransition[1] && this.isValidTransition[2]){
                  this.currentDirection = this.chosenDirection;
              }
-              this.currentPosition = [
-                this.currentPosition[0] + (this.currentDirection[0]*this.speed),
-                this.currentPosition[1] + (this.currentDirection[1]*this.speed),
-                this.currentPosition[2] + (this.currentDirection[2]*this.speed)
-            ];
-
-        this.snakeHead.position.set(this.currentPosition[0],
-                                         this.currentPosition[1],
-                                         this.currentPosition[2]);
+              this.snakeHead.position.set(
+                this.snakeHead.position.x + (this.currentDirection[0]*this.speed),
+                this.snakeHead.position.y + (this.currentDirection[1]*this.speed),
+                this.snakeHead.position.z + (this.currentDirection[2]*this.speed)
+              );
 
       }
    }
