@@ -23,7 +23,6 @@ window.addEventListener('load',()=>{
     let camera_control = new THREE.OrbitControls( camera,renderer.domElement);
 
     scene.add(snake.snakeHead);
-
     let animate = function () {
         requestAnimationFrame(animate);
         snake.move();
@@ -33,8 +32,9 @@ window.addEventListener('load',()=>{
     animate();
 
 /*Snake Listener*/
+    let keyCode;
     document.addEventListener("keydown", (event)=>{
-             let keyCode = event.key;
+             keyCode = event.key;
              snake.changeDirection(keyCode);
            });
 

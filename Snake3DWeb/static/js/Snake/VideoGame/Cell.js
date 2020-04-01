@@ -8,7 +8,7 @@ let geometry_cube = new THREE.BoxGeometry(),
 let wireframe = new THREE.LineSegments( geometry, material );
 
 
-let x = 3, y = 3, z = 3,
+let x = 6, y = 4, z = 5,
     x_index = 0, y_index = 0, z_index = 0,
     wireframeArray = triDimensionalArray(x,y,z);
 
