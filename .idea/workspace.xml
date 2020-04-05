@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/GameLogic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Apple.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Apple.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/GameLogic.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" afterDir="false" />
@@ -116,7 +114,16 @@
       <workItem from="1585427997447" duration="21978000" />
       <workItem from="1585707448862" duration="8498000" />
       <workItem from="1585760800245" duration="693000" />
-      <workItem from="1585763243442" duration="5157000" />
+      <workItem from="1585763243442" duration="5307000" />
+      <workItem from="1585770031996" duration="631000" />
+      <workItem from="1585845196775" duration="10000" />
+      <workItem from="1585868606863" duration="361000" />
+      <workItem from="1585870674509" duration="2722000" />
+      <workItem from="1585946441348" duration="2481000" />
+      <workItem from="1585968539144" duration="669000" />
+      <workItem from="1586031967810" duration="259000" />
+      <workItem from="1586040767948" duration="267000" />
+      <workItem from="1586041088983" duration="9530000" />
     </task>
     <servers />
   </component>
@@ -151,10 +158,12 @@
       <screen x="0" y="27" width="1307" height="741" />
     </state>
     <state x="134" y="31" width="1024" height="737" key="SettingsEditor/0.27.1307.741@0.27.1307.741" timestamp="1585263833281" />
-    <state x="308" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1585763253969">
+    <state x="308" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1586041101031">
       <screen x="0" y="27" width="1307" height="741" />
     </state>
-    <state x="308" y="224" key="com.intellij.ide.util.TipDialog/0.27.1307.741@0.27.1307.741" timestamp="1585763253969" />
+    <state x="307" y="224" key="com.intellij.ide.util.TipDialog/0.27.1301.741/0.27.1301.741@0.27.1301.741" timestamp="1586031968364" />
+    <state x="308" y="224" key="com.intellij.ide.util.TipDialog/0.27.1307.741@0.27.1307.741" timestamp="1586041101031" />
+    <state x="322" y="224" key="com.intellij.ide.util.TipDialog/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1586040767663" />
     <state x="301" y="136" width="704" height="522" key="find.popup" timestamp="1585506622810">
       <screen x="0" y="27" width="1307" height="741" />
     </state>

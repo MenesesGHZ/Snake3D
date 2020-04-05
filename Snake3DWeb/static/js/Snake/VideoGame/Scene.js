@@ -22,8 +22,9 @@ window.addEventListener('load',()=>{
 
     let camera_control = new THREE.OrbitControls( camera,renderer.domElement);
 
-    scene.add(snake.snakeHead);
+    scene.add(snake.body[0]);
     scene.add(apple.object);
+
     let animate = function () {
         requestAnimationFrame(animate);
         snake.move();
