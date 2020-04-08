@@ -2,7 +2,6 @@ let scene = null,
     window_relation = window.innerWidth / window.innerHeight;
 
 
-
 window.addEventListener('load',()=>{
     //let rx = document.getElementById('rx');
     scene = new THREE.Scene();

@@ -1,11 +1,9 @@
-let x = 4, y = 4, z = 4;
-
+let x = 5, y = 10, z = 3;
 
 window.addEventListener('load',()=>{
-
 let geometry_cube = new THREE.BoxGeometry(),
     geometry = new THREE.EdgesGeometry( geometry_cube ),
-    material = new THREE.LineBasicMaterial( { color: 0x000000,  transparent:true, opacity:0.1} );
+    material = new THREE.LineBasicMaterial( { color: 0x000000,  transparent:true, opacity:0.6} );
 let wireframe = new THREE.LineSegments( geometry, material );
 
 
@@ -23,10 +21,6 @@ window.CellAnimation = function(){
 
 
 });
-
-
-
-
 function triDimensionalArray(x,y,z) {
    let array = Array(x),
        x_index = 0, y_index = 0, z_index = 0;
@@ -40,7 +34,6 @@ function triDimensionalArray(x,y,z) {
    }
    return array;
 }
-
 function cellPositioner(x,y,z,object,triDimensionalArray){
    let x_index = 0, y_index = 0, z_index = 0;
       for(;x_index<x;x_index++){
@@ -55,7 +48,6 @@ function cellPositioner(x,y,z,object,triDimensionalArray){
             }
       return triDimensionalArray;
    }
-
    function addCellsToScene(wireframeArray,x,y,z){
       let x_index = 0, y_index = 0, z_index = 0;
       for(;x_index<x;x_index++){
@@ -69,6 +61,3 @@ function cellPositioner(x,y,z,object,triDimensionalArray){
                   y_index = 0;
                }
       }
-
-
-

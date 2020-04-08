@@ -11,7 +11,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.currentDirection = [[0,0,0]];
          this.chosenDirection = [0,0,0];
          this.volatileDirection = [0,0,0];
-
          this.translationError = 0.01;
          this.isValidTransition = [[true,true,true]];
          this.isValidEating = [false,false,false];
@@ -20,7 +19,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
             ];
          this.bodyIndex = 1;
       }
-
      changeDirection(keyCode){
           if (keyCode === 'a')  //left
                this.chosenDirection = [1,0,0];
@@ -35,7 +33,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
           else if (keyCode === 'q') //down
                this.chosenDirection = [0,-1,0];
       }
-
       move(){
             this.checkSnakeState();
             this.isValidTransition[0] = [
@@ -67,7 +64,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
                        if(this.isValidTransition[this.bodyIndex][0] && this.isValidTransition[this.bodyIndex][1] && this.isValidTransition[this.bodyIndex][2]){
                             this.currentDirection[this.bodyIndex] = this.volatileDirection;
-                            console.log(this.bodyIndex);
                            }
 
                        this.body[this.bodyIndex].position.set(
@@ -76,16 +72,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
                              this.body[this.bodyIndex].position.z + (this.currentDirection[this.bodyIndex][2]*this.speed)
                         );
                 }
-
-
              this.bodyIndex = 1;
-
-
-
-
-
       }
-
       checkSnakeState(){
           this.isValidEating = [
               Math.abs(this.body[0].position.x - apple.object.position.x ) < this.translationError,
@@ -110,9 +98,5 @@ window.addEventListener('DOMContentLoaded', ()=>{
           this.length += 1;
       }
    }
-
    snake = new Snake();
-
-
-
 });

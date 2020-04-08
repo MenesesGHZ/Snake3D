@@ -16,6 +16,7 @@ window.addEventListener('DOMContentLoaded', ()=> {
                 Math.floor(Math.random()*y),
                 Math.floor(Math.random()*z)
             );
+
         }
 
 
