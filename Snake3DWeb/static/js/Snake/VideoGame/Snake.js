@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.body = [
              new THREE.Mesh( new THREE.BoxGeometry(), this.material ),
             ];
-         this.bodyIndex = 1;
+         this.bodyIndex = 0;
       }
      changeDirection(keyCode){
           if (keyCode === 'a')  //left
@@ -34,45 +34,33 @@ window.addEventListener('DOMContentLoaded', ()=>{
                this.chosenDirection = [0,-1,0];
       }
       move(){
-            this.checkSnakeState();
-            this.isValidTransition[0] = [
-             Math.abs(this.body[0].position.x-Math.round(this.body[0].position.x)) < this.translationError,
-             Math.abs(this.body[0].position.y-Math.round(this.body[0].position.y)) < this.translationError,
-             Math.abs(this.body[0].position.z-Math.round(this.body[0].position.z)) < this.translationError
-             ];
-             if(this.isValidTransition[0][0] && this.isValidTransition[0][1] && this.isValidTransition[0][2]){
-                 this.currentDirection[0] = this.chosenDirection;
-             }
-                this.body[0].position.set(
-                     this.body[0].position.x + (this.currentDirection[0][0]*this.speed),
-                     this.body[0].position.y + (this.currentDirection[0][1]*this.speed),
-                     this.body[0].position.z + (this.currentDirection[0][2]*this.speed)
-                 );
+             for(;this.bodyIndex<this.length;this.bodyIndex++){
+                   this.isValidTransition[this.bodyIndex] = [
+                         Math.abs(this.body[this.bodyIndex].position.x-Math.round(this.body[this.bodyIndex].position.x)) < this.translationError,
+                         Math.abs(this.body[this.bodyIndex].position.y-Math.round(this.body[this.bodyIndex].position.y)) < this.translationError,
+                         Math.abs(this.body[this.bodyIndex].position.z-Math.round(this.body[this.bodyIndex].position.z)) < this.translationError
+                   ];
 
-                 for(;this.bodyIndex<this.length;this.bodyIndex++){
-
-                      this.volatileDirection = [
-                          Math.round(this.body[this.bodyIndex-1].position.x-this.body[this.bodyIndex].position.x),
-                          Math.round(this.body[this.bodyIndex-1].position.y-this.body[this.bodyIndex].position.y),
-                          Math.round(this.body[this.bodyIndex-1].position.z-this.body[this.bodyIndex].position.z)
-                      ];
-                       this.isValidTransition[this.bodyIndex] = [
-                             Math.abs(this.body[this.bodyIndex].position.x-Math.round(this.body[this.bodyIndex].position.x)) < this.translationError,
-                             Math.abs(this.body[this.bodyIndex].position.y-Math.round(this.body[this.bodyIndex].position.y)) < this.translationError,
-                             Math.abs(this.body[this.bodyIndex].position.z-Math.round(this.body[this.bodyIndex].position.z)) < this.translationError
-                       ];
-
-                       if(this.isValidTransition[this.bodyIndex][0] && this.isValidTransition[this.bodyIndex][1] && this.isValidTransition[this.bodyIndex][2]){
-                            this.currentDirection[this.bodyIndex] = this.volatileDirection;
-                           }
-
-                       this.body[this.bodyIndex].position.set(
-                            this.body[this.bodyIndex].position.x + (this.currentDirection[this.bodyIndex][0]*this.speed),
-                             this.body[this.bodyIndex].position.y + (this.currentDirection[this.bodyIndex][1]*this.speed),
-                             this.body[this.bodyIndex].position.z + (this.currentDirection[this.bodyIndex][2]*this.speed)
-                        );
-                }
-             this.bodyIndex = 1;
+                   if(this.isValidTransition[this.bodyIndex][0] && this.isValidTransition[this.bodyIndex][1] && this.isValidTransition[this.bodyIndex][2]){
+                       if(this.bodyIndex!==0) {
+                           this.volatileDirection = [
+                               Math.round(this.body[this.bodyIndex - 1].position.x - this.body[this.bodyIndex].position.x),
+                               Math.round(this.body[this.bodyIndex - 1].position.y - this.body[this.bodyIndex].position.y),
+                               Math.round(this.body[this.bodyIndex - 1].position.z - this.body[this.bodyIndex].position.z)
+                           ];
+                           this.currentDirection[this.bodyIndex] = this.volatileDirection;
+                       }else{
+                            this.currentDirection[0] = this.chosenDirection;
+                       }
+                   }
+                   this.body[this.bodyIndex].position.set(
+                        this.body[this.bodyIndex].position.x + (this.currentDirection[this.bodyIndex][0]*this.speed),
+                         this.body[this.bodyIndex].position.y + (this.currentDirection[this.bodyIndex][1]*this.speed),
+                         this.body[this.bodyIndex].position.z + (this.currentDirection[this.bodyIndex][2]*this.speed)
+                    );
+            }
+             this.bodyIndex = 0;
+             this.checkSnakeState();
       }
       checkSnakeState(){
           this.isValidEating = [
@@ -97,6 +85,20 @@ window.addEventListener('DOMContentLoaded', ()=>{
           scene.add(this.body[this.length]);
           this.length += 1;
       }
+      takenLocations(){
+          let takenPositions = [],
+              volatileCoords = [];
+          for(;this.bodyIndex<this.length;this.bodyIndex++){
+              volatileCoords = [
+                    Math.round(this.body[this.bodyIndex].position.x),
+                    Math.round(this.body[this.bodyIndex].position.y),
+                    Math.round(this.body[this.bodyIndex].position.z)
+                    ];
+            takenPositions.push(volatileCoords);
+          }
+          return takenPositions
+      }
    }
    snake = new Snake();
+
 });

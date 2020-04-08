@@ -11,10 +11,12 @@ window.addEventListener('DOMContentLoaded', ()=> {
         }
 
         setNewPosition(){
-          this.object.position.set(
-                Math.floor(Math.random()*x),
-                Math.floor(Math.random()*y),
-                Math.floor(Math.random()*z)
+            let blankPositions = cell.blankPositions(),
+                index = Math.floor(Math.random()*blankPositions.length);
+            this.object.position.set(
+                blankPositions[index][0],
+                blankPositions[index][1],
+                blankPositions[index][2]
             );
 
         }
