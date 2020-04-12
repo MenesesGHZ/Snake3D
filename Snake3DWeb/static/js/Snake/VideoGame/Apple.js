@@ -9,7 +9,6 @@ window.addEventListener('DOMContentLoaded', ()=> {
             this.object.scale.set(0.55,0.55,0.55);
             this.setNewPosition();
         }
-
         setNewPosition(){
             let blankPositions = cell.blankPositions(),
                 index = Math.floor(Math.random()*blankPositions.length);

@@ -68,6 +68,31 @@ window.addEventListener('DOMContentLoaded', ()=>{
               Math.abs(this.body[0].position.y - apple.object.position.y ) < this.translationError,
               Math.abs(this.body[0].position.z - apple.object.position.z ) < this.translationError
           ];
+          if(this.body[0].position.x>x+this.translationError || this.body[0].position.x<-this.translationError ||
+             this.body[0].position.y>y+this.translationError || this.body[0].position.y<-this.translationError ||
+             this.body[0].position.z>z+this.translationError || this.body[0].position.z<-this.translationError ) {
+
+              /*
+              let loader = new THREE.FontLoader();
+
+                    loader.load( static_path+'/helvetiker_regular.typeface.json', function ( font ) {
+
+                        var geometry = new THREE.TextGeometry( 'Game Over', {
+                            font: font,
+                            size: 80,
+                            height: 5,
+                            curveSegments: 12,
+                            bevelEnabled: true,
+                            bevelThickness: 10,
+                            bevelSize: 8,
+                            bevelOffset: 0,
+                            bevelSegments: 5
+                        } );
+                        scene.add(geometry);
+                    } );
+                */
+              alert("GameOver");
+          }
 
           if(this.isValidEating[0] && this.isValidEating[1] && this.isValidEating[2]) {
             this.addToSnake();
@@ -86,17 +111,15 @@ window.addEventListener('DOMContentLoaded', ()=>{
           this.length += 1;
       }
       takenLocations(){
-          let takenPositions = [],
-              volatileCoords = [];
+          let takenPositions = [];
           for(;this.bodyIndex<this.length;this.bodyIndex++){
-              volatileCoords = [
+            takenPositions.push([
                     Math.round(this.body[this.bodyIndex].position.x),
                     Math.round(this.body[this.bodyIndex].position.y),
                     Math.round(this.body[this.bodyIndex].position.z)
-                    ];
-            takenPositions.push(volatileCoords);
+            ]);
           }
-          return takenPositions
+          return takenPositions;
       }
    }
    snake = new Snake();

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/helvetiker_regular.typeface.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Apple.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Apple.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
     </list>
@@ -40,29 +40,30 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Snake3DWeb/static/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Snake3DWeb/static" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/css" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/js" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/css/etc" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/etc" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js" />
-      <recent name="$PROJECT_DIR$/Snake3DWeb/static/css" />
-      <recent name="$PROJECT_DIR$/Snake3DWeb" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.snake3D.html">
@@ -125,12 +126,15 @@
       <workItem from="1586040767948" duration="267000" />
       <workItem from="1586041088983" duration="11050000" />
       <workItem from="1586226803437" duration="365000" />
-      <workItem from="1586310324862" duration="16552000" />
+      <workItem from="1586310324862" duration="19332000" />
+      <workItem from="1586472402432" duration="51000" />
+      <workItem from="1586656582233" duration="514000" />
+      <workItem from="1586657120166" duration="10946000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -140,6 +144,10 @@
       <screen x="0" y="27" width="1307" height="741" />
     </state>
     <state x="110" y="34" width="1086" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1307.741@0.27.1307.741" timestamp="1585259514264" />
+    <state x="430" y="143" width="426" height="522" key="FileChooserDialogImpl" timestamp="1586383358526">
+      <screen x="0" y="27" width="1307" height="741" />
+    </state>
+    <state x="430" y="143" width="426" height="522" key="FileChooserDialogImpl/0.27.1307.741@0.27.1307.741" timestamp="1586383358526" />
     <state width="1259" height="172" key="GridCell.Tab.0.bottom" timestamp="1585203961752">
       <screen x="0" y="27" width="1307" height="741" />
     </state>
