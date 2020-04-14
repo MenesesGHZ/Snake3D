@@ -14,11 +14,14 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.translationError = 0.01;
          this.isValidTransition = [[true,true,true]];
          this.isValidEating = [false,false,false];
+         this.doesCollide = [false,false,false];
          this.body = [
              new THREE.Mesh( new THREE.BoxGeometry(), this.material ),
             ];
          this.bodyIndex = 0;
+         this.gameOver = false;
       }
+
      changeDirection(keyCode){
           if (keyCode === 'a')  //left
                this.chosenDirection = [1,0,0];
@@ -32,18 +35,25 @@ window.addEventListener('DOMContentLoaded', ()=>{
                this.chosenDirection = [0,1,0];
           else if (keyCode === 'q') //down
                this.chosenDirection = [0,-1,0];
+            
+          if(this.chosenDirection[0]*-1 === this.currentDirection[0][0] && // If is the opposite Direction, the snake direction does not change.
+             this.chosenDirection[1]*-1 === this.currentDirection[0][1] &&
+             this.chosenDirection[2]*-1 === this.currentDirection[0][2]){
+              this.chosenDirection = this.currentDirection[0];
+          }
+
+
       }
       move(){
              for(;this.bodyIndex<this.length;this.bodyIndex++){
-                   this.isValidTransition[this.bodyIndex] = [
+                   this.isValidTransition[this.bodyIndex] = [  //Check if the current position is valid to change direction
                          Math.abs(this.body[this.bodyIndex].position.x-Math.round(this.body[this.bodyIndex].position.x)) < this.translationError,
                          Math.abs(this.body[this.bodyIndex].position.y-Math.round(this.body[this.bodyIndex].position.y)) < this.translationError,
                          Math.abs(this.body[this.bodyIndex].position.z-Math.round(this.body[this.bodyIndex].position.z)) < this.translationError
                    ];
-
                    if(this.isValidTransition[this.bodyIndex][0] && this.isValidTransition[this.bodyIndex][1] && this.isValidTransition[this.bodyIndex][2]){
-                       if(this.bodyIndex!==0) {
-                           this.volatileDirection = [
+                       if(this.bodyIndex!==0) { // if( it is not the head ) {follow the cube at front} .
+                           this.volatileDirection = [ //Only one unit of distance per cube exist. Therefore I am comparing the [front_cube.position - behind_cube.position] to get behind_cube's direction.
                                Math.round(this.body[this.bodyIndex - 1].position.x - this.body[this.bodyIndex].position.x),
                                Math.round(this.body[this.bodyIndex - 1].position.y - this.body[this.bodyIndex].position.y),
                                Math.round(this.body[this.bodyIndex - 1].position.z - this.body[this.bodyIndex].position.z)
@@ -68,32 +78,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
               Math.abs(this.body[0].position.y - apple.object.position.y ) < this.translationError,
               Math.abs(this.body[0].position.z - apple.object.position.z ) < this.translationError
           ];
-          if(this.body[0].position.x>x+this.translationError || this.body[0].position.x<-this.translationError ||
-             this.body[0].position.y>y+this.translationError || this.body[0].position.y<-this.translationError ||
-             this.body[0].position.z>z+this.translationError || this.body[0].position.z<-this.translationError ) {
-
-              /*
-              let loader = new THREE.FontLoader();
-
-                    loader.load( static_path+'/helvetiker_regular.typeface.json', function ( font ) {
-
-                        var geometry = new THREE.TextGeometry( 'Game Over', {
-                            font: font,
-                            size: 80,
-                            height: 5,
-                            curveSegments: 12,
-                            bevelEnabled: true,
-                            bevelThickness: 10,
-                            bevelSize: 8,
-                            bevelOffset: 0,
-                            bevelSegments: 5
-                        } );
-                        scene.add(geometry);
-                    } );
-                */
-              alert("GameOver");
-          }
-
+          this.gameOverLogic();
           if(this.isValidEating[0] && this.isValidEating[1] && this.isValidEating[2]) {
             this.addToSnake();
             apple.setNewPosition();
@@ -109,6 +94,51 @@ window.addEventListener('DOMContentLoaded', ()=>{
           );
           scene.add(this.body[this.length]);
           this.length += 1;
+      }
+      gameOverLogic(){
+
+          if(!this.gameOver) {
+              this.bodyIndex = 0
+
+              this.bodyIndex = 4 // it is set at 4 because at this point the snake is capable to collision itself.
+              //check if the head is in any body part.
+              for(;this.bodyIndex<this.length;this.bodyIndex++){
+                   this.doesCollide = [
+                      Math.abs(this.body[0].position.x-this.body[this.bodyIndex].position.x)<this.translationError,
+                      Math.abs(this.body[0].position.y-this.body[this.bodyIndex].position.y)<this.translationError,
+                      Math.abs(this.body[0].position.z-this.body[this.bodyIndex].position.z)<this.translationError
+                  ];
+                  if(this.doesCollide[0] && this.doesCollide[1] && this.doesCollide [2]){
+                      this.gameOver = true;
+                      break;
+                  }
+              }
+              this.bodyIndex = 0;
+
+              //check if the head is outside the Cell (Grid)
+              if (this.body[0].position.x > x - 1 + this.translationError || this.body[0].position.x < -this.translationError ||
+                  this.body[0].position.y > y - 1 + this.translationError || this.body[0].position.y < -this.translationError ||
+                  this.body[0].position.z > z - 1 + this.translationError || this.body[0].position.z < -this.translationError) {
+                  this.gameOver = true;
+              }
+
+
+              if(this.gameOver){ // this only run once to display the 'game over' text.
+                  let loader = new THREE.FontLoader();
+                  loader.load(static_path + 'helvetiker_regular.typeface.json', function (font) {
+                      let text_geometry = new THREE.TextGeometry('Game Over', {
+                          font: font,
+                          size: 0.8,
+                          height: 0.2,
+                          curveSegments: 6
+                      });
+                      let text_material = new THREE.MeshPhongMaterial({color: 0xFF0000}),
+                          text_mesh = new THREE.Mesh(text_geometry, text_material);
+                      scene.add(text_mesh);
+                  });
+              }
+          }
+
       }
       takenLocations(){
           let takenPositions = [];

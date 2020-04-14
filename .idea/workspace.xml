@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/helvetiker_regular.typeface.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Apple.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Apple.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
     </list>
@@ -129,7 +128,9 @@
       <workItem from="1586310324862" duration="19332000" />
       <workItem from="1586472402432" duration="51000" />
       <workItem from="1586656582233" duration="514000" />
-      <workItem from="1586657120166" duration="10946000" />
+      <workItem from="1586657120166" duration="18176000" />
+      <workItem from="1586740859728" duration="2879000" />
+      <workItem from="1586839951435" duration="865000" />
     </task>
     <servers />
   </component>
@@ -174,6 +175,10 @@
     <state x="307" y="224" key="com.intellij.ide.util.TipDialog/0.27.1301.741/0.27.1301.741@0.27.1301.741" timestamp="1586031968364" />
     <state x="308" y="224" key="com.intellij.ide.util.TipDialog/0.27.1307.741@0.27.1307.741" timestamp="1586310324687" />
     <state x="322" y="224" key="com.intellij.ide.util.TipDialog/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1586040767663" />
+    <state x="175" y="27" width="946" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586740468993">
+      <screen x="0" y="27" width="1307" height="741" />
+    </state>
+    <state x="175" y="27" width="946" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1307.741@0.27.1307.741" timestamp="1586740468993" />
     <state x="301" y="136" width="704" height="522" key="find.popup" timestamp="1585506622810">
       <screen x="0" y="27" width="1307" height="741" />
     </state>

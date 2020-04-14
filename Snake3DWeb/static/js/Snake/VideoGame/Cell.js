@@ -1,4 +1,4 @@
-let x = 3, y = 3, z = 3,cell = null;
+let x = 4, y = 4, z = 4,cell = null;
 
 window.addEventListener('DOMContentLoaded',()=>{
 
