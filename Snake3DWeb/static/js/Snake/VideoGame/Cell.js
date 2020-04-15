@@ -1,6 +1,6 @@
 let x = 4, y = 4, z = 4,cell = null;
 
-window.addEventListener('DOMContentLoaded',()=>{
+window.addEventListener('DOMContentLoaded',() => {
 
     class Cell{
         constructor(x,y,z) {

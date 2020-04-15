@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.translationError = 0.01;
          this.isValidTransition = [[true,true,true]];
          this.isValidEating = [false,false,false];
-         this.doesCollide = [false,false,false];
+         this.didCollide = [false,false,false];
          this.body = [
              new THREE.Mesh( new THREE.BoxGeometry(), this.material ),
             ];
@@ -35,7 +35,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
                this.chosenDirection = [0,1,0];
           else if (keyCode === 'q') //down
                this.chosenDirection = [0,-1,0];
-            
           if(this.chosenDirection[0]*-1 === this.currentDirection[0][0] && // If is the opposite Direction, the snake direction does not change.
              this.chosenDirection[1]*-1 === this.currentDirection[0][1] &&
              this.chosenDirection[2]*-1 === this.currentDirection[0][2]){
@@ -64,7 +63,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                        }
                    }
                    this.body[this.bodyIndex].position.set(
-                        this.body[this.bodyIndex].position.x + (this.currentDirection[this.bodyIndex][0]*this.speed),
+                        this.body[this.bodyIndex].position.x +  (this.currentDirection[this.bodyIndex][0]*this.speed),
                          this.body[this.bodyIndex].position.y + (this.currentDirection[this.bodyIndex][1]*this.speed),
                          this.body[this.bodyIndex].position.z + (this.currentDirection[this.bodyIndex][2]*this.speed)
                     );
@@ -95,6 +94,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
           scene.add(this.body[this.length]);
           this.length += 1;
       }
+
       gameOverLogic(){
 
           if(!this.gameOver) {
@@ -103,12 +103,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
               this.bodyIndex = 4 // it is set at 4 because at this point the snake is capable to collision itself.
               //check if the head is in any body part.
               for(;this.bodyIndex<this.length;this.bodyIndex++){
-                   this.doesCollide = [
+                   this.didCollide = [
                       Math.abs(this.body[0].position.x-this.body[this.bodyIndex].position.x)<this.translationError,
                       Math.abs(this.body[0].position.y-this.body[this.bodyIndex].position.y)<this.translationError,
                       Math.abs(this.body[0].position.z-this.body[this.bodyIndex].position.z)<this.translationError
                   ];
-                  if(this.doesCollide[0] && this.doesCollide[1] && this.doesCollide [2]){
+                  if(this.didCollide[0] && this.didCollide[1] && this.didCollide [2]){
                       this.gameOver = true;
                       break;
                   }
