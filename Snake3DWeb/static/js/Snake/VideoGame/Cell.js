@@ -1,9 +1,9 @@
-let x = 4, y = 4, z = 4,cell = null;
+let x = 4, y = 4, z = 4,cell = null, obstacles=null;
 
 window.addEventListener('DOMContentLoaded',() => {
 
-    class Cell{
-        constructor(x,y,z) {
+    class Matrix3D{
+        constructor(x,y,z,fill=false,color=0x000000) {
             this.blankCoords = [];
             for(let x_it=0;x_it<x;x_it++){
                 for(let y_it=0;y_it<y;y_it++){
@@ -12,11 +12,18 @@ window.addEventListener('DOMContentLoaded',() => {
                     }
                 }
             }
-
-            let geometry_cube = new THREE.BoxGeometry(),
-                geometry = new THREE.EdgesGeometry( geometry_cube ),
-                material = new THREE.LineBasicMaterial( { color: 0x000000,  transparent:true, opacity:0.6} );
-            this.object = new THREE.LineSegments( geometry, material );
+            let geometry_cube = new THREE.BoxGeometry();
+            if(fill){
+                 this.object = new THREE.Mesh( geometry_cube, new THREE.MeshBasicMaterial( { color: color} ) );
+                 let geo = new THREE.EdgesGeometry( this.object.geometry ),
+                     mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } ),
+                     wireframe = new THREE.LineSegments( geo, mat );
+                 this.object.add( wireframe );
+            }else{
+              let geometry = new THREE.EdgesGeometry( geometry_cube ),
+                  material = new THREE.LineBasicMaterial( { color: color,  transparent:true, opacity:0.6} );
+              this.object = new THREE.LineSegments( geometry, material );
+            }
             this.x = x;
             this.y = y;
             this.z = z;
@@ -60,7 +67,8 @@ window.addEventListener('DOMContentLoaded',() => {
 
     }
 
-    cell = new Cell(x,y,z);
+    cell = new Matrix3D(x,y,z);
+    obstacles = new Matrix3D(x,y,z,true,0x00FF00);
 
 });
 
@@ -87,7 +95,7 @@ function deleteElement(element,array){
     }
 }
 
-window.addCellsToScene = function(cell){
+window.addMatrix3DToElement = function(cell, scene){
               let x_index = 0, y_index = 0, z_index = 0;
               for(;x_index<cell.x;x_index++){
                           for(;y_index<cell.y;y_index++){

@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/checkbox.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/imgs/snake-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Obstacles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/checkbox.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +23,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -47,21 +53,25 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Snake3DWeb/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Snake3DWeb/static/imgs" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/Snake" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/css/etc" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/etc" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/imgs" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/js" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/css" />
       <recent name="$PROJECT_DIR$/Snake3DWeb" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js" />
-      <recent name="$PROJECT_DIR$/Snake3DWeb/static/css/etc" />
-      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/etc" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.snake3D.html">
@@ -131,6 +141,11 @@
       <workItem from="1586740859728" duration="2879000" />
       <workItem from="1586839951435" duration="5184000" />
       <workItem from="1586916676103" duration="402000" />
+      <workItem from="1586921161524" duration="1467000" />
+      <workItem from="1587886545671" duration="42000" />
+      <workItem from="1587937320517" duration="854000" />
+      <workItem from="1587946552148" duration="599000" />
+      <workItem from="1588187304873" duration="22262000" />
     </task>
     <servers />
   </component>
@@ -175,10 +190,10 @@
     <state x="307" y="224" key="com.intellij.ide.util.TipDialog/0.27.1301.741/0.27.1301.741@0.27.1301.741" timestamp="1586031968364" />
     <state x="308" y="224" key="com.intellij.ide.util.TipDialog/0.27.1307.741@0.27.1307.741" timestamp="1586310324687" />
     <state x="322" y="224" key="com.intellij.ide.util.TipDialog/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1586040767663" />
-    <state x="175" y="27" width="946" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586740468993">
+    <state x="175" y="27" width="946" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588217581034">
       <screen x="0" y="27" width="1307" height="741" />
     </state>
-    <state x="175" y="27" width="946" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1307.741@0.27.1307.741" timestamp="1586740468993" />
+    <state x="175" y="27" width="946" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1307.741@0.27.1307.741" timestamp="1588217581034" />
     <state x="301" y="136" width="704" height="522" key="find.popup" timestamp="1585506622810">
       <screen x="0" y="27" width="1307" height="741" />
     </state>
