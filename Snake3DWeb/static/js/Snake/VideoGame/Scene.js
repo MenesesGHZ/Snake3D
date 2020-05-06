@@ -15,7 +15,7 @@ window.addEventListener('load',()=>{
         radiansDirection = [0,0,0];
      */
     //Isometric View
-    camera.position.set( 6, 6, 6 );
+    camera.position.set( 3.7, 3.7, 3.7 );
 	camera.rotation.y = Math.PI / 4;
 	camera.rotation.x = Math.atan( - 1 / Math.sqrt( 2 ) );
 
@@ -51,7 +51,6 @@ window.addEventListener('load',()=>{
 
     document.getElementById('auto-rotation').addEventListener("change", element =>{
         camera_control.autoRotate = element.target.checked;
-        console.log(element.target);
     })
 });
 

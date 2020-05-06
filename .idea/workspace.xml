@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/checkbox.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/imgs/snake-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Obstacles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/checkbox.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/close-button.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/imgs/pyramid-icon-24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/imgs/pyramid-icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/snake3d.css" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/snake3d.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Cell.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Obstacles.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Obstacles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/WallSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/WallSelector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Walls.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Walls.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
         <option value="CSS File" />
       </list>
     </option>
@@ -74,7 +78,27 @@
       <recent name="$PROJECT_DIR$/Snake3DWeb" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.snake3D.html">
+  <component name="RunManager" selected="Django tests.Test: Snake3DWeb.static.js.Snake.VideoGame">
+    <configuration name="Test: Snake3DWeb.static.js.Snake.VideoGame" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="Snake3D" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="Snake3DWeb.static.js.Snake.VideoGame" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="snake3D.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Snake3D/Snake3DWeb/templates/snake3D.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -103,6 +127,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Django tests.Test: Snake3DWeb.static.js.Snake.VideoGame" />
         <item itemvalue="JavaScript Debug.snake3D.html" />
       </list>
     </recent_temporary>
@@ -145,7 +170,11 @@
       <workItem from="1587886545671" duration="42000" />
       <workItem from="1587937320517" duration="854000" />
       <workItem from="1587946552148" duration="599000" />
-      <workItem from="1588187304873" duration="22262000" />
+      <workItem from="1588187304873" duration="23720000" />
+      <workItem from="1588273251855" duration="1157000" />
+      <workItem from="1588377198232" duration="19208000" />
+      <workItem from="1588639848788" duration="3109000" />
+      <workItem from="1588720080315" duration="4760000" />
     </task>
     <servers />
   </component>
@@ -198,9 +227,12 @@
       <screen x="0" y="27" width="1307" height="741" />
     </state>
     <state x="301" y="136" width="704" height="522" key="find.popup/0.27.1307.741@0.27.1307.741" timestamp="1585506622810" />
-    <state x="316" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1585173166071">
+    <state x="316" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1588392239244">
       <screen x="0" y="27" width="1307" height="741" />
     </state>
-    <state x="316" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1307.741@0.27.1307.741" timestamp="1585173166071" />
+    <state x="316" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1307.741@0.27.1307.741" timestamp="1588392239244" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Snake3D$Test__Snake3DWeb_static_js_Snake_VideoGame.coverage" NAME="Test: Snake3DWeb.static.js.Snake.VideoGame Coverage Results" MODIFIED="1588397911563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

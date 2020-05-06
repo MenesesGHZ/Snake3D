@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{% static 'css/etc/bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/etc/bootstrap-reboot.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/etc/checkbox.css' %}">
+    <link rel="stylesheet" href="{% static 'css/etc/close-button.css' %}">
+    <link rel="stylesheet" href="{% static 'css/etc/snake3d.css' %}">
 
     <!--SNAKE FILES-->
     <script src="{% static 'js/three.min.js' %}"></script>
@@ -23,13 +25,13 @@
     <script src="{% static 'js/Snake/VideoGame/Snake.js' %}"></script>
     <script src="{% static 'js/Snake/VideoGame/Cell.js' %}"></script>
     <script src="{% static 'js/Snake/VideoGame/Apple.js' %}"></script>
-    <script src="{% static 'js/Snake/VideoGame/Obstacles.js' %}"></script>
+    <script src="{% static 'js/Snake/VideoGame/Walls.js' %}"></script>
+    <script src="{% static 'js/Snake/VideoGame/WallSelector.js' %}"></script>
 
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-light " style="background-color: #cee0e7;width:100vw;overflow: hide
-">
+        <nav class="navbar navbar-light " style="background-color: #cee0e7;width:100vw;overflow:hidden;">
             <div class="d-flex align-items-center">
                 <img src="{% static 'imgs/snake-icon.png' %}" width="40" height="40" class="d-inline-block align-top" alt="">
                 <a class="navbar-brand ml-3" href="#">Snake 3D</a>
@@ -39,8 +41,6 @@
    <main>
        <div class="container-fluid m-0 p-0 position-relative">
            <div class="row position-relative" style="width:100vw;">
-
-
                <div class="col-12 m-0 p-0">
                     <div id="canvas" style=" width: 100vw; height: 91vh;">
                     </div>
@@ -48,24 +48,42 @@
 
                <div class="col-3 position-absolute h-100">
                    <div class="container-fluid shadow h-100" style="background-color:rgba(192,208,219,0.5)">
-                       <div class="row justify-content-center align-items-center h-50">
-                           <div id="obstacles-canvas" style="width: 200px; height: 200px; ">
+
+
+                       <div class="row justify-content-around align-items-center h-50 mx-2">
+                           <div class="col-4" >
+                               <div class="container-fluid" id="ob-x">
+                               </div>
+                           </div>
+                           <div class="col-4" >
+                               <div class="container-fluid" id="ob-y">
+                               </div>
+                           </div>
+                           <div class="col-4">
+                               <div class="container-fluid"  id="ob-z">
+                               </div>
                            </div>
                        </div>
-                       <div class="row justify-content-center align-items-center h-50"></div>
+                       <div class="row justify-content-center align-items-center h-50" >
+                            <div class="col-12">
+                                <div class="container-fluid" id="coords-label">
+
+
+                                </div>
+                            </div>
+                       </div>
                    </div>
                </div>
 
                <div class="col-3">
 
                </div>
-
-
            </div>
-           <div class="position-absolute" style="top:0;right:0;transform: translateX(-30px)">
-               <div class="bg-light">
-                   <p class="m-0">Autorotacion</p>
-                  {% include 'includes/checkbox.html' with id="auto-rotation" %}
+           <div class="position-absolute" style="top:0;right:0;transform: translateX(-30px) translateY(20px)">
+               <div class="bg-light container-fluid">
+                   <div class="row justify-content-center ">
+                     {% include 'includes/checkbox.html' with id="auto-rotation" %}
+                   </div>
                </div>
              </div>
 

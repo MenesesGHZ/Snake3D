@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded',() => {
             }
             let geometry_cube = new THREE.BoxGeometry();
             if(fill){
+                 geometry_cube.translate(-(x-1)/2,-(y-1)/2,-(z-1)/2);
                  this.object = new THREE.Mesh( geometry_cube, new THREE.MeshBasicMaterial( { color: color} ) );
                  let geo = new THREE.EdgesGeometry( this.object.geometry ),
                      mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } ),
@@ -21,7 +22,7 @@ window.addEventListener('DOMContentLoaded',() => {
                  this.object.add( wireframe );
             }else{
               let geometry = new THREE.EdgesGeometry( geometry_cube ),
-                  material = new THREE.LineBasicMaterial( { color: color,  transparent:true, opacity:0.6} );
+                  material = new THREE.LineBasicMaterial( { color: color,  transparent:true, opacity:0.25} );
               this.object = new THREE.LineSegments( geometry, material );
             }
             this.x = x;

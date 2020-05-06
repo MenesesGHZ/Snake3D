@@ -14,7 +14,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.translationError = 0.01;
          this.isValidTransition = [[true,true,true]];
          this.isValidEating = [false,false,false];
-         this.didCollide = [false,false,false];
          this.body = [
              new THREE.Mesh( new THREE.BoxGeometry(), this.material ),
             ];
@@ -98,31 +97,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
       gameOverLogic(){
 
           if(!this.gameOver) {
-              this.bodyIndex = 0
-
-              this.bodyIndex = 4 // it is set at 4 because at this point the snake is capable to collision itself.
-              //check if the head is in any body part.
-              for(;this.bodyIndex<this.length;this.bodyIndex++){
-                   this.didCollide = [
-                      Math.abs(this.body[0].position.x-this.body[this.bodyIndex].position.x)<this.translationError,
-                      Math.abs(this.body[0].position.y-this.body[this.bodyIndex].position.y)<this.translationError,
-                      Math.abs(this.body[0].position.z-this.body[this.bodyIndex].position.z)<this.translationError
-                  ];
-                  if(this.didCollide[0] && this.didCollide[1] && this.didCollide [2]){
-                      this.gameOver = true;
-                      break;
-                  }
-              }
-              this.bodyIndex = 0;
-
-              //check if the head is outside the Cell (Grid)
-              if (this.body[0].position.x > x - 1 + this.translationError || this.body[0].position.x < -this.translationError ||
-                  this.body[0].position.y > y - 1 + this.translationError || this.body[0].position.y < -this.translationError ||
-                  this.body[0].position.z > z - 1 + this.translationError || this.body[0].position.z < -this.translationError) {
-                  this.gameOver = true;
-              }
-
-
+              this.gameOver = this.didLose();
               if(this.gameOver){ // this only run once to display the 'game over' text.
                   let loader = new THREE.FontLoader();
                   loader.load(static_path + 'helvetiker_regular.typeface.json', function (font) {
@@ -139,6 +114,31 @@ window.addEventListener('DOMContentLoaded', ()=>{
               }
           }
 
+      }
+
+      didLose(){
+          this.bodyIndex = 0
+              this.bodyIndex = 4 // it is set at 4 because at this point the snake is capable to collision itself.
+              //check if the head is in any body part.
+              for(;this.bodyIndex<this.length;this.bodyIndex++){
+                  if(Math.abs(this.body[0].position.x-this.body[this.bodyIndex].position.x)<this.translationError &&
+                     Math.abs(this.body[0].position.y-this.body[this.bodyIndex].position.y)<this.translationError &&
+                     Math.abs(this.body[0].position.z-this.body[this.bodyIndex].position.z)<this.translationError){
+                      return true;
+                  }
+              }
+              this.bodyIndex = 0;
+              //check if the head is outside the Cell (Grid)
+              if (this.body[0].position.x > x - 1 + this.translationError || this.body[0].position.x < -this.translationError ||
+                  this.body[0].position.y > y - 1 + this.translationError || this.body[0].position.y < -this.translationError ||
+                  this.body[0].position.z > z - 1 + this.translationError || this.body[0].position.z < -this.translationError) {
+                  return true;
+              }
+              return walls.didCollideWith([
+                  this.body[0].position.x,
+                  this.body[0].position.y,
+                  this.body[0].position.z
+                            ],this.translationError);
       }
       takenLocations(){
           let takenPositions = [];
