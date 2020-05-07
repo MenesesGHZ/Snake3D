@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
 /*font-family: 'Electrolize', sans-serif;*/
+html{
+    height: 100vh !important;
+    min-height: 100vh !important;
+    overflow: hidden;
+}
 
 .font-electro{
     font-family: 'Electrolize', sans-serif;
@@ -14,3 +19,11 @@ p{
 .hover-blue:hover{
     background-color: cadetblue;
 }
+
+.h-40{
+    height: 40% !important;
+}
+.h-10{
+    height: 10% !important;
+}
+

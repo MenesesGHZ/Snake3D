@@ -21,6 +21,7 @@
     <!--SNAKE FILES-->
     <script src="{% static 'js/three.min.js' %}"></script>
     <script src="{% static 'js/OrbitControls.js' %}"></script>
+    <script src="{% static 'js/etc/functions.js' %}"></script>
     <script src="{% static 'js/Snake/VideoGame/Scene.js' %}"></script>
     <script src="{% static 'js/Snake/VideoGame/Snake.js' %}"></script>
     <script src="{% static 'js/Snake/VideoGame/Cell.js' %}"></script>
@@ -41,40 +42,19 @@
    <main>
        <div class="container-fluid m-0 p-0 position-relative">
            <div class="row position-relative" style="width:100vw;">
-               <div class="col-12 m-0 p-0">
+
+
+               <div class="col-12 m-0 p-0"><!--CANVAS FOR SNAKE3D-GAME-->
                     <div id="canvas" style=" width: 100vw; height: 91vh;">
                     </div>
                </div>
 
-               <div class="col-3 position-absolute h-100">
-                   <div class="container-fluid shadow h-100" style="background-color:rgba(192,208,219,0.5)">
+               <div class="col-3 position-absolute h-100"> <!--LEFT NAVIGATION BAR-->
+                   <div class="container-fluid shadow h-100 " style="background-color:rgba(192,208,219,0.5)">
 
-
-                       <div class="row justify-content-around align-items-center h-50 mx-2">
-                           <div class="col-4" >
-                               <div class="container-fluid" id="ob-x">
-                               </div>
-                           </div>
-                           <div class="col-4" >
-                               <div class="container-fluid" id="ob-y">
-                               </div>
-                           </div>
-                           <div class="col-4">
-                               <div class="container-fluid"  id="ob-z">
-                               </div>
-                           </div>
-                       </div>
-                       <div class="row justify-content-center align-items-center h-50" >
-                            <div class="col-12">
-                                <div class="container-fluid" id="coords-label">
-
-
-                                </div>
-                            </div>
-                       </div>
+                       {% include 'includes/obstaclesFeature.html' %}
                    </div>
                </div>
-
                <div class="col-3">
 
                </div>

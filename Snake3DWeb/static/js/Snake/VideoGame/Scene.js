@@ -24,6 +24,7 @@ window.addEventListener('load',()=>{
     renderer.setSize(canvas.offsetWidth,canvas.offsetHeight);
 
     let camera_control = new THREE.OrbitControls( camera,renderer.domElement);
+    camera_control.autoRotate = true;
     scene.add(snake.body[0]);
     scene.add(apple.object);
     window.addMatrix3DToElement(cell,scene);
@@ -44,13 +45,14 @@ window.addEventListener('load',()=>{
     animate();
     /*Snake Listener*/
     let keyCode;
+
     document.addEventListener("keydown", (event)=>{
          keyCode = event.key;
          snake.changeDirection(keyCode);
        });
-
     document.getElementById('auto-rotation').addEventListener("change", element =>{
         camera_control.autoRotate = element.target.checked;
-    })
+    });
+
 });
 

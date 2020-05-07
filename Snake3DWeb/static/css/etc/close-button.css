@@ -3,8 +3,9 @@
   height: 12px;
   background: #000;
   margin: 0;
-    padding: 0;
+  padding: 0;
   transition: background ease 0.6s;
+  cursor: pointer;
 }
 .close-button:before,
 .close-button:after {
