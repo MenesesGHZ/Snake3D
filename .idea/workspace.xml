@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/metrics.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/snakeMetrics.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/snake3d.css" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/snake3d.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/metrics.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/under_div.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/featuresNav.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/featuresNav.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/snakeMetrics.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/snakeMetrics.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -174,7 +173,7 @@
       <workItem from="1588795637376" duration="25000" />
       <workItem from="1588805050475" duration="20093000" />
       <workItem from="1588838118946" duration="10104000" />
-      <workItem from="1588870030285" duration="3765000" />
+      <workItem from="1588870030285" duration="6364000" />
     </task>
     <servers />
   </component>

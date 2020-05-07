@@ -35,6 +35,8 @@
     <script src="{% static 'js/Snake/VideoGame/WallSelector.js' %}"></script>
     <!-- Plotly.js -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="{% static 'js/Snake/under_div.js' %}"></script>
+
 
 </head>
 <body>
@@ -53,7 +55,6 @@
                     <div id="canvas" style=" width: 100vw; height: 91vh;">
                     </div>
                </div>
-
                <div class="col-3 position-absolute h-100" id="left-nav"> <!--LEFT NAVIGATION BAR-->
                   {% include 'includes/leftNavBar.html' %}
                   {% include 'includes/featuresNav.html' %}
@@ -64,7 +65,7 @@
                    {% include 'includes/rightNavBar.html' %}
                </div>
            </div>
-           <div class="row" style="height: 100vh">
+           <div class="row d-none" style="height: 100vh" id="under-div">
                {% include 'includes/snakeMetrics.html' %}
            </div>
 
