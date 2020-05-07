@@ -35,7 +35,7 @@ p{
 }
 
 #theory-div{
-    transition: all ease-in-out 0.5s;
+    transition: border-color ease-in-out 0.4s, background-color ease-in-out 0.4s;
     border:transparent dashed 1px;
     background-color: rgba(69, 245, 154, 0.5);
 }
@@ -45,11 +45,26 @@ p{
 }
 
 #features-div{
-    transition: all ease-in-out 0.5s;
+    transition: border-color ease-in-out 0.4s, background-color ease-in-out 0.4s;
     border:transparent dashed 1px;
     background-color: rgba(45, 187, 168, 0.50);
 }
 #features-div:hover{
     border-color: black;
     background-color:  rgba(45, 187, 168, 0.75);
+}
+#go-back-features{
+    font-size: 9pt;
+    text-decoration: underline transparent;
+}
+#go-back-features:hover{
+    color:mediumblue;
+    text-decoration-color: mediumblue;
+}
+
+.feature{
+    text-decoration: underline transparent;
+}
+.feature:hover{
+    text-decoration-color: black;
 }

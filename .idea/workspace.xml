@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/imgs/ai-icon-24.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/imgs/robot-icon-24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/etc/CSSPlugin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/etc/animation.gsap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/etc/animations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/featuresNav.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/leftNavBar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/snake3d.css" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/snake3d.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/WallSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/WallSelector.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/obstaclesFeature.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/obstaclesFeature.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,18 +53,18 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Snake3DWeb/static/imgs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Snake3DWeb/static/js/etc" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/etc" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/imgs" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/js" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/css" />
-      <recent name="$PROJECT_DIR$/Snake3DWeb" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame" />
@@ -172,7 +173,7 @@
       <workItem from="1588720080315" duration="5016000" />
       <workItem from="1588751423853" duration="2278000" />
       <workItem from="1588795637376" duration="25000" />
-      <workItem from="1588805050475" duration="10108000" />
+      <workItem from="1588805050475" duration="19078000" />
     </task>
     <servers />
   </component>
