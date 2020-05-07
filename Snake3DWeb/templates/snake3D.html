@@ -32,7 +32,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-light " style="background-color: #cee0e7;width:100vw;overflow:hidden;">
+        <nav class="navbar navbar-light " style="background-color: #add9e8;width:100vw;overflow:hidden;">
             <div class="d-flex align-items-center">
                 <img src="{% static 'imgs/snake-icon.png' %}" width="40" height="40" class="d-inline-block align-top" alt="">
                 <a class="navbar-brand ml-3" href="#">Snake 3D</a>
@@ -50,20 +50,35 @@
                </div>
 
                <div class="col-3 position-absolute h-100"> <!--LEFT NAVIGATION BAR-->
-                   <div class="container-fluid shadow h-100 " style="background-color:rgba(192,208,219,0.5)">
-
-                       {% include 'includes/obstaclesFeature.html' %}
-                   </div>
+                       <div id="theory-div" class="container-fluid h-50 cursor-pointer " >
+                           <div class="row align-items-center h-100">
+                               <div class="col-12 d-flex justify-content-center">
+                                   <p class="m-0 font-electro" style="font-size: 15pt">
+                                       Theory Behind
+                                   </p>
+                               </div>
+                           </div>
+                           <img class="position-absolute" style="bottom: 0;right: 0; transform: translateX(-12px) translateY(-12px)" src="{% static 'imgs/ai-icon-24.png' %}" alt="robot-icon">
+                       </div>
+                        <div id="features-div" class="container-fluid h-50 cursor-pointer position-relative" >
+                           <div class="row align-items-center h-100">
+                               <div class="col-12 d-flex justify-content-center ">
+                                   <p class="m-0 font-electro" style="font-size: 15pt">
+                                       Features
+                                   </p>
+                               </div>
+                           </div>
+                            <img class="position-absolute" style="bottom: 0;right: 0; transform: translateX(-12px) translateY(-12px)" src="{% static 'imgs/robot-icon-24.png' %}" alt="robot-icon">
+                       </div>
+                  {% include 'includes/obstaclesFeature.html' %}
                </div>
                <div class="col-3">
 
                </div>
            </div>
            <div class="position-absolute" style="top:0;right:0;transform: translateX(-30px) translateY(20px)">
-               <div class="bg-light container-fluid">
-                   <div class="row justify-content-center ">
+               <div class="container-fluid">
                      {% include 'includes/checkbox.html' with id="auto-rotation" %}
-                   </div>
                </div>
              </div>
 

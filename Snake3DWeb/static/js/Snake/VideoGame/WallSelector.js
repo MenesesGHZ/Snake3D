@@ -9,15 +9,15 @@ window.addEventListener('load',()=>{
    //Creating wall selector UI
     let i;
     for(i=0; i<x;i++)
-       html_result += html_grid.format(i+1);
+       html_result += html_grid.format(i);
     ob_x.innerHTML = html_result;
     html_result = "";
     for(i=0; i<y;i++)
-       html_result += html_grid.format(i+1);
+       html_result += html_grid.format(i);
     ob_y.innerHTML = html_result;
     html_result ="";
     for(i=0; i<z;i++)
-       html_result += html_grid.format(i+1);
+       html_result += html_grid.format(i);
     ob_z.innerHTML = html_result;
 
     //Add functionality to the grid
