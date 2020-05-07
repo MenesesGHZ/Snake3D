@@ -19,6 +19,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
             ];
          this.bodyIndex = 0;
          this.gameOver = false;
+         this.user_mode = true;
       }
 
      changeDirection(keyCode){
@@ -67,6 +68,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
                          this.body[this.bodyIndex].position.z + (this.currentDirection[this.bodyIndex][2]*this.speed)
                     );
             }
+             if(this.user_mode === true){
+                       camera.position.x += this.currentDirection[0][0] * this.speed;
+                       camera.position.y += this.currentDirection[0][1] * this.speed;
+                       camera.position.z += this.currentDirection[0][2] * this.speed;
+                    }
              this.bodyIndex = 0;
              this.checkSnakeState();
       }
@@ -151,7 +157,17 @@ window.addEventListener('DOMContentLoaded', ()=>{
           }
           return takenPositions;
       }
+
+     snakeClear(){
+          for (let i = 0; i < this.length; i++) {
+            scene.remove(this.body[i]);
+          }
+         snake = new Snake();
+         scene.add(snake.body[0]);
+     }
+
    }
+
    snake = new Snake();
 
 });
