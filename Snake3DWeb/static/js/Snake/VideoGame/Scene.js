@@ -50,8 +50,11 @@ window.addEventListener('load',()=>{
          keyCode = event.key;
          snake.changeDirection(keyCode);
        });
-    document.getElementById('auto-rotation').addEventListener("change", element =>{
+    document.getElementById('control-auto-rotation').addEventListener("change", element =>{
         camera_control.autoRotate = element.target.checked;
+    });
+    document.getElementById('control-orbit-controls').addEventListener("change",element=>{
+        camera_control.enabled = element.target.checked;
     });
 
 });

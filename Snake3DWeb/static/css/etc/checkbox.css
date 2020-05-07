@@ -27,6 +27,7 @@
   -webkit-transform: translateX(-0.4em);
           transform: translateX(-0.4em);
   z-index: 5;
+
 }
 .checkmark svg {
   display: block;

@@ -71,7 +71,7 @@ window.addEventListener('load',()=>{
                                 <div class="close-button ob-coord-delete"></div>
                             </div>
                         </div>`;
-   let ob_coord_x, ob_coord_y,ob_coord_z, ob_coord_delete,coords = [];
+   let ob_coord_x, ob_coord_y,ob_coord_z, ob_coord_delete,coords = [],obstacles_counter_el = document.getElementById('description-obstacles-counter');
    function setBlock(){
        if(x_value!==-1 && y_value!==-1 && z_value!==-1 ){
             walls.add( new Wall(x_value,y_value,z_value).object );
@@ -83,10 +83,13 @@ window.addEventListener('load',()=>{
             ob_coord_x[ob_coord_x.length-1].innerHTML = x_value;
             ob_coord_y[ob_coord_x.length-1].innerHTML = y_value;
             ob_coord_z[ob_coord_x.length-1].innerHTML = z_value;
+            obstacles_counter_el.innerHTML = String(walls.array.length);
             ob_coord_delete[ob_coord_delete.length-1].addEventListener("click",(element)=>{
                 let index = Array.from(document.getElementsByClassName('close-button')).indexOf(element.currentTarget);
                 scene.remove(walls.array[index]);
+                walls.array.splice(index,1);
                 coords_label.children[index].remove();
+                obstacles_counter_el.innerHTML = String(walls.array.length);
             });
        }
    }
