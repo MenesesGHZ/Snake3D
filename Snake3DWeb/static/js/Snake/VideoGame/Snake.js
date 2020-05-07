@@ -158,7 +158,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
           return takenPositions;
       }
 
-     snakeClear(){
+     clear(){
           for (let i = 0; i < this.length; i++) {
             scene.remove(this.body[i]);
           }

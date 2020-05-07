@@ -33,6 +33,8 @@
     <script src="{% static 'js/Snake/VideoGame/Apple.js' %}"></script>
     <script src="{% static 'js/Snake/VideoGame/Walls.js' %}"></script>
     <script src="{% static 'js/Snake/VideoGame/WallSelector.js' %}"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 </head>
 <body>
@@ -61,6 +63,9 @@
                <div class="col-3 position-absolute h-100 p-0" style="right:0;transform: translateX(9%);"> <!--RIGHT NAVIGATION BAR-->
                    {% include 'includes/rightNavBar.html' %}
                </div>
+           </div>
+           <div class="row" style="height: 100vh">
+               {% include 'includes/snakeMetrics.html' %}
            </div>
 
        </div>

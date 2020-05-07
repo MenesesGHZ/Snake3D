@@ -3,7 +3,10 @@
 html{
     height: 100vh !important;
     min-height: 100vh !important;
-    overflow: hidden;
+    overflow-x: hidden;
+    /*overflow-y: hidden;
+
+     */
 }
 
 .font-electro{

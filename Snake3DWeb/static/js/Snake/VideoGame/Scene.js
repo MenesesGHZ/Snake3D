@@ -45,12 +45,9 @@ window.addEventListener('load',()=>{
 
 
 
-function EraseSnake(){
-    snake.snakeClear();
-}
 
 document.getElementById('feature-player-mode').addEventListener('click',()=>{
-    EraseSnake();
+    snake.clear();
     snake.user_mode = true;
     camera.position.set( -1.3, 0, -4);
     camera.rotation.y = 180 * (Math.PI /180);
@@ -63,7 +60,7 @@ document.getElementById('feature-player-mode').addEventListener('click',()=>{
 });
 
 document.getElementById('trigger-AI').addEventListener('click',()=>{
-     EraseSnake();
+    snake.clear();
     snake.user_mode = false;
     camera.position.set( 3.7, 3.7, 3.7 );
     //camera.rotation.y = -180 * (Math.PI /180);
