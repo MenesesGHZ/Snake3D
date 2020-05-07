@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/checkbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/checkbox.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/featuresNav.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/featuresNav.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +167,8 @@
       <workItem from="1588751423853" duration="2278000" />
       <workItem from="1588795637376" duration="25000" />
       <workItem from="1588805050475" duration="20093000" />
-      <workItem from="1588838118946" duration="10052000" />
+      <workItem from="1588838118946" duration="10104000" />
+      <workItem from="1588870030285" duration="668000" />
     </task>
     <servers />
   </component>
