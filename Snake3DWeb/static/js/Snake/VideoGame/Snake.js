@@ -7,11 +7,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00} );
          this.length = 1;
          this.speed = 0.05;
-         this.direction = ['a','d','w','s','e','q']; //Necessary for AI
+         this.directionController = {"AI":{'a':[1,0,0],'d':[-1,0,0],'w':[0,0,1],'s':[0,0,-1],'e':[0,1,0],'q':[0,-1,0]},"USER":{}}
          this.currentDirection = [[0,0,0]];
          this.chosenDirection = [0,0,0];
          this.volatileDirection = [0,0,0];
-         this.translationError = 0.01;
+         this.translationError = 0.01
          this.isValidTransition = [[true,true,true]];
          this.isValidEating = [false,false,false];
          this.body = [
@@ -19,10 +19,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
             ];
          this.bodyIndex = 0;
          this.gameOver = false;
-         this.user_mode = true;
+         this.user_mode = false;
       }
 
      changeDirection(keyCode){
+          this.chosenDirection = this.directionController["AI"][keyCode];
+          /*
           if (keyCode === 'a')  //left
                this.chosenDirection = [1,0,0];
           else if (keyCode === 'd')  //right
@@ -35,14 +37,15 @@ window.addEventListener('DOMContentLoaded', ()=>{
                this.chosenDirection = [0,1,0];
           else if (keyCode === 'q') //down
                this.chosenDirection = [0,-1,0];
+           */
           if(this.chosenDirection[0]*-1 === this.currentDirection[0][0] && // If is the opposite Direction, the snake direction does not change.
              this.chosenDirection[1]*-1 === this.currentDirection[0][1] &&
              this.chosenDirection[2]*-1 === this.currentDirection[0][2]){
               this.chosenDirection = this.currentDirection[0];
           }
-
-
       }
+
+
       move(){
              for(;this.bodyIndex<this.length;this.bodyIndex++){
                    this.isValidTransition[this.bodyIndex] = [  //Check if the current position is valid to change direction

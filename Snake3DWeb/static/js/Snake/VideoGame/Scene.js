@@ -37,7 +37,7 @@ window.addEventListener('load',()=>{
     let animate = function () {
         requestAnimationFrame(animate);
         snake.move();
-        camera_control.update();
+        if(!snake.user_mode) camera_control.update();
         renderer.render( scene, camera );
     };
     animate();
@@ -67,8 +67,11 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
     //camera.rotation.x = -20 * (Math.PI / 180);
     camera_control = new THREE.OrbitControls( camera,renderer.domElement);
     camera_control.enabled = true;
-    document.getElementById('control-orbit-controls-input').disabled = false;
+    camera_control.autoRotate = true;
+    document.getElementById('control-orbit-controls-input').checked = true;
+    document.getElementById('control-auto-rotation-input').checked = true;
 });
+
 
 
 
