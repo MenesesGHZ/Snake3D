@@ -17,14 +17,21 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.body = [
              new THREE.Mesh( new THREE.BoxGeometry(), this.material ),
             ];
-         this.bodyIndex = 0;
+         this.body[0].position.set(
+             Math.round(Math.random()*x-1),
+             Math.round(Math.random()*y-1),
+             Math.round(Math.random()*z-1)
+         );
          this.gameOver = false;
          this.user_mode = false;
+         this.lastPosition = [-1,-1,-1]; // Send Clean Signal to the AI
       }
 
      changeDirection(keyCode){
           /*AI: keyCode: a=left, d=right, w=forward, s=back, e=up, q=down*/
-          this.chosenDirection = this.directionController["AI"][keyCode];
+          if(Object.keys(this.directionController["AI"]).includes(keyCode)){
+            this.chosenDirection = this.directionController["AI"][keyCode];
+          }
           if(this.chosenDirection[0]*-1 === this.currentDirection[0][0] && // If is the opposite Direction, the snake direction does not change.
              this.chosenDirection[1]*-1 === this.currentDirection[0][1] &&
              this.chosenDirection[2]*-1 === this.currentDirection[0][2]){
@@ -32,28 +39,29 @@ window.addEventListener('DOMContentLoaded', ()=>{
           }
       }
       move(){
-             for(;this.bodyIndex<this.length;this.bodyIndex++){
-                   this.isValidTransition[this.bodyIndex] = [  //Check if the current position is valid to change direction
-                         Math.abs(this.body[this.bodyIndex].position.x-Math.round(this.body[this.bodyIndex].position.x)) < this.translationError,
-                         Math.abs(this.body[this.bodyIndex].position.y-Math.round(this.body[this.bodyIndex].position.y)) < this.translationError,
-                         Math.abs(this.body[this.bodyIndex].position.z-Math.round(this.body[this.bodyIndex].position.z)) < this.translationError
+             for(let i=0;i<this.length;i++){
+                   this.isValidTransition[i] = [  //Check if the current position is valid to change direction
+                         Math.abs(this.body[i].position.x-Math.round(this.body[i].position.x)) < this.translationError,
+                         Math.abs(this.body[i].position.y-Math.round(this.body[i].position.y)) < this.translationError,
+                         Math.abs(this.body[i].position.z-Math.round(this.body[i].position.z)) < this.translationError
                    ];
-                   if(this.isValidTransition[this.bodyIndex][0] && this.isValidTransition[this.bodyIndex][1] && this.isValidTransition[this.bodyIndex][2]){
-                       if(this.bodyIndex!==0) { // if( it is not the head ) {follow the cube at front} .
-                           this.volatileDirection = [ //Only one unit of distance per cube exist. Therefore I am comparing the [front_cube.position - behind_cube.position] to get behind_cube's direction.
-                               Math.round(this.body[this.bodyIndex - 1].position.x - this.body[this.bodyIndex].position.x),
-                               Math.round(this.body[this.bodyIndex - 1].position.y - this.body[this.bodyIndex].position.y),
-                               Math.round(this.body[this.bodyIndex - 1].position.z - this.body[this.bodyIndex].position.z)
+                   if(this.isValidTransition[i][0] && this.isValidTransition[i][1] && this.isValidTransition[i][2]){
+                       if(i!==0) { // if( it is not the head ) {follow the cube at front} .
+                           this.volatileDirection = [
+                               Math.round(this.body[i - 1].position.x - this.body[i].position.x),
+                               Math.round(this.body[i - 1].position.y - this.body[i].position.y),
+                               Math.round(this.body[i - 1].position.z - this.body[i].position.z)
                            ];
-                           this.currentDirection[this.bodyIndex] = this.volatileDirection;
+                           this.currentDirection[i] = this.volatileDirection;
                        }else{
                             this.currentDirection[0] = this.chosenDirection;
+                            this.send_time_step_signal();
                        }
                    }
-                   this.body[this.bodyIndex].position.set(
-                         this.body[this.bodyIndex].position.x + (this.currentDirection[this.bodyIndex][0]*this.speed),
-                         this.body[this.bodyIndex].position.y + (this.currentDirection[this.bodyIndex][1]*this.speed),
-                         this.body[this.bodyIndex].position.z + (this.currentDirection[this.bodyIndex][2]*this.speed)
+                   this.body[i].position.set(
+                         this.body[i].position.x + (this.currentDirection[i][0]*this.speed),
+                         this.body[i].position.y + (this.currentDirection[i][1]*this.speed),
+                         this.body[i].position.z + (this.currentDirection[i][2]*this.speed)
                     );
             }
              if(this.user_mode){
@@ -61,12 +69,13 @@ window.addEventListener('DOMContentLoaded', ()=>{
                        camera.position.y += this.currentDirection[0][1] * this.speed;
                        camera.position.z += this.currentDirection[0][2] * this.speed;
                     }
-             this.bodyIndex = 0;
       }
 
       run(){
-       this.move();
-       this.checkSnakeState();
+       if(!this.gameOver){
+         this.move();
+         this.checkSnakeState();
+       }
       }
 
 
@@ -114,36 +123,34 @@ window.addEventListener('DOMContentLoaded', ()=>{
       }
 
       didLose(){
-          this.bodyIndex = 0
-              this.bodyIndex = 4 // it is set at 4 because at this point the snake is capable to collision itself.
-              //check if the head is in any body part.
-              for(;this.bodyIndex<this.length;this.bodyIndex++){
-                  if(Math.abs(this.body[0].position.x-this.body[this.bodyIndex].position.x)<this.translationError &&
-                     Math.abs(this.body[0].position.y-this.body[this.bodyIndex].position.y)<this.translationError &&
-                     Math.abs(this.body[0].position.z-this.body[this.bodyIndex].position.z)<this.translationError){
-                      return true;
-                  }
-              }
-              this.bodyIndex = 0;
-              //check if the head is outside the Cell (Grid)
-              if (this.body[0].position.x > x - 1 + this.translationError || this.body[0].position.x < -this.translationError ||
-                  this.body[0].position.y > y - 1 + this.translationError || this.body[0].position.y < -this.translationError ||
-                  this.body[0].position.z > z - 1 + this.translationError || this.body[0].position.z < -this.translationError) {
+          // it is set at 4 because at this point the snake is capable to collision itself.
+          //check if the head is in any body part.
+          for(let i=4;i<this.length;i++){
+              if(Math.abs(this.body[0].position.x-this.body[i].position.x)<this.translationError &&
+                 Math.abs(this.body[0].position.y-this.body[i].position.y)<this.translationError &&
+                 Math.abs(this.body[0].position.z-this.body[i].position.z)<this.translationError){
                   return true;
               }
-              return walls.didCollideWith([
-                  this.body[0].position.x,
-                  this.body[0].position.y,
-                  this.body[0].position.z
-                            ],this.translationError);
+          }
+          //check if the head is outside the Cell (Grid)
+          if (this.body[0].position.x > x - 1 + this.translationError || this.body[0].position.x < -this.translationError ||
+              this.body[0].position.y > y - 1 + this.translationError || this.body[0].position.y < -this.translationError ||
+              this.body[0].position.z > z - 1 + this.translationError || this.body[0].position.z < -this.translationError) {
+              return true;
+          }
+          return walls.didCollideWith([
+              this.body[0].position.x,
+              this.body[0].position.y,
+              this.body[0].position.z
+                        ],this.translationError);
       }
       takenLocations(){
           let takenPositions = [];
-          for(;this.bodyIndex<this.length;this.bodyIndex++){
+          for(let i=0;i<this.length;i++){
             takenPositions.push([
-                    Math.round(this.body[this.bodyIndex].position.x),
-                    Math.round(this.body[this.bodyIndex].position.y),
-                    Math.round(this.body[this.bodyIndex].position.z)
+                    Math.round(this.body[i].position.x),
+                    Math.round(this.body[i].position.y),
+                    Math.round(this.body[i].position.z)
             ]);
           }
           return takenPositions;
@@ -157,10 +164,17 @@ window.addEventListener('DOMContentLoaded', ()=>{
      }
 
      send_time_step_signal(){
-
+           if(this.lastPosition[0]!==Math.round(this.body[0].position.x) ||
+              this.lastPosition[1]!==Math.round(this.body[0].position.y) ||
+              this.lastPosition[2]!==Math.round(this.body[0].position.z) ){
+                       this.lastPosition = [
+                             Math.round(this.body[0].position.x),
+                             Math.round(this.body[0].position.y),
+                             Math.round(this.body[0].position.z)
+                         ];
+                         receive_time_step_signal();
+            }
      }
-
-
    }
 
    snake = new Snake();

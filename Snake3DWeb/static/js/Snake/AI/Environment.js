@@ -1,8 +1,11 @@
 class SnakeEnvironment{
     constructor(grid_size=[4,4,4]) {
+
         this.time_step = 0;
         this.rewards = {"blank":-1,"danger":-2,"apple":+1};
     }
+
+
     read_environment(){
         `  
             Read Apple Position in the Grid: 
@@ -17,16 +20,18 @@ class SnakeEnvironment{
             z = Math.round(walls[i].object.position.z);
             env_sensor["DangerPos"].push([x,y,z])
         }
-        for(let i=1;i<snake.body.length;i++){
+        for(let i=1;i<snake.length;i++){
             x = Math.round(snake.body[i].position.x);
             y = Math.round(snake.body[i].position.y);
             z = Math.round(snake.body[i].position.z);
-            env_sensor["ApplePos"].push([x,y,z])
+            env_sensor["DangerPos"].push([x,y,z]);
         }
+        env_sensor["ApplePos"].push(
+            [apple.object.position.x,
+             apple.object.position.y,
+             apple.object.position.z]
+        );
         return env_sensor;
-    }
-    receive_time_step_signal(){
-
     }
 
     end_episode(){
@@ -79,5 +84,4 @@ class SnakeEnvironment{
     }
 }
 
-let Environment = new SnakeEnvironment();
 

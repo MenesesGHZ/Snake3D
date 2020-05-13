@@ -76,6 +76,7 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
 
 
 /*Snake Control's Listeners*/
+    /*
  let keyCode;
   document.addEventListener("keydown", (event)=>{
          keyCode = event.key;
@@ -88,6 +89,7 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
         camera_control.enabled = element.target.checked;
     });
 
+     */
 });
 
 
