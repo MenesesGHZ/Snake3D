@@ -1,20 +1,16 @@
-class Agent{
+class SnakeAgent{
     constructor() {
-        this.actions = ['a', 'w', 'd', 's', 'q', 'e', null];
-        this.state;
+        this.actions = ['a', 'w', 'd', 's', 'q', 'e'];
     }
 
-    state_value_function(){
-
-    }
-
-    do_action_in_state(action,state){
-
-    }
-
-    update_state(){
-
-        this.state = ["blank",[0,0,0],'a'];
+    read_state(){
+        let pos_x = snake.body[0].position.x,
+            pos_y = snake.body[0].position.y,
+            pos_z = snake.body[0].position.z;
+        let state = [apple.object.position.x - pos_x]
     }
 }
+
+let agent = new SnakeAgent();
+
 

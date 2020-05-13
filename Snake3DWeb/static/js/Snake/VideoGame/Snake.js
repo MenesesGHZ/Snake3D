@@ -23,29 +23,14 @@ window.addEventListener('DOMContentLoaded', ()=>{
       }
 
      changeDirection(keyCode){
+          /*AI: keyCode: a=left, d=right, w=forward, s=back, e=up, q=down*/
           this.chosenDirection = this.directionController["AI"][keyCode];
-          /*
-          if (keyCode === 'a')  //left
-               this.chosenDirection = [1,0,0];
-          else if (keyCode === 'd')  //right
-               this.chosenDirection = [-1,0,0];
-          else if(keyCode === 'w') //forward
-               this.chosenDirection = [0,0,1];
-          else if(keyCode === 's') //back
-             this.chosenDirection = [0,0,-1];
-          else if (keyCode === 'e') // up
-               this.chosenDirection = [0,1,0];
-          else if (keyCode === 'q') //down
-               this.chosenDirection = [0,-1,0];
-           */
           if(this.chosenDirection[0]*-1 === this.currentDirection[0][0] && // If is the opposite Direction, the snake direction does not change.
              this.chosenDirection[1]*-1 === this.currentDirection[0][1] &&
              this.chosenDirection[2]*-1 === this.currentDirection[0][2]){
               this.chosenDirection = this.currentDirection[0];
           }
       }
-
-
       move(){
              for(;this.bodyIndex<this.length;this.bodyIndex++){
                    this.isValidTransition[this.bodyIndex] = [  //Check if the current position is valid to change direction
@@ -66,19 +51,25 @@ window.addEventListener('DOMContentLoaded', ()=>{
                        }
                    }
                    this.body[this.bodyIndex].position.set(
-                        this.body[this.bodyIndex].position.x +  (this.currentDirection[this.bodyIndex][0]*this.speed),
+                         this.body[this.bodyIndex].position.x + (this.currentDirection[this.bodyIndex][0]*this.speed),
                          this.body[this.bodyIndex].position.y + (this.currentDirection[this.bodyIndex][1]*this.speed),
                          this.body[this.bodyIndex].position.z + (this.currentDirection[this.bodyIndex][2]*this.speed)
                     );
             }
-             if(this.user_mode === true){
+             if(this.user_mode){
                        camera.position.x += this.currentDirection[0][0] * this.speed;
                        camera.position.y += this.currentDirection[0][1] * this.speed;
                        camera.position.z += this.currentDirection[0][2] * this.speed;
                     }
              this.bodyIndex = 0;
-             this.checkSnakeState();
       }
+
+      run(){
+       this.move();
+       this.checkSnakeState();
+      }
+
+
       checkSnakeState(){
           this.isValidEating = [
               Math.abs(this.body[0].position.x - apple.object.position.x ) < this.translationError,
@@ -102,9 +93,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
           scene.add(this.body[this.length]);
           this.length += 1;
       }
-
       gameOverLogic(){
-
           if(!this.gameOver) {
               this.gameOver = this.didLose();
               if(this.gameOver){ // this only run once to display the 'game over' text.
@@ -122,7 +111,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
                   });
               }
           }
-
       }
 
       didLose(){
@@ -160,7 +148,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
           }
           return takenPositions;
       }
-
      clear(){
           for (let i = 0; i < this.length; i++) {
             scene.remove(this.body[i]);
@@ -168,6 +155,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
          snake = new Snake();
          scene.add(snake.body[0]);
      }
+
+     send_time_step_signal(){
+
+     }
+
 
    }
 
