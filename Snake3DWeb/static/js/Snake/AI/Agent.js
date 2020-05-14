@@ -1,6 +1,7 @@
 class SnakeAgent{
     constructor() {
         this.actions = ['a', 'w', 'd', 's', 'q', 'e'];
+        this.currentCell = "blank";
     }
 
     read_state(env_elements){
@@ -50,10 +51,11 @@ class SnakeAgent{
                  if (env_elements["DangerPos"][i][0] === cells_next_to[j][0] &&
                      env_elements["DangerPos"][i][1] === cells_next_to[j][1] &&
                      env_elements["DangerPos"][i][2] === cells_next_to[j][2]){
-                       cells_next_to_state[j] = "danger"
+                       cells_next_to_state[j] = "danger";
                    }
              }
         }
+
         return [
             Math.sign(apple.object.position.x - pos_x),
             Math.sign(apple.object.position.y - pos_y),

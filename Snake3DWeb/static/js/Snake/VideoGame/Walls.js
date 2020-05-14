@@ -18,6 +18,11 @@ let walls;
 
         }
        }
+       clear(){
+           for(let i=0;i<this.array.length;i++){
+               scene.remove(this.array[i]);
+           }
+       }
 
    }
    class Wall{

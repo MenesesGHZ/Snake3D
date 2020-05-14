@@ -17,7 +17,10 @@ window.addEventListener('DOMContentLoaded', ()=> {
                 blankPositions[index][1],
                 blankPositions[index][2]
             );
-
+        }
+        clear(){
+            scene.remove(this.object);
+            apple = new Apple();
         }
 
 

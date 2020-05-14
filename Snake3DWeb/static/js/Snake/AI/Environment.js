@@ -1,36 +1,52 @@
 class SnakeEnvironment{
     constructor(grid_size=[4,4,4]) {
-
         this.time_step = 0;
+        this.markov_trajectory = [];
         this.rewards = {"blank":-1,"danger":-2,"apple":+1};
     }
-
-
     read_environment(){
         `  
             Read Apple Position in the Grid: 
             Read Danger Positions in the Grid:
                 Walls, Body Parts (snake tail)
+            Read Current Cell of Snake:
+                Blank, Danger, Apple
         `
-        let env_sensor = {"ApplePos":[],"DangerPos":[]},
+        let env_sensor = {"CurrentCell":"blank","ApplePos":[],"DangerPos":[]},
             x,y,z;
+
         for(let i=0; i<walls.length;i++){
             x = Math.round(walls[i].object.position.x);
             y = Math.round(walls[i].object.position.y);
             z = Math.round(walls[i].object.position.z);
             env_sensor["DangerPos"].push([x,y,z])
+            if(Math.round(snake.body[0].position.x) === x &&
+               Math.round(snake.body[0].position.y) === y &&
+               Math.round(snake.body[0].position.z) === z){
+                env_sensor["CurrentCell"] = "danger";
+            }
         }
-        for(let i=1;i<snake.length;i++){
+        for(let i=4;i<snake.length;i++){
             x = Math.round(snake.body[i].position.x);
             y = Math.round(snake.body[i].position.y);
             z = Math.round(snake.body[i].position.z);
             env_sensor["DangerPos"].push([x,y,z]);
+            if(Math.round(snake.body[0].position.x) === x &&
+               Math.round(snake.body[0].position.y) === y &&
+               Math.round(snake.body[0].position.z) === z){
+                env_sensor["CurrentCell"] = "danger";
+            }
         }
         env_sensor["ApplePos"].push(
             [apple.object.position.x,
              apple.object.position.y,
              apple.object.position.z]
         );
+        if(Math.round(snake.body[0].position.x) === apple.object.position.x &&
+           Math.round(snake.body[0].position.y) === apple.object.position.y &&
+           Math.round(snake.body[0].position.z) === apple.object.position.z){
+                env_sensor["CurrentCell"] = "apple";
+            }
         return env_sensor;
     }
 
@@ -38,13 +54,11 @@ class SnakeEnvironment{
        /*When Snake AI has Loose*/
     }
 
-    reward_t_a(time_step,action){
+    reward_at_t(){
 
     }
 
-    discounted_return(){
 
-    }
 
     compute_positions(grid_size,outside_positions=true){
         let output = [],

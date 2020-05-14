@@ -118,6 +118,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                           text_mesh = new THREE.Mesh(text_geometry, text_material);
                       scene.add(text_mesh);
                   });
+                  this.restart_game();
               }
           }
       }
@@ -162,7 +163,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
          snake = new Snake();
          scene.add(snake.body[0]);
      }
-
      send_time_step_signal(){
            if(this.lastPosition[0]!==Math.round(this.body[0].position.x) ||
               this.lastPosition[1]!==Math.round(this.body[0].position.y) ||
@@ -175,8 +175,14 @@ window.addEventListener('DOMContentLoaded', ()=>{
                          receive_time_step_signal();
             }
      }
+
    }
-
    snake = new Snake();
-
 });
+
+function restart_game(){
+    snake.clear();
+    walls.clear();
+    apple.clear();
+    receive_update_signal();
+}
