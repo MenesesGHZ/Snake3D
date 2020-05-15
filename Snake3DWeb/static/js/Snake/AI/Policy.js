@@ -6,10 +6,11 @@ class Policy{
         `
         this.posible_actions=["a","d","w","s","e","q"];
         this.Q = {};
+        this.QN = {};
         this.entity = {};
         this.epsilon = epsilon;
         this.discount_rate = discount_rate;
-        this.epsiode_step = 1;
+        this.episode_step = 1;
     }
 
 
@@ -25,30 +26,35 @@ class Policy{
     }
 
     update_policy(sequence){
-        let Gt = 0, argmax_q_value = Number.MIN_SAFE_INTEGER, argmax_q_action, reward,state,action;
-        for(let i=sequence.length-2; i>=1; i-=3){
+        let Gt = 0, Gt_avg=0 ,argmax_q_value = Number.MIN_SAFE_INTEGER, argmax_q_action, reward,state,action;
+        for(let i=sequence.length-1; i>=1; i-=3){
             reward = sequence[i];
             action = sequence[i-1];
             state = sequence[i-2];
-            //console.log(reward,action, state); // state,reward,action
-            Gt = reward + this.discount_rate*Gt;
-            if(!Object.keys(this.Q).includes(sequence[state])){
-                this.Q[state] = {};
-                this.Q[state][action] = Gt;
-            }else{
-                this.Q[state][action] = Gt + this.epsiode_step*(Gt - this.Q[state][action]);
+            if(!Object.keys(this.Q).includes(state)){
+                this.Q[state] = Object();
+                this.QN[state] = Object();
             }
+            if(!Object.keys(this.Q[state]).includes(action)){
+                this.Q[state][action] = 0;
+                this.QN[state][action] = 0;
+            }
+            this.QN[state][action]+=1;
+            this.Q[state][action] = this.Q[state][action] + ((1/this.QN[state][action])*(Gt - this.Q[state][action]));
+            Gt = reward + this.discount_rate*Gt;
         }
         for (let [state, actions] of Object.entries(this.Q)) {
               for(let [action,q_value] of Object.entries(actions) ){
-                    if(q_value>argmax_q_value){
+                  if(q_value>argmax_q_value){
                         argmax_q_action = action;
+                        argmax_q_value = q_value;
                     }
+                }
               this.entity[state] = argmax_q_action;
               argmax_q_value = Number.MIN_SAFE_INTEGER;
-            }
         }
-        this.epsiode_step+=1
+        this.episode_step+=1
+
     }
 
     index_of(state){

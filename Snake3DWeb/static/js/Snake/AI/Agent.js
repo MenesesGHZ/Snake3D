@@ -21,7 +21,10 @@ class SnakeAgent{
             negative_z_cell_type,
             ]
         `
-        this.currentCell = env_elements["currentCell"]
+        this.currentCell = env_elements["currentCell"];
+        if(this.currentCell === 'd'){
+            return "loosing_state";
+        }
         let pos_x = Math.round(snake.body[0].position.x),
             pos_y = Math.round(snake.body[0].position.y),
             pos_z = Math.round(snake.body[0].position.z);
@@ -35,17 +38,17 @@ class SnakeAgent{
         ], cells_next_to_state = ["b","b","b","b","b","b"];
 
         if(pos_x+1>x-1)
-            cells_next_to_state[0]="d"
+            cells_next_to_state[0]="d";
         if(pos_x-1<0)
-            cells_next_to_state[1]="d"
+            cells_next_to_state[1]="d";
         if(pos_y+1>y-1)
-            cells_next_to_state[2]="d"
+            cells_next_to_state[2]="d";
         if(pos_y-1<0)
-            cells_next_to_state[3]="d"
+            cells_next_to_state[3]="d";
         if(pos_z+1>z-1)
-            cells_next_to_state[4]="d"
+            cells_next_to_state[4]="d";
         if(pos_z-1<0)
-            cells_next_to_state[5]="d"
+            cells_next_to_state[5]="d";
 
         for(let i=0;i<env_elements["dangerPos"].length;i++){
             for(let j=0;j<env_elements["dangerPos"].length;j++){
@@ -56,7 +59,7 @@ class SnakeAgent{
                    }
              }
         }
-        return "{0}{1}{2}{3}{5}{6}{7}{8}".format(
+        return "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}".format(
             Math.sign(apple.object.position.x - pos_x),
             Math.sign(apple.object.position.y - pos_y),
             Math.sign(apple.object.position.z - pos_z),
@@ -65,7 +68,10 @@ class SnakeAgent{
             cells_next_to_state[2],
             cells_next_to_state[3],
             cells_next_to_state[4],
-            cells_next_to_state[5]
+            cells_next_to_state[5],
+            snake.currentDirection[0][0],
+            snake.currentDirection[0][1],
+            snake.currentDirection[0][2]
         );
     }
 

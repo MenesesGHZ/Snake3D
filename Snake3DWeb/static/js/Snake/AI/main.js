@@ -5,7 +5,7 @@ let env_elements,
     state,
     action,
     sequence,
-    reward = 0;
+    reward;
 
 
 function receive_time_step_signal(){
@@ -13,23 +13,20 @@ function receive_time_step_signal(){
   state = agent.read_state(env_elements);
   action = policy.take_action_by_state(state);
   reward = environment.rewards[agent.currentCell];
-  alert(agent.currentCell);
   if(environment.time_step === 0){
     reward=0;
   }
-  sequence = [reward,state,action];
-  if(agent.currentCell !== "d"){
-    agent.do(action)
-  }
-  if(agent.currentCell === "d") {
-    sequence = [reward,state];
-  }
-
+  sequence = [state,action,reward];
   environment.markov_trajectory.push(...sequence);
   environment.time_step+=1;
+  if(agent.currentCell !== "d"){
+    agent.do(action);
+  }
 }
 
 function receive_update_signal(){
   policy.update_policy(environment.markov_trajectory);
+  environment.markov_trajectory = [];
+  environment.time_step = 0;
 
 }
