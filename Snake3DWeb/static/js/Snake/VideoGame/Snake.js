@@ -6,21 +6,21 @@ window.addEventListener('DOMContentLoaded', ()=>{
       constructor() {
          this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00} );
          this.length = 1;
-         this.speed = 0.05;
+         this.speed = 1;
          this.directionController = {"AI":{'a':[1,0,0],'d':[-1,0,0],'w':[0,0,1],'s':[0,0,-1],'e':[0,1,0],'q':[0,-1,0]},"USER":{}}
          this.currentDirection = [[0,0,0]];
          this.chosenDirection = [0,0,0];
          this.volatileDirection = [0,0,0];
          this.translationError = 0.01
-         this.isValidTransition = [[true,true,true]];
-         this.isValidEating = [false,false,false];
+         this.isValidTransition = [true];
+         this.isValidEating = false;
          this.body = [
              new THREE.Mesh( new THREE.BoxGeometry(), this.material ),
             ];
          this.body[0].position.set(
-             Math.round(Math.random()*x-1),
-             Math.round(Math.random()*y-1),
-             Math.round(Math.random()*z-1)
+             Math.round(Math.random()*(x-1)),
+             Math.round(Math.random()*(y-1)),
+             Math.round(Math.random()*(z-1))
          );
          this.gameOver = false;
          this.user_mode = false;
@@ -40,12 +40,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
       }
       move(){
              for(let i=0;i<this.length;i++){
-                   this.isValidTransition[i] = [  //Check if the current position is valid to change direction
-                         Math.abs(this.body[i].position.x-Math.round(this.body[i].position.x)) < this.translationError,
-                         Math.abs(this.body[i].position.y-Math.round(this.body[i].position.y)) < this.translationError,
-                         Math.abs(this.body[i].position.z-Math.round(this.body[i].position.z)) < this.translationError
-                   ];
-                   if(this.isValidTransition[i][0] && this.isValidTransition[i][1] && this.isValidTransition[i][2]){
+                   this.isValidTransition[i] =  //Check if the current position is valid to change direction
+                         Math.abs(this.body[i].position.x-Math.round(this.body[i].position.x)) < this.translationError &&
+                         Math.abs(this.body[i].position.y-Math.round(this.body[i].position.y)) < this.translationError &&
+                         Math.abs(this.body[i].position.z-Math.round(this.body[i].position.z)) < this.translationError;
+
+                   if(this.isValidTransition[i]){
                        if(i!==0) { // if( it is not the head ) {follow the cube at front} .
                            this.volatileDirection = [
                                Math.round(this.body[i - 1].position.x - this.body[i].position.x),
@@ -55,7 +55,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
                            this.currentDirection[i] = this.volatileDirection;
                        }else{
                             this.currentDirection[0] = this.chosenDirection;
-                            this.send_time_step_signal();
                        }
                    }
                    this.body[i].position.set(
@@ -73,39 +72,46 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
       run(){
        if(!this.gameOver){
-         this.move();
          this.checkSnakeState();
+         this.move();
        }
       }
-
-
       checkSnakeState(){
-          this.isValidEating = [
-              Math.abs(this.body[0].position.x - apple.object.position.x ) < this.translationError,
-              Math.abs(this.body[0].position.y - apple.object.position.y ) < this.translationError,
-              Math.abs(this.body[0].position.z - apple.object.position.z ) < this.translationError
-          ];
-          this.gameOverLogic();
-          if(this.isValidEating[0] && this.isValidEating[1] && this.isValidEating[2]) {
-            this.addToSnake();
-            apple.setNewPosition();
-        }
+        this.isValidTransition[0] =  //Check if the current position is valid to change direction
+             Math.abs(this.body[0].position.x-Math.round(this.body[0].position.x)) < this.translationError &&
+             Math.abs(this.body[0].position.y-Math.round(this.body[0].position.y)) < this.translationError &&
+             Math.abs(this.body[0].position.z-Math.round(this.body[0].position.z)) < this.translationError;
+        if(this.isValidTransition[0]){
+             this.send_time_step_signal();
+              this.isValidEating =
+                  Math.round(this.body[0].position.x) === apple.object.position.x &&
+                  Math.round(this.body[0].position.y) === apple.object.position.y &&
+                  Math.round(this.body[0].position.z) === apple.object.position.z;
+              if(this.isValidEating) {
+                  this.addToSnake();
+                  apple.setNewPosition();
+                  right_bar_update(this.length - 1);
+              }
+              this.gameOverLogic();
+         }
       }
       addToSnake(){
           this.currentDirection.push([0,0,0]);
           this.body.push(new THREE.Mesh( new THREE.BoxGeometry(), this.material ));
           this.body[this.length].position.set(
-            Math.round(this.body[this.length-1].position.x),
-            Math.round(this.body[this.length-1].position.y),
-            Math.round(this.body[this.length-1].position.z)
+            Math.round(this.body[this.length-1].position.x - this.currentDirection[this.length-1][0]),
+            Math.round(this.body[this.length-1].position.y - this.currentDirection[this.length-1][1]),
+            Math.round(this.body[this.length-1].position.z - this.currentDirection[this.length-1][2])
           );
           scene.add(this.body[this.length]);
           this.length += 1;
       }
+      
       gameOverLogic(){
           if(!this.gameOver) {
               this.gameOver = this.didLose();
               if(this.gameOver){ // this only run once to display the 'game over' text.
+                 /*
                   let loader = new THREE.FontLoader();
                   loader.load(static_path + 'helvetiker_regular.typeface.json', function (font) {
                       let text_geometry = new THREE.TextGeometry('Game Over', {
@@ -118,7 +124,9 @@ window.addEventListener('DOMContentLoaded', ()=>{
                           text_mesh = new THREE.Mesh(text_geometry, text_material);
                       scene.add(text_mesh);
                   });
-                  this.restart_game();
+
+                  */
+                  restart_game();
               }
           }
       }
@@ -145,6 +153,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
               this.body[0].position.z
                         ],this.translationError);
       }
+
+
       takenLocations(){
           let takenPositions = [];
           for(let i=0;i<this.length;i++){
@@ -161,7 +171,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
             scene.remove(this.body[i]);
           }
          snake = new Snake();
-         scene.add(snake.body[0]);
      }
      send_time_step_signal(){
            if(this.lastPosition[0]!==Math.round(this.body[0].position.x) ||
@@ -185,4 +194,7 @@ function restart_game(){
     walls.clear();
     apple.clear();
     receive_update_signal();
+    scene.add(snake.body[0]);
+    scene.add(apple.object);
+    right_bar_update();
 }

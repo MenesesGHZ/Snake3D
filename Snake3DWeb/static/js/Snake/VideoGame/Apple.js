@@ -25,8 +25,6 @@ window.addEventListener('DOMContentLoaded', ()=> {
 
 
     }
-
-
     apple = new Apple();
 
 });

@@ -1,9 +1,13 @@
 class SnakeEnvironment{
     constructor(grid_size=[4,4,4]) {
+        `
+        this.rewards: Blank = -1, Danger = -2, Apple = +1
+        `
         this.time_step = 0;
         this.markov_trajectory = [];
-        this.rewards = {"blank":-1,"danger":-2,"apple":+1};
+        this.rewards = {"b":-0.25,"d":-2,"a":+1};
     }
+
     read_environment(){
         `  
             Read Apple Position in the Grid: 
@@ -12,52 +16,47 @@ class SnakeEnvironment{
             Read Current Cell of Snake:
                 Blank, Danger, Apple
         `
-        let env_sensor = {"CurrentCell":"blank","ApplePos":[],"DangerPos":[]},
-            x,y,z;
+        let env_sensor = {"currentCell":"b","applePos":[],"dangerPos":[]},
+            pos_x,pos_y,pos_z;
 
         for(let i=0; i<walls.length;i++){
-            x = Math.round(walls[i].object.position.x);
-            y = Math.round(walls[i].object.position.y);
-            z = Math.round(walls[i].object.position.z);
-            env_sensor["DangerPos"].push([x,y,z])
-            if(Math.round(snake.body[0].position.x) === x &&
-               Math.round(snake.body[0].position.y) === y &&
-               Math.round(snake.body[0].position.z) === z){
-                env_sensor["CurrentCell"] = "danger";
+            pos_x = Math.round(walls[i].object.position.x);
+            pos_y = Math.round(walls[i].object.position.y);
+            pos_z = Math.round(walls[i].object.position.z);
+            env_sensor["dangerPos"].push([pos_x,pos_y,pos_z])
+            if(Math.round(snake.body[0].position.x) === pos_x &&
+               Math.round(snake.body[0].position.y) === pos_y &&
+               Math.round(snake.body[0].position.z) === pos_z){
+                env_sensor["currentCell"] = "d";
             }
         }
         for(let i=4;i<snake.length;i++){
-            x = Math.round(snake.body[i].position.x);
-            y = Math.round(snake.body[i].position.y);
-            z = Math.round(snake.body[i].position.z);
-            env_sensor["DangerPos"].push([x,y,z]);
-            if(Math.round(snake.body[0].position.x) === x &&
-               Math.round(snake.body[0].position.y) === y &&
-               Math.round(snake.body[0].position.z) === z){
-                env_sensor["CurrentCell"] = "danger";
+            pos_x = Math.round(snake.body[i].position.x);
+            pos_y = Math.round(snake.body[i].position.y);
+            pos_z = Math.round(snake.body[i].position.z);
+            env_sensor["dangerPos"].push([pos_x,pos_y,pos_z]);
+            if(Math.round(snake.body[0].position.x) === pos_x &&
+               Math.round(snake.body[0].position.y) === pos_y &&
+               Math.round(snake.body[0].position.z) === pos_z){
+                env_sensor["currentCell"] = "d";
             }
         }
-        env_sensor["ApplePos"].push(
+        env_sensor["applePos"].push(
             [apple.object.position.x,
              apple.object.position.y,
              apple.object.position.z]
         );
-        if(Math.round(snake.body[0].position.x) === apple.object.position.x &&
-           Math.round(snake.body[0].position.y) === apple.object.position.y &&
-           Math.round(snake.body[0].position.z) === apple.object.position.z){
-                env_sensor["CurrentCell"] = "apple";
-            }
+        if(Math.round(snake.body[0].position.x) > x-1 || Math.round(snake.body[0].position.x) < 0 ||
+           Math.round(snake.body[0].position.y) > y-1 || Math.round(snake.body[0].position.y) < 0 ||
+           Math.round(snake.body[0].position.z) > z-1 || Math.round(snake.body[0].position.z) < 0){
+            env_sensor["currentCell"] = "d";
+        } else if(Math.round(snake.body[0].position.x) === apple.object.position.x &&
+                   Math.round(snake.body[0].position.y) === apple.object.position.y &&
+                   Math.round(snake.body[0].position.z) === apple.object.position.z){
+                        env_sensor["currentCell"] = "a";
+                    }
         return env_sensor;
     }
-
-    end_episode(){
-       /*When Snake AI has Loose*/
-    }
-
-    reward_at_t(){
-
-    }
-
 
 
     compute_positions(grid_size,outside_positions=true){

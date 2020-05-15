@@ -1,7 +1,7 @@
 class SnakeAgent{
     constructor() {
         this.actions = ['a', 'w', 'd', 's', 'q', 'e'];
-        this.currentCell = "blank";
+        this.currentCell = "b";
     }
 
     read_state(env_elements){
@@ -21,6 +21,7 @@ class SnakeAgent{
             negative_z_cell_type,
             ]
         `
+        this.currentCell = env_elements["currentCell"]
         let pos_x = Math.round(snake.body[0].position.x),
             pos_y = Math.round(snake.body[0].position.y),
             pos_z = Math.round(snake.body[0].position.z);
@@ -31,32 +32,31 @@ class SnakeAgent{
             [pos_x,pos_y-1,pos_z],
             [pos_x,pos_y,pos_z+1],
             [pos_x,pos_y,pos_z-1]
-        ], cells_next_to_state = ["blank","blank","blank","blank","blank","blank"];
+        ], cells_next_to_state = ["b","b","b","b","b","b"];
 
         if(pos_x+1>x-1)
-            cells_next_to_state[0]="danger"
+            cells_next_to_state[0]="d"
         if(pos_x-1<0)
-            cells_next_to_state[1]="danger"
+            cells_next_to_state[1]="d"
         if(pos_y+1>y-1)
-            cells_next_to_state[2]="danger"
+            cells_next_to_state[2]="d"
         if(pos_y-1<0)
-            cells_next_to_state[3]="danger"
+            cells_next_to_state[3]="d"
         if(pos_z+1>z-1)
-            cells_next_to_state[4]="danger"
+            cells_next_to_state[4]="d"
         if(pos_z-1<0)
-            cells_next_to_state[5]="danger"
+            cells_next_to_state[5]="d"
 
-        for(let i=0;i<env_elements["DangerPos"].length;i++){
-            for(let j=0;j<env_elements["DangerPos"].length;j++){
-                 if (env_elements["DangerPos"][i][0] === cells_next_to[j][0] &&
-                     env_elements["DangerPos"][i][1] === cells_next_to[j][1] &&
-                     env_elements["DangerPos"][i][2] === cells_next_to[j][2]){
-                       cells_next_to_state[j] = "danger";
+        for(let i=0;i<env_elements["dangerPos"].length;i++){
+            for(let j=0;j<env_elements["dangerPos"].length;j++){
+                 if (env_elements["dangerPos"][i][0] === cells_next_to[j][0] &&
+                     env_elements["dangerPos"][i][1] === cells_next_to[j][1] &&
+                     env_elements["dangerPos"][i][2] === cells_next_to[j][2]){
+                       cells_next_to_state[j] = "d";
                    }
              }
         }
-
-        return [
+        return "{0}{1}{2}{3}{5}{6}{7}{8}".format(
             Math.sign(apple.object.position.x - pos_x),
             Math.sign(apple.object.position.y - pos_y),
             Math.sign(apple.object.position.z - pos_z),
@@ -65,8 +65,8 @@ class SnakeAgent{
             cells_next_to_state[2],
             cells_next_to_state[3],
             cells_next_to_state[4],
-            cells_next_to_state[5],
-        ];
+            cells_next_to_state[5]
+        );
     }
 
     do(action){
