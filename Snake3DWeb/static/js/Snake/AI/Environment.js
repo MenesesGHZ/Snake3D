@@ -5,7 +5,7 @@ class SnakeEnvironment{
         `
         this.time_step = 0;
         this.markov_trajectory = [];
-        this.rewards = {"b":-1,"d":-2,"a":+3};
+        this.rewards = {"b":-1,"d":-2,"a":+2};
     }
 
     read_environment(){

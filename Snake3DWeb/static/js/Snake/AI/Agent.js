@@ -1,6 +1,6 @@
 class SnakeAgent{
     constructor() {
-        this.actions = ['a', 'w', 'd', 's', ''];
+        this.actions = ['a', 'w', 's', 'd', 'none'];
         this.currentCell = "b";
     }
 
@@ -28,47 +28,60 @@ class SnakeAgent{
         let pos_x = Math.round(snake.body[0].position.x),
             pos_y = Math.round(snake.body[0].position.y),
             pos_z = Math.round(snake.body[0].position.z);
-        let cells_next_to =[
-            [pos_x+1,pos_y,pos_z],
-            [pos_x-1,pos_y,pos_z],
-            [pos_x,pos_y+1,pos_z],
-            [pos_x,pos_y-1,pos_z],
-            [pos_x,pos_y,pos_z+1],
-            [pos_x,pos_y,pos_z-1]
-        ], cells_next_to_state = ["b","b","b","b","b","b"];
+        let cell_if_action = {"a":"b","w":"b","s":"b","d":"b","none":"b"},
+            direction;
 
-        if(pos_x+1>x-1)
-            cells_next_to_state[0]="d";
-        if(pos_x-1<0)
-            cells_next_to_state[1]="d";
-        if(pos_y+1>y-1)
-            cells_next_to_state[2]="d";
-        if(pos_y-1<0)
-            cells_next_to_state[3]="d";
-        if(pos_z+1>z-1)
-            cells_next_to_state[4]="d";
-        if(pos_z-1<0)
-            cells_next_to_state[5]="d";
-
-        for(let i=0;i<env_elements["dangerPos"].length;i++){
-            for(let j=0;j<env_elements["dangerPos"].length;j++){
-                 if (env_elements["dangerPos"][i][0] === cells_next_to[j][0] &&
-                     env_elements["dangerPos"][i][1] === cells_next_to[j][1] &&
-                     env_elements["dangerPos"][i][2] === cells_next_to[j][2]){
-                       cells_next_to_state[j] = "d";
-                   }
-             }
+        for(let i=0;i<this.actions.length;i++){
+            direction = snake.directionController["USER"][this.actions[i]]
+            if(direction[0]!==0){
+                  if(pos_x+direction[0]>x-1 ||
+                    pos_x+direction[0]<0){
+                    cell_if_action[this.actions[i]] = "d";
+                }
+            }else if(direction[1]!==0){
+                      if(pos_y+direction[1]>y-1 ||
+                        pos_y+direction[1]<0){
+                        cell_if_action[this.actions[i]] = "d";
+                    }
+              }
+            else{
+              if(pos_z+direction[2]>z-1 ||
+                    pos_z+direction[2]<0){
+                    cell_if_action[this.actions[i]] = "d";
+                }
+            }
         }
-        return "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}".format(
+/*
+            for(let j=0;env_elements["dangerPos"].length;j++) {
+                for(let i=0; i<cell_if_action.length-1;i++){
+                    if (pos_x + possible_directions[i][0] === env_elements["dangerPos"][j][0] &&
+                        pos_y + possible_directions[i][1] === env_elements["dangerPos"][j][1] &&
+                        pos_z + possible_directions[i][2] === env_elements["dangerPos"][j][2]) {
+                        cell_if_action[j] = "d";
+                    }
+                }
+            }
+
+ */
+/*
+        for(let i=0; i<possible_directions.length;i++){
+            if(env_elements["applePos"][0]===possible_directions[i][0] &&
+               env_elements["applePos"][1]===possible_directions[i][1] &&
+               env_elements["applePos"][2]===possible_directions[i][2] ){
+                 cell_if_action[j] = "a";
+            }
+        }
+
+ */
+        return "{0}{1}{2}{3}{4}{5}{6}{7}".format(
             Math.sign(apple.object.position.x - pos_x),
             Math.sign(apple.object.position.y - pos_y),
             Math.sign(apple.object.position.z - pos_z),
-            cells_next_to_state[0],
-            cells_next_to_state[1],
-            cells_next_to_state[2],
-            cells_next_to_state[3],
-            cells_next_to_state[4],
-            cells_next_to_state[5],
+            cell_if_action["a"],
+            cell_if_action["w"],
+            cell_if_action["s"],
+            cell_if_action["d"],
+            cell_if_action["none"]
         );
     }
 

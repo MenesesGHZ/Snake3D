@@ -6,12 +6,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
       constructor() {
          this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00} );
          this.length = 1;
-         this.speed = 0.05;
+         this.speed = 1;
          this.directionController = {
              "AI":{'a':[1,0,0],'d':[-1,0,0],'w':[0,0,1],'s':[0,0,-1],'e':[0,1,0],'q':[0,-1,0]},
-             "USER":{"a":[1,0,0],"w":[0,1,0],"s":[0,-1,0],"d":[-1,0,0]}
+             "USER":{"a":[1,0,0],"w":[0,1,0],"s":[0,-1,0],"d":[-1,0,0],"none":[0,0,1]}
          };
-         this.oppositeKeyCode= {"a":"d","d":"a","w":"s","s":"w"};
+         this.oppositeKeyCode= {"a":"d","w":"s","s":"w","d":"a"};
          this.currentDirection = [[0,0,0]];
          this.chosenDirection = [0,0,1];
          this.volatileDirection = [0,0,0];
@@ -50,6 +50,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
           if(this.user_mode && Object.keys(this.directionController["USER"]).includes(keyCode)){
               let temp_dir = this.chosenDirection;
               this.chosenDirection = this.directionController["USER"][keyCode];
+              this.directionController["USER"]["none"] = this.chosenDirection;
               this.oppositeController(keyCode,temp_dir);
           }
           /*
@@ -107,7 +108,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
              Math.abs(this.body[0].position.y-Math.round(this.body[0].position.y)) < this.translationError &&
              Math.abs(this.body[0].position.z-Math.round(this.body[0].position.z)) < this.translationError;
         if(this.isValidTransition[0]){
-             //this.send_time_step_signal();
+             this.send_time_step_signal();
               this.isValidEating =
                   Math.round(this.body[0].position.x) === apple.object.position.x &&
                   Math.round(this.body[0].position.y) === apple.object.position.y &&
@@ -218,8 +219,11 @@ function restart_game(){
     snake.clear();
     walls.clear();
     apple.clear();
-    //receive_update_signal();
+    receive_update_signal();
     scene.add(snake.body[0]);
     scene.add(apple.object);
     right_bar_update();
 }
+
+
+

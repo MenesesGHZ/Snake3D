@@ -4,7 +4,7 @@ class Policy{
         N: Contains the number of times that an action has been selected in certain state.
         Q: Contains the values of actions in an certain state.
         `
-        this.posible_actions=["a","d","w","s","e","q"];
+        this.posible_actions=["a","d","w","s","none"];
         this.Q = {};
         this.QN = {};
         this.entity = {};
