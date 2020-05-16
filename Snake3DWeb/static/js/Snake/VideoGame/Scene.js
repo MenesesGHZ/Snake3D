@@ -37,7 +37,7 @@ window.addEventListener('load',()=>{
     let animate = function () {
         requestAnimationFrame(animate);
         snake.run();
-        if(!snake.user_mode) camera_control.update();
+        camera_control.update();
         renderer.render( scene, camera );
     };
     animate();
@@ -76,7 +76,7 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
 
 
 /*Snake Control's Listeners*/
-/*
+
  let keyCode;
   document.addEventListener("keydown", (event)=>{
          keyCode = event.key;
@@ -89,7 +89,7 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
         camera_control.enabled = element.target.checked;
     });
 
- */
+
 
 
 

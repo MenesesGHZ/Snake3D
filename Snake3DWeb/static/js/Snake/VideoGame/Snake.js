@@ -6,10 +6,14 @@ window.addEventListener('DOMContentLoaded', ()=>{
       constructor() {
          this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00} );
          this.length = 1;
-         this.speed = 1;
-         this.directionController = {"AI":{'a':[1,0,0],'d':[-1,0,0],'w':[0,0,1],'s':[0,0,-1],'e':[0,1,0],'q':[0,-1,0]},"USER":{}}
+         this.speed = 0.05;
+         this.directionController = {
+             "AI":{'a':[1,0,0],'d':[-1,0,0],'w':[0,0,1],'s':[0,0,-1],'e':[0,1,0],'q':[0,-1,0]},
+             "USER":{"a":[1,0,0],"w":[0,1,0],"s":[0,-1,0],"d":[-1,0,0]}
+         };
+         this.oppositeKeyCode= {"a":"d","d":"a","w":"s","s":"w"};
          this.currentDirection = [[0,0,0]];
-         this.chosenDirection = [0,0,0];
+         this.chosenDirection = [0,0,1];
          this.volatileDirection = [0,0,0];
          this.translationError = 0.01
          this.isValidTransition = [true];
@@ -23,20 +27,42 @@ window.addEventListener('DOMContentLoaded', ()=>{
              Math.round(Math.random()*(z-1))
          );
          this.gameOver = false;
-         this.user_mode = false;
+         this.user_mode = true;
          this.lastPosition = [-1,-1,-1]; // Send Clean Signal to the AI
       }
 
+     oppositeController(keyCode_1,direction){
+          let oppositeKeyCode = this.oppositeKeyCode[keyCode_1];
+          this.directionController["USER"][oppositeKeyCode] = direction;
+          this.directionController["USER"][keyCode_1] = [
+            direction[0]*-1,
+            direction[1]*-1,
+            direction[2]*-1
+          ];
+     }
+
      changeDirection(keyCode){
-          /*AI: keyCode: a=left, d=right, w=forward, s=back, e=up, q=down*/
-          if(Object.keys(this.directionController["AI"]).includes(keyCode)){
+          /*Third Person: keyCode: a=left, d=right, w=forward, s=back, e=up, q=down*/
+         /*
+         if(Object.keys(this.directionController["AI"]).includes(keyCode)){
             this.chosenDirection = this.directionController["AI"][keyCode];
           }
+
+          */
+          if(this.user_mode && Object.keys(this.directionController["USER"]).includes(keyCode)){
+              let temp_dir = this.chosenDirection;
+              this.chosenDirection = this.directionController["USER"][keyCode];
+              this.oppositeController(keyCode,temp_dir);
+          }
+          /*
           if(this.chosenDirection[0]*-1 === this.currentDirection[0][0] && // If is the opposite Direction, the snake direction does not change.
              this.chosenDirection[1]*-1 === this.currentDirection[0][1] &&
              this.chosenDirection[2]*-1 === this.currentDirection[0][2]){
               this.chosenDirection = this.currentDirection[0];
           }
+
+           */
+
       }
       move(){
              for(let i=0;i<this.length;i++){
@@ -63,11 +89,14 @@ window.addEventListener('DOMContentLoaded', ()=>{
                          this.body[i].position.z + (this.currentDirection[i][2]*this.speed)
                     );
             }
+             /*
              if(this.user_mode){
                        camera.position.x += this.currentDirection[0][0] * this.speed;
                        camera.position.y += this.currentDirection[0][1] * this.speed;
                        camera.position.z += this.currentDirection[0][2] * this.speed;
                     }
+
+              */
       }
 
       run(){
@@ -82,7 +111,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
              Math.abs(this.body[0].position.y-Math.round(this.body[0].position.y)) < this.translationError &&
              Math.abs(this.body[0].position.z-Math.round(this.body[0].position.z)) < this.translationError;
         if(this.isValidTransition[0]){
-             this.send_time_step_signal();
+             //this.send_time_step_signal();
               this.isValidEating =
                   Math.round(this.body[0].position.x) === apple.object.position.x &&
                   Math.round(this.body[0].position.y) === apple.object.position.y &&
@@ -193,7 +222,7 @@ function restart_game(){
     snake.clear();
     walls.clear();
     apple.clear();
-    receive_update_signal();
+    //receive_update_signal();
     scene.add(snake.body[0]);
     scene.add(apple.object);
     right_bar_update();

@@ -1,6 +1,6 @@
 class SnakeAgent{
     constructor() {
-        this.actions = ['a', 'w', 'd', 's', 'q', 'e'];
+        this.actions = ['a', 'w', 'd', 's', ''];
         this.currentCell = "b";
     }
 
@@ -69,9 +69,6 @@ class SnakeAgent{
             cells_next_to_state[3],
             cells_next_to_state[4],
             cells_next_to_state[5],
-            snake.currentDirection[0][0],
-            snake.currentDirection[0][1],
-            snake.currentDirection[0][2]
         );
     }
 
