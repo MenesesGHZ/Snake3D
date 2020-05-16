@@ -40,14 +40,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
             direction[2]*-1
           ];
      }
-
      changeDirection(keyCode){
           /*Third Person: keyCode: a=left, d=right, w=forward, s=back, e=up, q=down*/
          /*
          if(Object.keys(this.directionController["AI"]).includes(keyCode)){
             this.chosenDirection = this.directionController["AI"][keyCode];
           }
-
           */
           if(this.user_mode && Object.keys(this.directionController["USER"]).includes(keyCode)){
               let temp_dir = this.chosenDirection;
@@ -60,9 +58,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
              this.chosenDirection[2]*-1 === this.currentDirection[0][2]){
               this.chosenDirection = this.currentDirection[0];
           }
-
            */
-
       }
       move(){
              for(let i=0;i<this.length;i++){

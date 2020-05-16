@@ -33,7 +33,6 @@ window.addEventListener('load',()=>{
     axesHelper.size = 10;
     scene.add( axesHelper );
 
-
     let animate = function () {
         requestAnimationFrame(animate);
         snake.run();
