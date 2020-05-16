@@ -1,5 +1,5 @@
 class Policy{
-    constructor(epsilon=0.1,discount_rate=0.7) {
+    constructor(epsilon=0.1,discount_rate=0.5) {
         `
         N: Contains the number of times that an action has been selected in certain state.
         Q: Contains the values of actions in an certain state.

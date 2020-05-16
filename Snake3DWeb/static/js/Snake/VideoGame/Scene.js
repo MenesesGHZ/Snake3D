@@ -62,8 +62,6 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
     snake.clear();
     snake.user_mode = false;
     camera.position.set( 3.7, 3.7, 3.7 );
-    //camera.rotation.y = -180 * (Math.PI /180);
-    //camera.rotation.x = -20 * (Math.PI / 180);
     camera_control = new THREE.OrbitControls( camera,renderer.domElement);
     camera_control.enabled = true;
     camera_control.autoRotate = true;
@@ -75,11 +73,13 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
 
 
 /*Snake Control's Listeners*/
-/*
+
  let keyCode;
   document.addEventListener("keydown", (event)=>{
          keyCode = event.key;
-         snake.changeDirection(keyCode);
+         if(Object.keys(snake.directionController["USER"]).includes(keyCode)){
+              snake.changeDirection(keyCode);
+         }
        });
     document.getElementById('control-auto-rotation').addEventListener("change", element =>{
         camera_control.autoRotate = element.target.checked;
@@ -88,7 +88,7 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
         camera_control.enabled = element.target.checked;
     });
 
-*/
+
 
 
 

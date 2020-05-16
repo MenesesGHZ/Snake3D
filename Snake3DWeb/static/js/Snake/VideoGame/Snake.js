@@ -3,16 +3,16 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
    /*Snake Object Logic*/
    class Snake{
-      constructor() {
+      constructor(speed=1) {
          this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00} );
          this.length = 1;
-         this.speed = 1;
+         this.speed = speed;
          this.directionController = {
              "AI":{'a':[1,0,0],'d':[-1,0,0],'w':[0,0,1],'s':[0,0,-1],'e':[0,1,0],'q':[0,-1,0]},
              "USER":{"a":[1,0,0],"w":[0,1,0],"s":[0,-1,0],"d":[-1,0,0],"none":[0,0,1]}
          };
          this.oppositeKeyCode= {"a":"d","w":"s","s":"w","d":"a"};
-         this.currentDirection = [[0,0,0]];
+         this.currentDirection = [[0,0,1]];
          this.chosenDirection = [0,0,1];
          this.volatileDirection = [0,0,0];
          this.translationError = 0.01
@@ -29,16 +29,20 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.gameOver = false;
          this.user_mode = true;
          this.lastPosition = [-1,-1,-1]; // Send Clean Signal to the AI
+         this.tempDir = [];
+         this.lastKeyCode = "none";
       }
 
      oppositeController(keyCode_1,direction){
-          let oppositeKeyCode = this.oppositeKeyCode[keyCode_1];
-          this.directionController["USER"][oppositeKeyCode] = direction;
-          this.directionController["USER"][keyCode_1] = [
-            direction[0]*-1,
-            direction[1]*-1,
-            direction[2]*-1
-          ];
+        if(keyCode_1 !== "none") {
+            let oppositeKeyCode = this.oppositeKeyCode[keyCode_1];
+            this.directionController["USER"][oppositeKeyCode] = direction;
+            this.directionController["USER"][keyCode_1] = [
+                direction[0] * -1,
+                direction[1] * -1,
+                direction[2] * -1
+            ];
+        }
      }
      changeDirection(keyCode){
           /*Third Person: keyCode: a=left, d=right, w=forward, s=back, e=up, q=down*/
@@ -47,11 +51,10 @@ window.addEventListener('DOMContentLoaded', ()=>{
             this.chosenDirection = this.directionController["AI"][keyCode];
           }
           */
-          if(this.user_mode && Object.keys(this.directionController["USER"]).includes(keyCode)){
-              let temp_dir = this.chosenDirection;
+          if(this.user_mode) {
+              this.tempDir = this.currentDirection[0];
               this.chosenDirection = this.directionController["USER"][keyCode];
-              this.directionController["USER"]["none"] = this.chosenDirection;
-              this.oppositeController(keyCode,temp_dir);
+              this.lastKeyCode = keyCode;
           }
           /*
           if(this.chosenDirection[0]*-1 === this.currentDirection[0][0] && // If is the opposite Direction, the snake direction does not change.
@@ -78,6 +81,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
                            this.currentDirection[i] = this.volatileDirection;
                        }else{
                             this.currentDirection[0] = this.chosenDirection;
+                            this.directionController["USER"]["none"] = this.chosenDirection;
+                            this.oppositeController(this.lastKeyCode,this.tempDir);
                        }
                    }
                    this.body[i].position.set(
@@ -103,23 +108,25 @@ window.addEventListener('DOMContentLoaded', ()=>{
        }
       }
       checkSnakeState(){
-        this.isValidTransition[0] =  //Check if the current position is valid to change direction
-             Math.abs(this.body[0].position.x-Math.round(this.body[0].position.x)) < this.translationError &&
-             Math.abs(this.body[0].position.y-Math.round(this.body[0].position.y)) < this.translationError &&
-             Math.abs(this.body[0].position.z-Math.round(this.body[0].position.z)) < this.translationError;
-        if(this.isValidTransition[0]){
-             this.send_time_step_signal();
-              this.isValidEating =
-                  Math.round(this.body[0].position.x) === apple.object.position.x &&
-                  Math.round(this.body[0].position.y) === apple.object.position.y &&
-                  Math.round(this.body[0].position.z) === apple.object.position.z;
-              if(this.isValidEating) {
-                  this.addToSnake();
-                  apple.setNewPosition();
-                  right_bar_update(this.length - 1);
-              }
-              this.gameOverLogic();
-         }
+
+               this.isValidTransition[0] =  //Check if the current position is valid to change direction
+                   Math.abs(this.body[0].position.x - Math.round(this.body[0].position.x)) < this.translationError &&
+                   Math.abs(this.body[0].position.y - Math.round(this.body[0].position.y)) < this.translationError &&
+                   Math.abs(this.body[0].position.z - Math.round(this.body[0].position.z)) < this.translationError;
+               if (this.isValidTransition[0]) {
+                   this.send_time_step_signal();
+                   this.isValidEating =
+                       Math.round(this.body[0].position.x) === apple.object.position.x &&
+                       Math.round(this.body[0].position.y) === apple.object.position.y &&
+                       Math.round(this.body[0].position.z) === apple.object.position.z;
+                   if (this.isValidEating) {
+                       this.addToSnake();
+                       apple.setNewPosition();
+                       right_bar_update(this.length - 1);
+                   }
+                   this.gameOverLogic();
+
+           }
       }
       addToSnake(){
           this.currentDirection.push([0,0,0]);
@@ -152,7 +159,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                   });
 
                   */
-                  restart_game();
+                 restart_game();
               }
           }
       }
@@ -196,19 +203,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
           for (let i = 0; i < this.length; i++) {
             scene.remove(this.body[i]);
           }
-         snake = new Snake();
+         snake = new Snake(snake.speed);
      }
      send_time_step_signal(){
-           if(this.lastPosition[0]!==Math.round(this.body[0].position.x) ||
-              this.lastPosition[1]!==Math.round(this.body[0].position.y) ||
-              this.lastPosition[2]!==Math.round(this.body[0].position.z) ){
-                       this.lastPosition = [
-                             Math.round(this.body[0].position.x),
-                             Math.round(this.body[0].position.y),
-                             Math.round(this.body[0].position.z)
-                         ];
-                         receive_time_step_signal();
-            }
+
+            receive_time_step_signal();
+
      }
 
    }
