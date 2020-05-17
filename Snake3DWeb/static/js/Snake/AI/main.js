@@ -30,3 +30,21 @@ function receive_update_signal(){
   environment.time_step = 0;
 
 }
+
+function read_learning(){
+  let rawFile = new XMLHttpRequest(),
+      file = static_path + "js/Snake/AI/policy.txt"
+        rawFile.open("GET",file,false);
+          rawFile.onreadystatechange = function() {
+              if(rawFile.readyState === 4) {
+                  if(rawFile.status === 200 || rawFile.status === 0) {
+                      let allText = rawFile.responseText,
+                          pack = JSON.parse(allText);
+                      policy.read_text_policy(pack);
+                      environment.read_text_env(pack);
+                  }
+              }
+          }
+          rawFile.send(null);
+
+}

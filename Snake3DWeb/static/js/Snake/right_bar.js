@@ -12,3 +12,4 @@ function right_bar_update(score=null){
     }
 
 }
+

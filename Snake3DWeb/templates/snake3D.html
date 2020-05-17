@@ -26,7 +26,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> <!--THIS REPLACE TimelineLite.js and TweenLite.js -->
     <script src="{% static 'js/etc/CSSPlugin.min.js' %}"></script>
     <script src="{% static 'js/etc/animation.gsap.min.js' %}"></script>
-    <script src="{% static 'js/etc/animations.js' %}"></script>
+    <script src="{% static 'js/etc/features.js' %}"></script>
     <script src="{% static 'js/Snake/VideoGame/Scene.js' %}"></script>
     <script src="{% static 'js/Snake/VideoGame/Snake.js' %}"></script>
     <script src="{% static 'js/Snake/VideoGame/Cell.js' %}"></script>
@@ -65,6 +65,7 @@
                   {% include 'includes/leftNavBar.html' %}
                   {% include 'includes/featuresNav.html' %}
                   {% include 'includes/obstaclesFeature.html' %}
+                  {% include 'includes/setUpFeature.html' %}
                </div>
 
                <div class="col-3 position-absolute h-100 p-0" style="right:0;transform: translateX(9%);"> <!--RIGHT NAVIGATION BAR-->

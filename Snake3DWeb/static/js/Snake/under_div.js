@@ -9,10 +9,6 @@ window.addEventListener('load',()=>{
        graph_1();
        graph_2();
     });
-
-
-
-
 });
 
 

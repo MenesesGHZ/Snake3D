@@ -3,17 +3,20 @@ window.addEventListener('load',()=>{
     const theory_div = new TimelineLite({paused:true}),
           features_div = new TimelineLite({paused:true}),
           features_nav = new TimelineLite({paused:true}),
-          obstacles_nav = new TimelineLite({paused:true});
+          obstacles_nav = new TimelineLite({paused:true}),
+          set_up_nav = new  TimelineLite({paused:true});
 
     theory_div.fromTo("#theory-div",0.25,{x:"-101%"},{x:"0%"});
     features_div.fromTo('#features-div',0.25,{x:"-101%"},{x:"0%"});
     features_nav.fromTo("#features-nav",0.3,{x:"-101%"},{x:"0%"});
     obstacles_nav.fromTo("#obstacles-nav",0.3,{x:"-101%"},{x:"0%"});
+    obstacles_nav.fromTo("#set-up-nav",0.3,{x:"-101%"},{x:"0%"});
     let left_nav_menu_able = true;
 
     let left_nav_el = document.getElementById('main-left-nav'),
         features_nav_el = document.getElementById('features-nav'),
-        obstacles_nav_el = document.getElementById('obstacles-nav');
+        obstacles_nav_el = document.getElementById('obstacles-nav'),
+        set_up_nav_el = document.getElementById('set-up-nav');
     let go_back_features = document.getElementById('go-back-features'),
         go_back_obstacles = document.getElementById('go-back-obstacles');
 
@@ -43,6 +46,12 @@ window.addEventListener('load',()=>{
         features_nav_el.classList.add('d-none');
         obstacles_nav_el.classList.remove('d-none');
         obstacles_nav.play();
+    });
+    document.getElementById('feature-set-up').addEventListener('click',()=>{
+        features_nav.reverse();
+        features_nav_el.classList.add('d-none');
+        set_up_nav_el.classList.remove('d-none');
+        set_up_nav.play();
     });
 
 

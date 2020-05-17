@@ -35,7 +35,7 @@ window.addEventListener('load',()=>{
 
     let animate = function () {
         requestAnimationFrame(animate);
-        snake.run();
+        //snake.run();
         camera_control.update();
         renderer.render( scene, camera );
     };

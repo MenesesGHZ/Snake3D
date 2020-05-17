@@ -57,8 +57,19 @@ class Policy{
 
     }
 
+    read_text_policy(pack){
+        this.Q = JSON.parse(pack["Q"]);
+        this.QN= JSON.parse(pack["QN"]);
+        this.entity = JSON.parse(pack["entity"]);
+        this.episode_step = pack["es"];
+        this.epsilon = pack["eps"];
+        this.discount_rate = pack["discount_rate"];
+    }
+
     index_of(state){
         `Return the index of the state in this.state. if it does not exist return -1`
     }
+
+
 
 }
