@@ -54,7 +54,6 @@ class SnakeAgent{
                 }
             }
         }
-
         return "{0}{1}{2}{3}{4}{5}{6}{7}".format(
             Math.sign(apple.object.position.x - pos_x),
             Math.sign(apple.object.position.y - pos_y),

@@ -4,7 +4,7 @@ class Policy{
         N: Contains the number of times that an action has been selected in certain state.
         Q: Contains the values of actions in an certain state.
         `
-        this.posible_actions=["a","d","w","s","none"];
+        this.posible_actions=["a","w","s","d","none"];
         this.Q = {};
         this.QN = {};
         this.entity = {};
@@ -32,12 +32,8 @@ class Policy{
             action = sequence[i-1];
             state = sequence[i-2];
             if(!Object.keys(this.Q).includes(state)){
-                this.Q[state] = Object();
-                this.QN[state] = Object();
-            }
-            if(!Object.keys(this.Q[state]).includes(action)){
-                this.Q[state][action] = 0;
-                this.QN[state][action] = 0;
+                this.Q[state] = {"a":0,"w":0,"s":0,"d":0,"none":0};
+                this.QN[state] = {"a":0,"w":0,"s":0,"d":0,"none":0};
             }
             this.QN[state][action]+=1;
             this.Q[state][action] = this.Q[state][action] + ((1/this.QN[state][action])*(Gt - this.Q[state][action]));

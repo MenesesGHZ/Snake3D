@@ -27,6 +27,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
              Math.round(Math.random()*(z-1))
          );
          this.gameOver = false;
+         this.chosenSpeed = speed;
          this.user_mode = true;
          this.lastPosition = [-1,-1,-1]; // Send Clean Signal to the AI
          this.tempDir = [];
@@ -80,6 +81,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                            ];
                            this.currentDirection[i] = this.volatileDirection;
                        }else{
+                            this.speed = this.chosenSpeed;
                             this.currentDirection[0] = this.chosenDirection;
                             this.directionController["USER"]["none"] = this.chosenDirection;
                             this.oppositeController(this.lastKeyCode,this.tempDir);
@@ -203,12 +205,10 @@ window.addEventListener('DOMContentLoaded', ()=>{
           for (let i = 0; i < this.length; i++) {
             scene.remove(this.body[i]);
           }
-         snake = new Snake(snake.speed);
+         snake = new Snake(snake.chosenSpeed);
      }
      send_time_step_signal(){
-
             receive_time_step_signal();
-
      }
 
    }
