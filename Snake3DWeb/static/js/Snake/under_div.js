@@ -1,9 +1,12 @@
  let statistic_data ={
-        "snakeLength":1,
-        "statesCardinality":0,
+        "scoreEarned":[],
+        "statesCardinality":[],
         "timeStepByEpisode":[],
     },
-  graph_el_1 = document.getElementById('graph-1');
+     graph_el_1 = null,
+     graph_el_2 = null,
+     graph_el_3 = null,
+     displaying_graphs = false;
 window.addEventListener('load',()=> {
     let html_el = document.getElementsByTagName('html')[0],
         under_div = document.getElementById('under-div'),
@@ -13,58 +16,73 @@ window.addEventListener('load',()=> {
         html_el.style.overflowY = "visible";
         under_div.classList.remove('d-none');
         snake_metrics.classList.remove('d-none');
+        graph_el_1 = document.getElementById('graph-1');
+        graph_el_2 = document.getElementById('graph-2');
+        graph_el_3 = document.getElementById('graph-3');
+        displaying_graphs = true;
         graph_1();
-        //graph_2();
+        graph_2();
+        graph_3();
     });
 
-function graph_1(){
-    let x_data = []
-    for(let i=1;i<=statistic_data["timeStepByEpisode"].length;i++){
-        x_data.push(i);
-    }
-    let trace1 = {
-      x: x_data,
-      y: statistic_data["timeStepByEpisode"],
-      type: 'scatter'
-    };
-    let layout = {
-      showlegend: false,
-      title: "Terminal Time Step in Each Episode",
-      yaxis: {title: "Time Step"},
-      xaxis: {title: "Episode Step"}
-    };
-
-    let data = [trace1];
-    Plotly.newPlot('graph-1', data);
-}
-
-function update_graph(graph_name) {
-    if(graph_name === "graph-1"){
-        Plotly.addTraces(graph_el_1, {x: statistic_data["timeStepByEpisode"].length});
-
-        /*var update = {
-            'y': statistic_data["timeStepByEpisode"]
+    function graph_1() {
+        let trace1 = {
+            y: statistic_data["timeStepByEpisode"],
+            type: 'scatter'
         };
-        Plotly.relayout(graph_1, update)
+        let layout = {
+            showlegend: false,
+            title: "Terminal Time Step of Each Episode",
+            yaxis: {title: "Time Step"},
+            xaxis: {title: "Episode Step"}
+        };
 
-         */
+        let data = [trace1];
+        Plotly.newPlot('graph-1', data, layout,60);
+        statistic_data["timeStepByEpisode"] = [];
     }
-}
+    function graph_2(){
+        let trace1 = {
+            y: statistic_data["statesCardinality"],
+            type: 'scatter'
+        };
+        let layout = {
+            showlegend: false,
+            title: "Number of States Discovered at Episode",
+            yaxis: {title: "Number States"},
+            xaxis: {title: "Episode Step"}
+        };
+        let data = [trace1];
+        Plotly.newPlot('graph-2', data, layout,60);
+        statistic_data["statesCardinality"] = [];
+    }
+    function graph_3(){
 
-setInterval(()=>{update_graph('graph-1') },5000)
+        var trace1 = {
+          y: statistic_data["scoreEarned"],
+          type: "scatter",
+        };
 
-
+        var data = [trace1];
+        var layout = {barmode: "stack"};
+        Plotly.newPlot('graph-3', data, layout,5);
+        statistic_data["scoreEarned"] = [];
+    }
 });
 
-
-
-
-function update_statistic_data(){
-    statistic_data["snakeLength"] = snake.length;
-    statistic_data["statesCardinality"] = Object.keys(policy.Q).length;
-    statistic_data["timeStepByEpisode"].push(environment.time_step);
+function update_statistic_data() {
+        statistic_data["scoreEarned"].push(snake.length-1);
+        statistic_data["statesCardinality"].push(Object.keys(policy.Q).length);
+        statistic_data["timeStepByEpisode"].push(environment.time_step);
+        if (displaying_graphs) {
+            Plotly.extendTraces(graph_el_1, {y: [statistic_data["timeStepByEpisode"]]}, [0],41);
+            Plotly.extendTraces(graph_el_2, {y: [statistic_data["statesCardinality"]]}, [0],21);
+            Plotly.extendTraces(graph_el_3, {y: [statistic_data["scoreEarned"]]}, [0],11);
+            statistic_data["timeStepByEpisode"] = [];
+            statistic_data["statesCardinality"] = [];
+            statistic_data["scoreEarned"] = [];
+        }
 }
-
 
 
 

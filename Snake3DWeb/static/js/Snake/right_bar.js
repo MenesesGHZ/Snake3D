@@ -5,10 +5,10 @@ window.addEventListener('load',()=>{
     length_el = document.getElementById('description-snake-length');
 });
 
-function right_bar_update(score=null){
-    if(score!==null ){
-        length_el.innerHTML = score+1
-        if( parseInt(score_el.innerHTML)<score){
+function right_bar_update(length=null){
+    if(length!==null ){
+        length_el.innerHTML = length;
+        if( parseInt(score_el.innerHTML)<length-1){
             score_el.innerHTML = parseInt(score_el.innerHTML) + 1;
         }
     }else{

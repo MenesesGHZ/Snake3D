@@ -124,7 +124,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                    if (this.isValidEating) {
                        this.addToSnake();
                        apple.setNewPosition();
-                       right_bar_update(this.length - 1);
+                       right_bar_update(this.length);
                    }
                    this.gameOverLogic();
 
