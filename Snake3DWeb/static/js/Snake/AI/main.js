@@ -18,10 +18,10 @@ function receive_time_step_signal(){
   }
   sequence = [state,action,reward];
   environment.markov_trajectory.push(...sequence);
-  environment.time_step+=1;
   if(agent.currentCell !== "d"){
     agent.do(action);
   }
+  environment.time_step+=1;
 }
 
 function receive_update_signal(){
@@ -29,22 +29,26 @@ function receive_update_signal(){
   policy.update_policy(environment.markov_trajectory);
   environment.markov_trajectory = [];
   environment.time_step = 0;
+  environment.episode_step+=1;
+  if(environment.max_score < snake.body[0].length-1){
+      environment.max_score = snake.body[0].length-1;
+  }
 }
 
 function read_learning(){
-  let rawFile = new XMLHttpRequest(),
-      file = static_path + "js/Snake/AI/policy.txt"
-        rawFile.open("GET",file,false);
+  let rawFile = new XMLHttpRequest();
+      let file_path = static_path + "js/Snake/AI/policy.json"
+        rawFile.open("GET",file_path,false);
           rawFile.onreadystatechange = function() {
               if(rawFile.readyState === 4) {
                   if(rawFile.status === 200 || rawFile.status === 0) {
-                      let allText = rawFile.responseText,
-                          pack = JSON.parse(allText);
+                       let pack = JSON.parse(JSON.parse(rawFile.response));
                       policy.read_text_policy(pack);
                       environment.read_text_env(pack);
+                      episode_el.innerHTML = pack["es"];
+                      score_el.innerHTML = pack["max_score"];
                   }
               }
           }
           rawFile.send(null);
-
 }

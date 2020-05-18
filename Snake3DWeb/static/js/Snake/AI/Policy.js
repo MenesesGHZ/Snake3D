@@ -10,7 +10,6 @@ class Policy{
         this.entity = {};
         this.epsilon = epsilon;
         this.discount_rate = discount_rate;
-        this.episode_step = 1;
     }
 
 
@@ -49,17 +48,14 @@ class Policy{
               this.entity[state] = argmax_q_action;
               argmax_q_value = Number.MIN_SAFE_INTEGER;
         }
-        this.episode_step+=1
-
     }
 
     read_text_policy(pack){
-        this.Q = JSON.parse(pack["Q"]);
-        this.QN= JSON.parse(pack["QN"]);
-        this.entity = JSON.parse(pack["entity"]);
-        this.episode_step = pack["es"];
+        this.Q = pack["Q"];
+        this.QN= pack["QN"];
+        this.entity = pack["entity"];
         this.epsilon = pack["eps"];
-        this.discount_rate = pack["discount_rate"];
+        this.discount_rate = pack["gamma"];
     }
 
     index_of(state){

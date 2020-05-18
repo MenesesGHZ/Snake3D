@@ -3,13 +3,13 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
    /*Snake Object Logic*/
    class Snake{
-      constructor(speed=1) {
+      constructor(speed=1,user_mode=true) {
          this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00} );
          this.length = 1;
          this.speed = speed;
          this.directionController = {
-             "AI":{'a':[1,0,0],'d':[-1,0,0],'w':[0,0,1],'s':[0,0,-1],'e':[0,1,0],'q':[0,-1,0]},
-             "USER":{"a":[1,0,0],"w":[0,1,0],"s":[0,-1,0],"d":[-1,0,0],"none":[0,0,1]}
+             "USER":{'a':[1,0,0],'d':[-1,0,0],'w':[0,0,1],'s':[0,0,-1],'e':[0,1,0],'q':[0,-1,0]},
+             "AI":{"a":[1,0,0],"w":[0,1,0],"s":[0,-1,0],"d":[-1,0,0],"none":[0,0,1]}
          };
          this.oppositeKeyCode= {"a":"d","w":"s","s":"w","d":"a"};
          this.currentDirection = [[0,0,1]];
@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
          );
          this.gameOver = false;
          this.chosenSpeed = speed;
-         this.user_mode = true;
+         this.user_mode = user_mode;
          this.lastPosition = [-1,-1,-1]; // Send Clean Signal to the AI
          this.tempDir = [];
          this.lastKeyCode = "none";
@@ -37,8 +37,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
      oppositeController(keyCode_1,direction){
         if(keyCode_1 !== "none") {
             let oppositeKeyCode = this.oppositeKeyCode[keyCode_1];
-            this.directionController["USER"][oppositeKeyCode] = direction;
-            this.directionController["USER"][keyCode_1] = [
+            this.directionController["AI"][oppositeKeyCode] = direction;
+            this.directionController["AI"][keyCode_1] = [
                 direction[0] * -1,
                 direction[1] * -1,
                 direction[2] * -1
@@ -46,24 +46,20 @@ window.addEventListener('DOMContentLoaded', ()=>{
         }
      }
      changeDirection(keyCode){
-          /*Third Person: keyCode: a=left, d=right, w=forward, s=back, e=up, q=down*/
-         /*
-         if(Object.keys(this.directionController["AI"]).includes(keyCode)){
-            this.chosenDirection = this.directionController["AI"][keyCode];
-          }
-          */
-          if(this.user_mode) {
+          if(!this.user_mode) {
               this.tempDir = this.currentDirection[0];
-              this.chosenDirection = this.directionController["USER"][keyCode];
+              this.chosenDirection = this.directionController["AI"][keyCode];
               this.lastKeyCode = keyCode;
-          }
-          /*
-          if(this.chosenDirection[0]*-1 === this.currentDirection[0][0] && // If is the opposite Direction, the snake direction does not change.
-             this.chosenDirection[1]*-1 === this.currentDirection[0][1] &&
-             this.chosenDirection[2]*-1 === this.currentDirection[0][2]){
+          }else{
+            if(Object.keys(this.directionController["USER"]).includes(keyCode)){
+                    this.chosenDirection = this.directionController["USER"][keyCode];
+            }
+            if(this.chosenDirection[0]*-1 === this.currentDirection[0][0] &&
+               this.chosenDirection[1]*-1 === this.currentDirection[0][1] &&
+               this.chosenDirection[2]*-1 === this.currentDirection[0][2]){
               this.chosenDirection = this.currentDirection[0];
+            }
           }
-           */
       }
       move(){
              for(let i=0;i<this.length;i++){
@@ -83,7 +79,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                        }else{
                             this.speed = this.chosenSpeed;
                             this.currentDirection[0] = this.chosenDirection;
-                            this.directionController["USER"]["none"] = this.chosenDirection;
+                            this.directionController["AI"]["none"] = this.chosenDirection;
                             this.oppositeController(this.lastKeyCode,this.tempDir);
                        }
                    }
@@ -99,7 +95,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
                        camera.position.y += this.currentDirection[0][1] * this.speed;
                        camera.position.z += this.currentDirection[0][2] * this.speed;
                     }
-
               */
       }
 
@@ -109,19 +104,20 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.move();
        }
       }
-      checkSnakeState(){
 
+      checkSnakeState(){
                this.isValidTransition[0] =  //Check if the current position is valid to change direction
                    Math.abs(this.body[0].position.x - Math.round(this.body[0].position.x)) < this.translationError &&
                    Math.abs(this.body[0].position.y - Math.round(this.body[0].position.y)) < this.translationError &&
                    Math.abs(this.body[0].position.z - Math.round(this.body[0].position.z)) < this.translationError;
                if (this.isValidTransition[0]) {
-                   this.send_time_step_signal();
+                   if(!this.user_mode) this.send_time_step_signal();
+
                    this.isValidEating =
                        Math.round(this.body[0].position.x) === apple.object.position.x &&
                        Math.round(this.body[0].position.y) === apple.object.position.y &&
                        Math.round(this.body[0].position.z) === apple.object.position.z;
-                   if (this.isValidEating) {
+                   if(this.isValidEating) {
                        this.addToSnake();
                        apple.setNewPosition();
                        right_bar_update(this.length);
@@ -189,7 +185,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
                         ],this.translationError);
       }
 
-
       takenLocations(){
           let takenPositions = [];
           for(let i=0;i<this.length;i++){
@@ -201,11 +196,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
           }
           return takenPositions;
       }
+
      clear(){
           for (let i = 0; i < this.length; i++) {
             scene.remove(this.body[i]);
           }
-         snake = new Snake(snake.chosenSpeed);
+         snake = new Snake(snake.chosenSpeed,snake.user_mode);
      }
      send_time_step_signal(){
             receive_time_step_signal();
@@ -219,11 +215,8 @@ function restart_game(){
     snake.clear();
     walls.clear();
     apple.clear();
-    receive_update_signal();
+    if(!snake.user_mode) receive_update_signal();
     scene.add(snake.body[0]);
     scene.add(apple.object);
     right_bar_update();
 }
-
-
-

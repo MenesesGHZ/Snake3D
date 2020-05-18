@@ -5,22 +5,7 @@ class SnakeAgent{
     }
 
     read_state(env_elements){
-        `
-            This function has the main purpose 
-            to return the direction of the snake to the apple as a target.
-            Also sense the cells next to the snake.
-            [
-            x_direction_to_apple,
-            y_direction_to_apple,
-            z_direction_to_apple,
-            positive_x_cell_type,
-            negative_x_cell_type,
-            positive_y_cell_type,
-            negative_y_cell_type,
-            positive_z_cell_type,
-            negative_z_cell_type,
-            ]
-        `
+
         let pos_x = Math.round(snake.body[0].position.x),
             pos_y = Math.round(snake.body[0].position.y),
             pos_z = Math.round(snake.body[0].position.z);
@@ -35,11 +20,12 @@ class SnakeAgent{
             direction,scope;
 
         for(let i=0;i<this.actions.length;i++){
-            direction = snake.directionController["USER"][this.actions[i]]
+            direction = snake.directionController["AI"][this.actions[i]]
             if(direction[0]!==0){
                   scope = pos_x+direction[0];
                   if(scope >x-1 || scope<0 || this.will_position_in_tail([scope,pos_y,pos_z]) ){
                     cell_if_action[this.actions[i]] = "d";
+
                 }
             }else if(direction[1]!==0){
                    scope = pos_y+direction[1];
@@ -53,6 +39,7 @@ class SnakeAgent{
                     cell_if_action[this.actions[i]] = "d";
                 }
             }
+
         }
         if(env_elements["applePos"][0] ===  pos_x && env_elements["applePos"][1] ===  pos_y && env_elements["applePos"][2] ===  pos_z){
             this.currentCell = "a";

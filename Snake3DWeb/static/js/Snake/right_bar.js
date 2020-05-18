@@ -14,7 +14,6 @@ function right_bar_update(length=null){
     }else{
         episode_el.innerHTML = parseInt(episode_el.innerHTML) + 1;
         length_el.innerHTML = 1;
-
     }
 
 }

@@ -1,9 +1,4 @@
- let statistic_data ={
-        "scoreEarned":[],
-        "statesCardinality":[],
-        "timeStepByEpisode":[],
-    },
-     graph_el_1 = null,
+let  graph_el_1 = null,
      graph_el_2 = null,
      graph_el_3 = null,
      displaying_graphs = false;
@@ -12,22 +7,11 @@ window.addEventListener('load',()=> {
         under_div = document.getElementById('under-div'),
         snake_metrics = document.getElementById('snake-metrics');
 
-    document.getElementById('feature-metrics').addEventListener('click', () => {
-        html_el.style.overflowY = "visible";
-        under_div.classList.remove('d-none');
-        snake_metrics.classList.remove('d-none');
-        graph_el_1 = document.getElementById('graph-1');
-        graph_el_2 = document.getElementById('graph-2');
-        graph_el_3 = document.getElementById('graph-3');
-        displaying_graphs = true;
-        graph_1();
-        graph_2();
-        graph_3();
-    });
 
     function graph_1() {
         let trace1 = {
-            y: statistic_data["timeStepByEpisode"],
+            x:[],
+            y: [],
             type: 'scatter'
         };
         let layout = {
@@ -38,12 +22,12 @@ window.addEventListener('load',()=> {
         };
 
         let data = [trace1];
-        Plotly.newPlot('graph-1', data, layout,60);
-        statistic_data["timeStepByEpisode"] = [];
+        Plotly.newPlot('graph-1', data, layout);
     }
     function graph_2(){
         let trace1 = {
-            y: statistic_data["statesCardinality"],
+            x:[],
+            y: [],
             type: 'scatter'
         };
         let layout = {
@@ -53,36 +37,60 @@ window.addEventListener('load',()=> {
             xaxis: {title: "Episode Step"}
         };
         let data = [trace1];
-        Plotly.newPlot('graph-2', data, layout,60);
-        statistic_data["statesCardinality"] = [];
+        Plotly.newPlot('graph-2', data, layout);
     }
     function graph_3(){
 
         var trace1 = {
-          y: statistic_data["scoreEarned"],
+          x:[],
+          y: [],
           type: "scatter",
+        };
+         let layout = {
+            showlegend: false,
+            title: "Max Reward at Episode",
+            yaxis: {title: "Max Reward"},
+            xaxis: {title: "Episode Step"}
         };
 
         var data = [trace1];
-        var layout = {barmode: "stack"};
-        Plotly.newPlot('graph-3', data, layout,5);
-        statistic_data["scoreEarned"] = [];
+        Plotly.newPlot('graph-3', data);
     }
+
+    document.getElementById('feature-metrics').addEventListener('click', () => {
+            html_el.style.overflowY = "visible";
+            under_div.classList.remove('d-none');
+            snake_metrics.classList.remove('d-none');
+            graph_el_1 = document.getElementById('graph-1');
+            graph_el_2 = document.getElementById('graph-2');
+            graph_el_3 = document.getElementById('graph-3');
+            displaying_graphs = true;
+            graph_1();
+            graph_2();
+            graph_3();
+        });
+    document.getElementById('metric-input-step').addEventListener('input',(element)=>{
+        metric_step = element.currentTarget.value;
+    });
+
+    document.getElementById("snake-theory").addEventListener('click', () => {
+            html_el.style.overflowY = "visible";
+            under_div.classList.remove('d-none');
+        });
+
 });
 
+
+let metric_step = 4;
 function update_statistic_data() {
-        statistic_data["scoreEarned"].push(snake.length-1);
-        statistic_data["statesCardinality"].push(Object.keys(policy.Q).length);
-        statistic_data["timeStepByEpisode"].push(environment.time_step);
-        if (displaying_graphs) {
-            Plotly.extendTraces(graph_el_1, {y: [statistic_data["timeStepByEpisode"]]}, [0],41);
-            Plotly.extendTraces(graph_el_2, {y: [statistic_data["statesCardinality"]]}, [0],21);
-            Plotly.extendTraces(graph_el_3, {y: [statistic_data["scoreEarned"]]}, [0],11);
-            statistic_data["timeStepByEpisode"] = [];
-            statistic_data["statesCardinality"] = [];
-            statistic_data["scoreEarned"] = [];
+        if (displaying_graphs && environment.time_step % metric_step === 0) {
+            Plotly.extendTraces(graph_el_1, {x:[[environment.episode_step]], y: [[environment.time_step]]}, [0],41);
+            Plotly.extendTraces(graph_el_2, {x:[[environment.episode_step]], y: [[Object.keys(policy.Q).length]]}, [0],21);
+            Plotly.extendTraces(graph_el_3, {x:[[environment.episode_step]], y: [[snake.length-1]]}, [0],11);
         }
 }
+
+
 
 
 

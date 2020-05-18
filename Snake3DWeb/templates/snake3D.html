@@ -22,6 +22,8 @@
     <script src="{% static 'js/three.min.js' %}"></script>
     <script src="{% static 'js/OrbitControls.js' %}"></script>
     <script src="{% static 'js/etc/functions.js' %}"></script>
+    <script src="{% static 'js/Snake/right_bar.js' %}"></script>
+
     <!--GSAP-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> <!--THIS REPLACE TimelineLite.js and TweenLite.js -->
     <script src="{% static 'js/etc/CSSPlugin.min.js' %}"></script>
@@ -37,9 +39,8 @@
     <script src="{% static 'js/Snake/AI/Environment.js' %}"></script>
     <script src="{% static 'js/Snake/AI/Agent.js' %}"></script>
     <script src="{% static 'js/Snake/AI/main.js' %}"></script>
-    <script src="{% static 'js/Snake/right_bar.js' %}"></script>
 
-    <!-- Plotly.js -->
+     <!-- Plotly.js -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{% static 'js/Snake/under_div.js' %}"></script>
 
@@ -74,6 +75,7 @@
            </div>
            <div class="row d-none" style="height: 100vh" id="under-div"> <!--UNDER DIV-->
                {% include 'includes/snakeMetrics.html' %}
+               {% include 'includes/theory.html' %}
            </div>
        </div>
    </main>

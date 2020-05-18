@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/policy.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/theory.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/policyPY2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Agent.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Agent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Environment.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Environment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Policy.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Policy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/policy.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/right_bar.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/right_bar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/under_div.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/under_div.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/snakeMetrics.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/snakeMetrics.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,10 +29,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -202,7 +213,8 @@
       <workItem from="1589443549633" duration="10174000" />
       <workItem from="1589516698683" duration="29201000" />
       <workItem from="1589600602338" duration="36234000" />
-      <workItem from="1589696179866" duration="38009000" />
+      <workItem from="1589696179866" duration="48956000" />
+      <workItem from="1589829339741" duration="7315000" />
     </task>
     <servers />
   </component>
@@ -217,6 +229,10 @@
       <screen x="0" y="27" width="1307" height="741" />
     </state>
     <state x="110" y="34" width="1086" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1307.741@0.27.1307.741" timestamp="1588805309832" />
+    <state x="362" y="198" width="572" height="405" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589829992616">
+      <screen x="0" y="27" width="1307" height="741" />
+    </state>
+    <state x="362" y="198" width="572" height="405" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1307.741@0.27.1307.741" timestamp="1589829992616" />
     <state x="430" y="143" width="426" height="522" key="FileChooserDialogImpl" timestamp="1586383358526">
       <screen x="0" y="27" width="1307" height="741" />
     </state>

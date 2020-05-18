@@ -1,11 +1,13 @@
 class SnakeEnvironment{
-    constructor(grid_size=[4,4,4]) {
+    constructor() {
         `
-        this.rewards: Blank = -1, Danger = -2, Apple = +1
+        this.rewards: Blank = -0.5, Danger = -2, Apple = +2
         `
         this.time_step = 0;
         this.markov_trajectory = [];
         this.rewards = {"b":-0.5,"d":-2,"a":+2};
+        this.episode_step = 1;
+        this.max_score = 0;
     }
 
     read_environment(){
@@ -29,12 +31,12 @@ class SnakeEnvironment{
             pos_z = Math.round(walls[i].object.position.z);
             env_sensor["dangerPos"].push([pos_x,pos_y,pos_z])
         }
-
-
         return env_sensor;
     }
     read_text_env(pack){
-        this.rewards = JSON.parse(pack["en_rew"]);
+        this.rewards = pack["en_rew"];
+        this.episode_step = pack["es"];
+        this.max_score = pack["max_score"];
     }
 }
 
