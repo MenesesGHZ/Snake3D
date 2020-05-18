@@ -54,6 +54,10 @@ class SnakeAgent{
                 }
             }
         }
+        if(env_elements["applePos"][0] ===  pos_x && env_elements["applePos"][1] ===  pos_y && env_elements["applePos"][2] ===  pos_z){
+            this.currentCell = "a";
+        }
+
         return "{0}{1}{2}{3}{4}{5}{6}{7}".format(
             Math.sign(apple.object.position.x - pos_x),
             Math.sign(apple.object.position.y - pos_y),
@@ -64,6 +68,7 @@ class SnakeAgent{
             cell_if_action["d"],
             cell_if_action["none"]
         );
+
     }
 
     will_position_in_tail(position){
@@ -85,10 +90,9 @@ class SnakeAgent{
         }
     }
     check_current_cell(dangerPos,position){
-        if(this.position_in_tail(position) ||
-            (position[0]>x-1 || position[0]<0) ||
+        if((position[0]>x-1 || position[0]<0) ||
             (position[1]>y-1 || position[1]<0) ||
-            (position[2]>z-1 || position[2]<0)){
+            (position[2]>z-1 || position[2]<0) || this.position_in_tail(position)){
             return 'd';
         }
         for(let i=0; i<dangerPos.length-1;i++){

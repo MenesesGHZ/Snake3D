@@ -5,7 +5,7 @@ class SnakeEnvironment{
         `
         this.time_step = 0;
         this.markov_trajectory = [];
-        this.rewards = {"b":-0.25,"d":-1,"a":+2};
+        this.rewards = {"b":-0.5,"d":-2,"a":+2};
     }
 
     read_environment(){
@@ -16,7 +16,11 @@ class SnakeEnvironment{
             Read Current Cell of Snake:
                 Blank, Danger, Apple
         `
-        let env_sensor = {"applePos":[],"dangerPos":[]},
+        let env_sensor = {"applePos":[
+             apple.object.position.x,
+             apple.object.position.y,
+             apple.object.position.z
+                ], "dangerPos":[]},
             pos_x,pos_y,pos_z;
 
         for(let i=0; i<walls.length;i++){
@@ -26,11 +30,6 @@ class SnakeEnvironment{
             env_sensor["dangerPos"].push([pos_x,pos_y,pos_z])
         }
 
-        env_sensor["applePos"].push(
-            [apple.object.position.x,
-             apple.object.position.y,
-             apple.object.position.z]
-        );
 
         return env_sensor;
     }

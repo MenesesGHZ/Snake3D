@@ -1,5 +1,5 @@
 class Policy{
-    constructor(epsilon=0.1,discount_rate=0.5) {
+    constructor(epsilon=0.1,discount_rate=0.7) {
         `
         N: Contains the number of times that an action has been selected in certain state.
         Q: Contains the values of actions in an certain state.
@@ -65,7 +65,4 @@ class Policy{
     index_of(state){
         `Return the index of the state in this.state. if it does not exist return -1`
     }
-
-
-
 }

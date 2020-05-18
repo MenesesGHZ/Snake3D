@@ -6,10 +6,12 @@
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Agent.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Agent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Environment.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Environment.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Policy.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Policy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/etc/features.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/etc/features.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/setUpFeature.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/setUpFeature.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/policy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/policy.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/right_bar.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/right_bar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/under_div.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/under_div.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/leftNavBar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/leftNavBar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/snakeMetrics.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/snakeMetrics.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +208,7 @@
       <workItem from="1589443549633" duration="10174000" />
       <workItem from="1589516698683" duration="29201000" />
       <workItem from="1589600602338" duration="36234000" />
-      <workItem from="1589696179866" duration="6211000" />
+      <workItem from="1589696179866" duration="25790000" />
     </task>
     <servers />
   </component>
