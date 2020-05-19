@@ -43,6 +43,9 @@
      <!-- Plotly.js -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{% static 'js/Snake/under_div.js' %}"></script>
+    <!--MathJax-->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 
 </head>
@@ -73,7 +76,7 @@
                    {% include 'includes/rightNavBar.html' %}
                </div>
            </div>
-           <div class="row d-none" style="height: 100vh" id="under-div"> <!--UNDER DIV-->
+           <div class="row d-none" id="under-div"> <!--UNDER DIV-->
                {% include 'includes/snakeMetrics.html' %}
                {% include 'includes/theory.html' %}
            </div>

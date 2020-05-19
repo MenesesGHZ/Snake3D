@@ -1,0 +1,52 @@
+{% load static %}
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center pb-2">
+        <p class="font-electro" style="font-size: 26pt">Building AI</p>
+    </div>
+    <div class="row justify-content-center align-items-center">
+        <div class="col-8 shadow-lg" style="border: black dashed 1px;">
+            <div class="m-2 font-times">
+                <p>Here we shall explain how we applied
+                    one of the most common introductory methods on reinforcement learning
+                    to solve a goal-directed learning task using a Monte Carlo method.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center align-items-center">
+            <img src="{% static 'imgs/RL-book.jpg' %}" alt="img" width="450px">
+    </div>
+    <div class="row">
+        <p class="font-times">
+            The main point that most of the methods that have been developed on
+            reinforcement learning field, it is that an certain agent must be capable to learn the 
+            dynamic of the environment that is confronting in base of the interaction
+            with the environment itself. This is one of tree paradigms of machine learning. 
+        </p>
+        <p class="font-times">
+            The Snake 3D AI scnerium yields a sitatuation which involve take a decision(action) 
+            in base of the situtation(state) that the current learning agent is. Being aware 
+            about that each action that the agent could take, could raise on future different states
+            and a good signal(good reward) or a bad signal(bad reward). This give us an overview about
+            the Markov Decision Proccess which is a mathematical framework that describe 
+            general equations to solve this problem of having this sequential interaction base 
+            on discrete time steps.
+            Having an abstraction of goal-directed learning with only tree main aspects, 
+            that are states \(S\), actions \(A\), and rewards \(R\).
+            A sequential interaction can be described as \(s_0,a_0,r_0,s_1,a_1,r_1,\dots s_T\) where
+            \(s_i \in S\), \(a_i \in A\), \(r_i \in R\) and \(T\) as the time step of the terminal state
+            or absorbing state.
+        </p>
+        <p class="font-times">
+            In this case we have a finite Markov Decision Process which involve that the quantity of states that 
+            the learning agent can confront is less than inifnity \(|S| \le \infty\), this same caracteristic aplies to the set of
+            actions that the agent could perfom, and to the set of rewards that agent could obtain.
+            Thus a way to solve this finite MDP we prefer to implement Monte Carlo Methods. Even Though
+            other alterntives as a temporal diference learning or dynamic programming could apply. 
+        </p>
+        <p class="font-times">
+            Monte Carlo Methods is a way to solve the sequential interaction that we have previously seen.
+            In this case we do not know the exactly
+        </p>
+
+    </div>
+</div>

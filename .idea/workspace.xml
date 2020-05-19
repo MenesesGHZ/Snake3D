@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/imgs/snake-game.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/snake3d.css" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/snake3d.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/policy.json" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/policy.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/under_div.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/under_div.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/theory.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/theory.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +201,9 @@
       <workItem from="1589516698683" duration="29201000" />
       <workItem from="1589600602338" duration="36234000" />
       <workItem from="1589696179866" duration="48956000" />
-      <workItem from="1589829339741" duration="16639000" />
+      <workItem from="1589829339741" duration="17477000" />
+      <workItem from="1589875432269" duration="1764000" />
+      <workItem from="1589877670284" duration="295000" />
     </task>
     <servers />
   </component>
