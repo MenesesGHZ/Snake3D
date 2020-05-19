@@ -5,7 +5,8 @@ let  graph_el_1 = null,
 window.addEventListener('load',()=> {
     let html_el = document.getElementsByTagName('html')[0],
         under_div = document.getElementById('under-div'),
-        snake_metrics = document.getElementById('snake-metrics');
+        snake_metrics = document.getElementById('snake-metrics'),
+        snake_theory = document.getElementById('snake-theory');
 
 
     function graph_1() {
@@ -73,9 +74,10 @@ window.addEventListener('load',()=> {
         metric_step = element.currentTarget.value;
     });
 
-    document.getElementById("snake-theory").addEventListener('click', () => {
+    document.getElementById("theory-div").addEventListener('click', () => {
             html_el.style.overflowY = "visible";
             under_div.classList.remove('d-none');
+            snake_theory.classList.remove('d-none');
         });
 
 });

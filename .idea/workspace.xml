@@ -2,20 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb6b763b-ed22-4c16-b3da-79aca2fc4ce6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/policy.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/theory.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/policyPY2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snake3DWeb/static/imgs/snake-game.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Agent.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Agent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Environment.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Environment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Policy.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/Policy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/policy.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame/Snake.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/right_bar.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/right_bar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/snake3d.css" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/css/etc/snake3d.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/policy.json" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/AI/policy.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/under_div.js" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/under_div.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/snakeMetrics.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/snakeMetrics.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/includes/theory.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/includes/theory.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" beforeDir="false" afterPath="$PROJECT_DIR$/Snake3DWeb/templates/snake3D.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,8 +23,8 @@
       <list>
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -60,25 +52,25 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Snake3DWeb/static/js/etc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Snake3DWeb/static/imgs" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/etc" />
-      <recent name="$PROJECT_DIR$/Snake3DWeb/static/imgs" />
-      <recent name="$PROJECT_DIR$/Snake3DWeb/static" />
-      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js" />
-      <recent name="$PROJECT_DIR$/Snake3DWeb/static/css" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/Snake/VideoGame" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/Snake" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/js" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/css/etc" />
       <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/etc" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/imgs" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js/etc" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/js" />
+      <recent name="$PROJECT_DIR$/Snake3DWeb/static/css" />
     </key>
   </component>
   <component name="RunManager" selected="Django tests.Test: Snake3DWeb.static.js.Snake.AI">
@@ -214,7 +206,7 @@
       <workItem from="1589516698683" duration="29201000" />
       <workItem from="1589600602338" duration="36234000" />
       <workItem from="1589696179866" duration="48956000" />
-      <workItem from="1589829339741" duration="7315000" />
+      <workItem from="1589829339741" duration="16639000" />
     </task>
     <servers />
   </component>
