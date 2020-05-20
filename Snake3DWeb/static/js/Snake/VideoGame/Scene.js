@@ -86,13 +86,14 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
               snake.changeDirection(keyCode);
          }
        });
+       */
     document.getElementById('control-auto-rotation').addEventListener("change", element =>{
         camera_control.autoRotate = element.target.checked;
     });
     document.getElementById('control-orbit-controls').addEventListener("change",element=>{
         camera_control.enabled = element.target.checked;
     });
-*/
+
 
 
 

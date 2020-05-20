@@ -111,6 +111,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                    Math.abs(this.body[0].position.y - Math.round(this.body[0].position.y)) < this.translationError &&
                    Math.abs(this.body[0].position.z - Math.round(this.body[0].position.z)) < this.translationError;
                if (this.isValidTransition[0]) {
+                   
                    if(!this.user_mode) this.send_time_step_signal();
 
                    this.isValidEating =
