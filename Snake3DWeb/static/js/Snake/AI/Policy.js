@@ -7,11 +7,10 @@ class Policy{
         this.posible_actions=["a","w","s","d","none"];
         this.Q = {};
         this.QN = {};
-        this.entity = {};
+        this.entity = {}
         this.epsilon = epsilon;
         this.discount_rate = discount_rate;
     }
-
 
     take_action_by_state(state){
       let action,
@@ -24,13 +23,14 @@ class Policy{
       return action;
     }
 
+
     update_policy(sequence){
-        let Gt = 0, Gt_avg=0 ,argmax_q_value = Number.MIN_SAFE_INTEGER, argmax_q_action, reward,state,action;
+        let Gt = 0, Gt_avg=0 ,argmax_q_value = Number.MIN_SAFE_INTEGER, argmax_q_action, reward,state,action;       
         for(let i=sequence.length-1; i>=1; i-=3){
             reward = sequence[i];
             action = sequence[i-1];
             state = sequence[i-2];
-            if(!Object.keys(this.Q).includes(state)){
+            if(!Object.keys(this.Q).includes(state)){ 
                 this.Q[state] = {"a":0,"w":0,"s":0,"d":0,"none":0};
                 this.QN[state] = {"a":0,"w":0,"s":0,"d":0,"none":0};
             }
@@ -38,6 +38,7 @@ class Policy{
             this.Q[state][action] = this.Q[state][action] + ((1/this.QN[state][action])*(Gt - this.Q[state][action]));
             Gt = reward + this.discount_rate*Gt;
         }
+
         for (let [state, actions] of Object.entries(this.Q)) {
               for(let [action,q_value] of Object.entries(actions) ){
                   if(q_value>argmax_q_value){
@@ -49,6 +50,9 @@ class Policy{
               argmax_q_value = Number.MIN_SAFE_INTEGER;
         }
     }
+
+
+
 
     read_text_policy(pack){
         this.Q = pack["Q"];

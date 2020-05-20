@@ -11,12 +11,12 @@ let env_elements,
 function receive_time_step_signal(){
   env_elements = environment.read_environment();
   state = agent.read_state(env_elements);
-  action = policy.take_action_by_state(state);
+  action = policy.take_action_by_state(state); 
   reward = environment.rewards[agent.currentCell];
   if(environment.time_step === 0){
     reward=0;
   }
-  sequence = [state,action,reward];
+  sequence = [state,action,reward]; 
   environment.markov_trajectory.push(...sequence);
   if(agent.currentCell !== "d"){
     agent.do(action);
@@ -24,8 +24,10 @@ function receive_time_step_signal(){
   environment.time_step+=1;
 }
 
+
+
 function receive_update_signal(){
-  update_statistic_data();
+  update_statistic_data();  
   policy.update_policy(environment.markov_trajectory);
   environment.markov_trajectory = [];
   environment.time_step = 0;
@@ -34,6 +36,7 @@ function receive_update_signal(){
       environment.max_score = snake.body[0].length-1;
   }
 }
+
 
 function read_learning(){
   let rawFile = new XMLHttpRequest();

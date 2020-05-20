@@ -3,9 +3,7 @@ class SnakeAgent{
         this.actions = ['a', 'w', 's', 'd', 'none'];
         this.currentCell = "b";
     }
-
     read_state(env_elements){
-
         let pos_x = Math.round(snake.body[0].position.x),
             pos_y = Math.round(snake.body[0].position.y),
             pos_z = Math.round(snake.body[0].position.z);
@@ -55,7 +53,6 @@ class SnakeAgent{
             cell_if_action["d"],
             cell_if_action["none"]
         );
-
     }
 
     will_position_in_tail(position){
