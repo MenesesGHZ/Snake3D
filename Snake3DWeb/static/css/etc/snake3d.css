@@ -16,10 +16,12 @@ html{
 p{
     margin: 0;
 }
+
 .hover-blue{
     transition: background-color ease-in-out 0.6s;
     cursor: pointer;
 }
+
 .hover-blue:hover{
     background-color: cadetblue;
 }

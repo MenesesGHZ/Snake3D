@@ -30,6 +30,7 @@ window.addEventListener('DOMContentLoaded',() => {
             this.z = z;
             this.cellsArray = this.createCellsArray();
         }
+
         createCellsArray(){
                let x_index = 0, y_index = 0, z_index = 0, triDimensionalArray = this.triDimensionalArray();
                   for(;x_index<this.x;x_index++){
@@ -44,6 +45,7 @@ window.addEventListener('DOMContentLoaded',() => {
                         }
                   return triDimensionalArray;
                }
+
       triDimensionalArray(){
             let array = Array(this.x),
                x_index = 0, y_index = 0, z_index = 0;
@@ -65,6 +67,10 @@ window.addEventListener('DOMContentLoaded',() => {
             }
             return copyBlankCoords;
         };
+        clear(new_x,new_y,new_z){
+            cell = new Matrix3D(new_x,new_y,new_z);
+        }
+
 
     }
 
@@ -108,3 +114,43 @@ window.addMatrix3DToElement = function(cell, scene){
                           y_index = 0;
                        }
               };
+function resize_grid(new_x,new_y,new_z){
+    let x_index = 0, y_index = 0, z_index = 0;
+    for(;x_index<cell.x;x_index++){
+                for(;y_index<cell.y;y_index++){
+                   for(;z_index<cell.z;z_index++){
+                      scene.remove(cell.cellsArray[x_index][y_index][z_index]);
+                   }
+                   z_index = 0;
+                }
+                y_index = 0;
+             }
+    cell.clear(new_x,new_y,new_z);
+    x = new_x; y = new_y; z=new_z;
+}
+
+
+window.addEventListener("load",()=>{
+    document.getElementById('input-resize-x').addEventListener('change',element=>{
+        new_x = element.target.value;
+        resize_grid(new_x,y,z);
+        calibrate_cell();
+    });
+
+    document.getElementById('input-resize-y').addEventListener('change',element=>{
+        new_y = element.target.value;
+        resize_grid(x,new_y,z);
+        calibrate_cell();
+    });
+
+    document.getElementById('input-resize-z').addEventListener('change',element=>{
+        new_z = element.target.value;
+        resize_grid(x,y,new_z);
+        calibrate_cell()
+    });
+    function calibrate_cell(){
+        addMatrix3DToElement(cell,scene);
+        if(!snake.user_mode || !play) scene.position.set(-(x-1)/2,-(y-1)/2,-(z-1)/2);
+        window.wall_selector_resize();
+    }
+});

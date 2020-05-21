@@ -1,34 +1,37 @@
+let coords_label = null;
 window.addEventListener('load',()=>{
    let ob_x = document.getElementById('ob-x'),
        ob_y = document.getElementById('ob-y'),
        ob_z = document.getElementById('ob-z'),
        ob_max_lenght = document.getElementById('ob-max-length');
 
-   let html_grid = '<div class="row justify-content-center"><div class="m-1 hover-blue d-flex justify-content-center font-electro font-weight-bold" style="width:22px;height:22px;border:rgb(85,85,85) 1px solid;font-size: 9pt"">{0}</div></div>',
+   let html_grid = '<div class="row justify-content-center"><div class="m-1 hover-blue d-flex justify-content-center font-electro font-weight-bold" style="width:22px;height:22px;border:rgb(85,85,85) 1px solid;font-size: 9pt">{0}</div></div>',
        html_result = ""
    //Creating wall selector UI
-    let i;
-    for(i=0; i<x;i++)
-       html_result += html_grid.format(i);
-    ob_x.innerHTML = html_result;
-    html_result = "";
-    for(i=0; i<y;i++)
-       html_result += html_grid.format(i);
-    ob_y.innerHTML = html_result;
-    html_result ="";
-    for(i=0; i<z;i++)
-       html_result += html_grid.format(i);
-    ob_z.innerHTML = html_result;
+    window.wall_selector_resize = function(){
+        let i;
+        for(i=0; i<x;i++)
+           html_result += html_grid.format(i);
+        ob_x.innerHTML = html_result;
+        html_result = "";
+        for(i=0; i<y;i++)
+           html_result += html_grid.format(i);
+        ob_y.innerHTML = html_result;
+        html_result ="";
+        for(i=0; i<z;i++)
+           html_result += html_grid.format(i);
+        ob_z.innerHTML = html_result;    
+    }
+    wall_selector_resize();
 
     //Add functionality to the grid
    let x_value=-1,y_value=-1,z_value=-1;
    for(i=0; i<x; i++){
        ob_x.children[i].firstChild.addEventListener('click',element=>{
            if(x_value === -1){
-              x_value = Array.from(ob_x.children).indexOf(element.target.parentNode); //return index
+             x_value = Array.from(ob_x.children).indexOf(element.target.parentNode); //return index
              element.target.style.backgroundColor = "red";
              setBlock();
-             //AGREGAR ANIMACION
            }
        });
    }
@@ -36,10 +39,9 @@ window.addEventListener('load',()=>{
    for(i=0; i<y; i++){
        ob_y.children[i].firstChild.addEventListener('click',element=>{
            if(y_value === -1){
-              y_value = Array.from(ob_y.children).indexOf(element.target.parentNode); //return index
+             y_value = Array.from(ob_y.children).indexOf(element.target.parentNode); //return index
              element.target.style.backgroundColor = "red";
              setBlock();
-             //AGREGAR ANIMACION
            }
        });
    }
@@ -50,12 +52,11 @@ window.addEventListener('load',()=>{
              z_value = Array.from(ob_z.children).indexOf(element.target.parentNode); //return index
              element.target.style.backgroundColor = "red";
              setBlock();
-             //AGREGAR ANIMACION
            }
        });
    }
+   coords_label = document.getElementById('coords-label');
    let pyramid_icon_path = static_path+"imgs/pyramid-icon-24.png",
-       coords_label = document.getElementById('coords-label'),
            html_coord = `<div class="row justify-content-center">
                              <div class="col-10 d-flex align-items-center justify-content-around font-electro">
                                 <img src="${pyramid_icon_path}" alt="pyramid-icon" width="22" height="22">
@@ -72,6 +73,8 @@ window.addEventListener('load',()=>{
                             </div>
                         </div>`;
    let ob_coord_x, ob_coord_y,ob_coord_z, ob_coord_delete,coords = [],obstacles_counter_el = document.getElementById('description-obstacles-counter');
+   
+   
    function setBlock(){
        if(x_value!==-1 && y_value!==-1 && z_value!==-1 ){
             walls.add( new Wall(x_value,y_value,z_value).object );
@@ -91,7 +94,23 @@ window.addEventListener('load',()=>{
                 coords_label.children[index].remove();
                 obstacles_counter_el.innerHTML = String(walls.array.length);
             });
+            clean_selector_display()
        }
    }
-
+   function clean_selector_display(){
+    let i;    
+    for(i=0;i<x;i++){
+        ob_x.children[i].firstChild.style.backgroundColor = "white";
+        }
+    for(i=0;i<y;i++){
+        ob_y.children[i].firstChild.style.backgroundColor = "white";
+    }
+    for(i=0;i<z;i++){
+        ob_z.children[i].firstChild.style.backgroundColor = "white";
+    }
+    x_value = -1; y_value = -1; z_value = -1;
+   }
 });
+function delete_labeled_walls(){
+    coords_label.innerHTML="";
+  }

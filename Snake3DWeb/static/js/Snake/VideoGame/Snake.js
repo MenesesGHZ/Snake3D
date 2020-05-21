@@ -4,11 +4,9 @@ window.addEventListener('DOMContentLoaded', ()=>{
    /*Snake Object Logic*/
    class Snake{
       constructor(speed=1,user_mode=true) {
-         this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00} );
-         this.length = 1;
          this.speed = speed;
          this.directionController = {
-             "USER":{'a':[1,0,0],'d':[-1,0,0],'w':[0,0,1],'s':[0,0,-1],'e':[0,1,0],'q':[0,-1,0]},
+             "USER":{"a":[1,0,0],"w":[0,1,0],"s":[0,-1,0],"d":[-1,0,0],"none":[0,0,1]},
              "AI":{"a":[1,0,0],"w":[0,1,0],"s":[0,-1,0],"d":[-1,0,0],"none":[0,0,1]}
          };
          this.oppositeKeyCode= {"a":"d","w":"s","s":"w","d":"a"};
@@ -19,7 +17,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.isValidTransition = [true];
          this.isValidEating = false;
          this.body = [
-             new THREE.Mesh( new THREE.BoxGeometry(), this.material ),
+             new THREE.Mesh( new THREE.BoxGeometry(), new THREE.MeshBasicMaterial( { color: 0x00ff00} ) ),
             ];
          this.body[0].position.set(
              Math.round(Math.random()*(x-1)),
@@ -27,13 +25,21 @@ window.addEventListener('DOMContentLoaded', ()=>{
              Math.round(Math.random()*(z-1))
          );
          this.gameOver = false;
-         this.chosenSpeed = speed;
+         this.chosenSpeed = speed;         
          this.user_mode = user_mode;
-         this.lastPosition = [-1,-1,-1]; // Send Clean Signal to the AI
+         this.lastPosition = [-1,-1,-1];
          this.tempDir = [];
          this.lastKeyCode = "none";
-      }
-
+         this.cameraKey = "";
+         this.cameraDirections = {
+             "100":[-Math.PI/2 ,-Math.PI/2 ,-Math.PI/2],
+             "-100":[-Math.PI/2,Math.PI/2,Math.PI/2],
+             "010":[Math.PI/2,0,-Math.PI], //rota Z, +-X define direccion 
+             "0-10":[-Math.PI/2,0,-Math.PI], //rota Z. +-X define direccion 
+             "001":[Math.PI,0,-Math.PI], 
+             "00-1":[0,0,0]  
+            };
+      };
      oppositeController(keyCode_1,direction){
         if(keyCode_1 !== "none") {
             let oppositeKeyCode = this.oppositeKeyCode[keyCode_1];
@@ -45,24 +51,15 @@ window.addEventListener('DOMContentLoaded', ()=>{
             ];
         }
      }
+     
      changeDirection(keyCode){
-          if(!this.user_mode) {
               this.tempDir = this.currentDirection[0];
               this.chosenDirection = this.directionController["AI"][keyCode];
-              this.lastKeyCode = keyCode;
-          }else{
-            if(Object.keys(this.directionController["USER"]).includes(keyCode)){
-                    this.chosenDirection = this.directionController["USER"][keyCode];
-            }
-            if(this.chosenDirection[0]*-1 === this.currentDirection[0][0] &&
-               this.chosenDirection[1]*-1 === this.currentDirection[0][1] &&
-               this.chosenDirection[2]*-1 === this.currentDirection[0][2]){
-              this.chosenDirection = this.currentDirection[0];
-            }
-          }
+              this.lastKeyCode = keyCode;    
       }
+
       move(){
-             for(let i=0;i<this.length;i++){
+             for(let i=0;i<this.body.length;i++){
                    this.isValidTransition[i] =  //Check if the current position is valid to change direction
                          Math.abs(this.body[i].position.x-Math.round(this.body[i].position.x)) < this.translationError &&
                          Math.abs(this.body[i].position.y-Math.round(this.body[i].position.y)) < this.translationError &&
@@ -77,10 +74,16 @@ window.addEventListener('DOMContentLoaded', ()=>{
                            ];
                            this.currentDirection[i] = this.volatileDirection;
                        }else{
-                            this.speed = this.chosenSpeed;
                             this.currentDirection[0] = this.chosenDirection;
+                            this.speed = this.chosenSpeed;
                             this.directionController["AI"]["none"] = this.chosenDirection;
                             this.oppositeController(this.lastKeyCode,this.tempDir);
+                            if(this.user_mode){
+                                this.cameraKey = "{0}{1}{2}".format(this.currentDirection[0][0],
+                                                                    this.currentDirection[0][1],
+                                                                    this.currentDirection[0][2])
+                                camera.rotation.set(...this.cameraDirections[this.cameraKey]);
+                            }
                        }
                    }
                    this.body[i].position.set(
@@ -89,15 +92,10 @@ window.addEventListener('DOMContentLoaded', ()=>{
                          this.body[i].position.z + (this.currentDirection[i][2]*this.speed)
                     );
             }
-             /*
-             if(this.user_mode){
-                       camera.position.x += this.currentDirection[0][0] * this.speed;
-                       camera.position.y += this.currentDirection[0][1] * this.speed;
-                       camera.position.z += this.currentDirection[0][2] * this.speed;
-                    }
-              */
+            if(snake.user_mode){
+                camera.position.set(...Object.values(this.body[0].position));
+            }     
       }
-
       run(){
        if(!this.gameOver){
          this.checkSnakeState();
@@ -121,7 +119,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                    if(this.isValidEating) {
                        this.addToSnake();
                        apple.setNewPosition();
-                       right_bar_update(this.length);
+                       right_bar_update(this.body.length);
                    }
                    this.gameOverLogic();
 
@@ -129,14 +127,13 @@ window.addEventListener('DOMContentLoaded', ()=>{
       }
       addToSnake(){
           this.currentDirection.push([0,0,0]);
-          this.body.push(new THREE.Mesh( new THREE.BoxGeometry(), this.material ));
-          this.body[this.length].position.set(
-            Math.round(this.body[this.length-1].position.x - this.currentDirection[this.length-1][0]),
-            Math.round(this.body[this.length-1].position.y - this.currentDirection[this.length-1][1]),
-            Math.round(this.body[this.length-1].position.z - this.currentDirection[this.length-1][2])
+          this.body.push(new THREE.Mesh( new THREE.BoxGeometry(),  new THREE.MeshBasicMaterial( { color: 0x00DD00} )  ));
+          this.body[this.body.length-1].position.set(
+            Math.round(this.body[this.body.length-2].position.x - this.currentDirection[this.body.length-2][0]),
+            Math.round(this.body[this.body.length-2].position.y - this.currentDirection[this.body.length-2][1]),
+            Math.round(this.body[this.body.length-2].position.z - this.currentDirection[this.body.length-2][2])
           );
-          scene.add(this.body[this.length]);
-          this.length += 1;
+          scene.add(this.body[this.body.length-1]);
       }
       
       gameOverLogic(){
@@ -166,7 +163,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
       didLose(){
           // it is set at 4 because at this point the snake is capable to collision itself.
           //check if the head is in any body part.
-          for(let i=4;i<this.length;i++){
+          for(let i=4;i<this.body.length;i++){
               if(Math.abs(this.body[0].position.x-this.body[i].position.x)<this.translationError &&
                  Math.abs(this.body[0].position.y-this.body[i].position.y)<this.translationError &&
                  Math.abs(this.body[0].position.z-this.body[i].position.z)<this.translationError){
@@ -179,6 +176,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
               this.body[0].position.z > z - 1 + this.translationError || this.body[0].position.z < -this.translationError) {
               return true;
           }
+
           return walls.didCollideWith([
               this.body[0].position.x,
               this.body[0].position.y,
@@ -188,7 +186,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
       takenLocations(){
           let takenPositions = [];
-          for(let i=0;i<this.length;i++){
+          for(let i=0;i<this.body.length;i++){
             takenPositions.push([
                     Math.round(this.body[i].position.x),
                     Math.round(this.body[i].position.y),
@@ -198,14 +196,18 @@ window.addEventListener('DOMContentLoaded', ()=>{
           return takenPositions;
       }
 
-     clear(){
-          for (let i = 0; i < this.length; i++) {
+     clear(speed,user_mode){
+          for (let i = 0; i < this.body.length; i++) {
             scene.remove(this.body[i]);
           }
-         snake = new Snake(snake.chosenSpeed,snake.user_mode);
+         snake = new Snake(speed,user_mode);
+         scene.add(snake.body[0]);
+
      }
-     send_time_step_signal(){
-            receive_time_step_signal();
+
+
+    send_time_step_signal(){
+        time_step_signal();
      }
 
    }
@@ -213,11 +215,12 @@ window.addEventListener('DOMContentLoaded', ()=>{
 });
 
 function restart_game(){
-    snake.clear();
+    snake.clear(snake.chosenSpeed,snake.user_mode);
     walls.clear();
     apple.clear();
+    delete_labeled_walls();
     if(!snake.user_mode) receive_update_signal();
-    scene.add(snake.body[0]);
-    scene.add(apple.object);
+    else camera.position.set(snake.body[0].position.x, snake.body[0].position.y, snake.body[0].position.z);
     right_bar_update();
+    scene.add(apple.object);
 }

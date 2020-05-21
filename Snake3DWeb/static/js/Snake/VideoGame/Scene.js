@@ -1,5 +1,6 @@
 let scene = null,
     camera = null,
+    play = false,
     window_relation = window.innerWidth / window.innerHeight;
 
 
@@ -35,8 +36,8 @@ window.addEventListener('load',()=>{
 
     let animate = function () {
         requestAnimationFrame(animate);
-        if(!snake.user_mode) snake.run();
-        camera_control.update();
+        if(play) snake.run();
+        if(!snake.user_mode) camera_control.update();
         renderer.render( scene, camera );
     };
     read_learning();
@@ -45,20 +46,29 @@ window.addEventListener('load',()=>{
 
 
 document.getElementById('feature-player-mode').addEventListener('click',()=>{
-    snake.clear();
-    snake.user_mode = true;
-    camera.position.set( -1.3, 0, -4);
-    camera.rotation.y = 180 * (Math.PI /180);
-    camera.rotation.x = 10 * (Math.PI / 180);
-    camera.rotation.z = 0;
+    snake.clear(0.005,true);
+
+    camera.rotation.x = 0;     
+    camera.rotation.y = 0;
+    camera.rotation.z = 0;    
+    scene.position.set(0,0,0); 
+    
+    camera.position.set(
+        snake.body[0].position.x,
+        snake.body[0].position.y,
+        snake.body[0].position.z
+        );
+
     camera_control.enabled = false;
     camera_control.autoRotate = false
     document.getElementById('control-orbit-controls-input').checked = false;
     document.getElementById('control-auto-rotation-input').checked = false;
+    play = true;
 });
 
 document.getElementById('trigger-AI').addEventListener('click',()=>{
     if(snake.user_mode) {
+        scene.position.set(-(x-1)/2,-(y-1)/2,-(z-1)/2);
         snake.user_mode = false;
         camera.position.set(3.7, 3.7, 3.7);
         camera_control = new THREE.OrbitControls(camera, renderer.domElement);
@@ -69,16 +79,14 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
     }else{
         //Download policy FILE
     }
+    play = true;
 });
 
 
 
 
-
-
-
 /*Snake Control's Listeners*/
-/*
+
  let keyCode;
   document.addEventListener("keydown", (event)=>{
          keyCode = event.key;
@@ -86,19 +94,13 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
               snake.changeDirection(keyCode);
          }
        });
-       */
+       
     document.getElementById('control-auto-rotation').addEventListener("change", element =>{
         camera_control.autoRotate = element.target.checked;
     });
     document.getElementById('control-orbit-controls').addEventListener("change",element=>{
         camera_control.enabled = element.target.checked;
     });
-
-
-
-
-
-
 });
 
 

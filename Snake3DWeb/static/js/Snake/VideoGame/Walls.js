@@ -7,6 +7,7 @@ let walls;
            this.array.push(wall);
            scene.add(wall);
        }
+
        didCollideWith(coord,translationError){
         let i;
         for(i in this.array) {
@@ -18,11 +19,13 @@ let walls;
 
         }
        }
+
        clear(){
            for(let i=0;i<this.array.length;i++){
                scene.remove(this.array[i]);
            }
        }
+       
 
    }
    class Wall{

@@ -15,7 +15,7 @@
     <div class="row justify-content-center align-items-center">
             <img src="{% static 'imgs/RL-book.jpg' %}" alt="img" width="450px">
     </div>
-    <div class="row">
+    <div class="row mx-4">
         <p class="font-times">
             The main point that most of the methods that have been developed on
             reinforcement learning field, it is that an certain agent must be capable to learn the 
@@ -32,8 +32,8 @@
             on discrete time steps.
             MDPs an abstraction of goal-directed learning with only tree main aspects, 
             that are states \(S\), actions \(A\), and rewards \(R\).
-            A sequential interaction can be described as \(s_0,a_0,r_1,s_1,a_1,r_2,\dots s_T\) where
-            \(s_i \in S\), \(a_i \in A\), \(r_i \in R\) and \(T\) as the time step of the terminal state
+            A sequential interaction can be described as \(s_0,a_0,r_1,s_1,a_1,r_2,\dots s_{T-1},a_{T-1},r_{T}\) where
+            \(s_i \in S\), \(a_i \in A\), \(r_i \in R\) and \(T\) is the time step of the terminal state
             or absorbing state.
         </p>
         <p class="font-times">
@@ -47,7 +47,7 @@
             Monte Carlo Methods is a way to solve the sequential action selection that we have previously 
             seen when we do not have the state-transition probabilities. Whereas one of the best atritubtes that Monte Carlo
             methods have, it is the fact that they only need experience samples to learn. 
-            It learns in an episodic form and it is base on the MDPs framework 
+            It learns in an episodic form and it is base on the MDP framework 
              therefore we are going to use a set of States, Actions and Rewards to make the evaluations.
             In first place we need to determine the value of an action \(a_i\) in a certain state \(s_i\), given by
             the expresion \(q(s,a)\). In this case Monte Carlo methods calculates \(q(s,a)\) base on the expected return which is 
@@ -58,8 +58,8 @@
             Thus the value of an action given a state under an policy is equal to
             \[q_{\pi}(s,a) = \mathbb{E}[Gt | S_t = s] \] 
             However we do not have any policy, where informally a policy is 
-            the way that an agent must behave or act in a certain state. In general when we do not have a model
-            of the environment the policy is denoted as 
+            the way that an agent must behave or act in a certain state. In general when 
+            we do not know the dynamic of the environment is denoted as 
             \( \pi(s) =  \arg\max_{a} q_{\pi}(s,a)\).
             Thus we are going to start with an arbitrary policy \(\pi_0\).
             So we are going to evaluate our policy by selecting greedy each time step and then base on 
@@ -76,8 +76,8 @@
             Also analyzing the posibles directions that the snake could perform are 5, in perspective from its current direction.
              The total amount of states that the snake could confront is equal to
 
-            \[|S| = \textrm{Posible Snake Positions} \cdot \textrm{Posible Apple Positions} \cdot \textrm{Posible Directions}\]
-            \[|S| = 4^4 \cdot 4^4 \cdot 5 = 20,480 \]
+            \[|S| = \textrm{Snake Positions} \cdot \textrm{Apple Positions} \cdot \textrm{Posible Directions}\]
+            \[|S| = 4^3 \cdot 4^3 \cdot 5 = 20,480 \]
             Then we realize that in the moment that the snake grid grows, it is going to be a lot 
             more posible states, and than means that it will take more time and computation to achieve 
             the optimal policy. Therefore our goal was to find the way to implement
@@ -87,26 +87,34 @@
             the agent if the next position it is a losing position or not by each 
             posible directions to go.
             Where now the amount of posible states is followed by
-            \[|S| = \textrm{Posible Directions to Apple} \cdot \textrm{Posible Combinations of boolean states by action} \]
+        </p>
+    </div>
+    <div class="row">
+        <p>
+            \[|S| = \textrm{Directions to Apple} \cdot \textrm{Boolean states each action} \]
             \[|S| = 3^3 \cdot 2^5 = 864\]
+        </p>
+    </div>
+    <div class="row">     
+        <p class="font-times">
+            The set of action that the agent can perform is represented as \( A = \{(\textrm{'a','right'}),(\textrm{'w','up'}),
+            (\textrm{'s','down'}),(\textrm{'d','left'}),(\textrm{'none','current direction'})\)
+        </p> 
+    </div>
 
-            About the set of actions that the agent can perform are the next ones
-            \[A = \{\textrm{a},\textrm{w},\textrm{s},\textrm{d},\textrm{none}\}\]
-            \[a \rightarrow \textrm{Change to right direction}\] 
-            \[w \rightarrow \textrm{Change to up direction}\] 
-            \[s \rightarrow \textrm{Change to down direction}\] 
-            \[d \rightarrow \textrm{Change to left direction}\] 
-            \[none \rightarrow \textrm{Not change direction}\] 
-
+    <div class="row mx-4">
+        <p class="font-times">
             As an instance about how the state's structure is
             \[s_i = \textrm{'001bbdbb'}\] 
             The tree first characters \(\textrm{001}\) are telling that the snake is at the same \(x\) and \(y\) coordinates that the apple,
             but its \(z\) position is before than the apple's \(z\), thus the agent must learn 
-            that going to an positive \(z\) direction could reach the apple. 
-            Also the rest characters \( \textrm{ bbdbb}\) are refering about if we take \(\textrm{a w s d none}\) respectievly what is 
-            the type of cell that we can confront, being 'b' as blank cell, or 'd' to a danger cell.
-            Are set of rewards are the next on 
+            that going to an positive \(z\) direction will reach the apple. 
+            Also the rest characters \( \textrm{ bbdbb}\) are refering about what is 
+            the type of cell that the agent can confront, being 'b' as blank cell, or 'd' as a danger cell, 
+            if the agent take an \(a_i\) respectivly.
+            The set of rewards are the next ones
             \[R = \{(\textrm{blank},-0.5),(\textrm{danger},-2),(\textrm{apple},2)\}\]
+            Meaning that if the agent is in a blank cell therefore he is going to obtain a reward of \(-0.5\) and so on.
         </p>
     </div>
 </div>

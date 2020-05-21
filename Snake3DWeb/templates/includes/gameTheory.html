@@ -1,3 +1,4 @@
+{% load static %}
 <div class="container-fluid">
     <div class="row justify-content-center align-items-center pb-2">
         <p class="font-electro" style="font-size: 26pt">Building Snake 3D videogame</p>
@@ -12,5 +13,61 @@
                     to achive this awesome recreation.</p>
             </div>
         </div>
+    </div>
+    <div class="row justify-content-center align-items-center my-4">
+        <img src="{% static 'imgs/three-js.png' %}" alt="img" width="400px">
+    </div>
+    <div class="row mx-4">
+        <p class="font-times">
+            Building the Game was a very simple part, because all we needed to do
+            it was follow the logic of snake 2D, and to transform
+            this base logic in a tree dimensional space.    
+            Building the graphics was something also nothing complicated because
+            we used the <a href="https://threejs.org/" target="_blank">three.js</a> library that allow to us 
+            make whatever kind of 3D model that we want, in a simple lines of code. Also as 
+            you have seen the graphics are not to much.
+        </p>
+        <p class="font-times">
+            We start creating our class Snake that you can see clicking below
+        </p>
+    </div>
+    <div class="row justify-content-center my-4 mx-4">
+        <a class="font-times" href="{% static 'js/Snake/VideoGame/Snake.js' %}" target="_blank">Snake.js</a>
+    </div>
+    <div class="row mx-4">
+        <p class="font-times">The main methods that the snake has are the move(), changeDirection() and checkSnakeState().
+            With the move() method allows to the snake to move smoothly around the space acording
+            to the direction that was selected. Involves five main atributes that are speed, 
+            current direction including the direction of each part of the tail, chosen direction,
+             snake position, the translation error  . It also prevents to change the direction if it is not a valid
+            position to be changed, therefore the snake only can move acoording to the grid. Whereas if it is 
+            a valid position change the current direction to the chosen one, and also change the user controls, 
+            because the direction that the user might chose is in base of his perspective and not in perspective
+            of the entire enviornment.
+        </p>
+    </div>
+    <div class="row mx-4">
+        <p class="font-times">
+            The Apple Object is a very simple class that you can inspect clicking below
+        </p>
+    </div>
+    <div class="row mx-4 my-4 justify-content-center">
+        <a class="font-times" href="{% static 'js/Snake/VideoGame/Apple.js' %}" target="_blank">Apple.js</a>
+    </div>
+    <div class="row mx-4">
+        <p class="font-times">
+            Every time that apple has been captured it is deleted and it is instantiated with a random 
+            position avoiding the snake's position and the obstacles's positons. 
+        </p>
+    </div>
+    <div class="row mx-4">
+        <p class="font-times">
+            We also have implemented some obstacles that the functionality that provide is in the case that the
+             snake is in the same position of any obstacle, the snake will loose inmediatly. The implementation
+            you can see it clicking below.
+        </p>
+    </div>
+    <div class="row my-4 justify-content-center">
+        <a class="font-times" href="{% static 'js/Snake/VideoGame/Walls.js' %}" target="_blank">Walls.js</a>
     </div>
 </div>
