@@ -46,11 +46,10 @@ window.addEventListener('load',()=>{
 
 
 document.getElementById('feature-player-mode').addEventListener('click',()=>{
-    snake.clear(0.005,true);
+    snake.clear(0.01,true);
 
-    camera.rotation.x = 0;     
-    camera.rotation.y = 0;
-    camera.rotation.z = 0;    
+   
+
     scene.position.set(0,0,0); 
     
     camera.position.set(
@@ -58,9 +57,14 @@ document.getElementById('feature-player-mode').addEventListener('click',()=>{
         snake.body[0].position.y,
         snake.body[0].position.z
         );
+    camera.lookAt(
+        snake.body[0].position.x + 2*snake.currentDirection[0][0],
+        snake.body[0].position.y + 2*snake.currentDirection[0][1],
+        snake.body[0].position.z + 2*snake.currentDirection[0][2]
+    );
 
     camera_control.enabled = false;
-    camera_control.autoRotate = false
+    camera_control.autoRotate = false;
     document.getElementById('control-orbit-controls-input').checked = false;
     document.getElementById('control-auto-rotation-input').checked = false;
     play = true;

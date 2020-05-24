@@ -32,6 +32,7 @@ window.addEventListener('DOMContentLoaded',() => {
         }
 
         createCellsArray(){
+
                let x_index = 0, y_index = 0, z_index = 0, triDimensionalArray = this.triDimensionalArray();
                   for(;x_index<this.x;x_index++){
                            for(;y_index<this.y;y_index++){
@@ -70,17 +71,9 @@ window.addEventListener('DOMContentLoaded',() => {
         clear(new_x,new_y,new_z){
             cell = new Matrix3D(new_x,new_y,new_z);
         }
-
-
     }
-
-    cell = new Matrix3D(x,y,z);
-    obstacles = new Matrix3D(x,y,z,true,0x00FF00);
-
+    cell = new Matrix3D(x,y,z);    
 });
-
-
-
 
 
 function deleteElementFromArrays(element,array){

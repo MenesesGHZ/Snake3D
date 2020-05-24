@@ -2,14 +2,14 @@ let coords_label = null;
 window.addEventListener('load',()=>{
    let ob_x = document.getElementById('ob-x'),
        ob_y = document.getElementById('ob-y'),
-       ob_z = document.getElementById('ob-z'),
-       ob_max_lenght = document.getElementById('ob-max-length');
-
-   let html_grid = '<div class="row justify-content-center"><div class="m-1 hover-blue d-flex justify-content-center font-electro font-weight-bold" style="width:22px;height:22px;border:rgb(85,85,85) 1px solid;font-size: 9pt">{0}</div></div>',
-       html_result = ""
+       ob_z = document.getElementById('ob-z');
+       
+   let html_grid = '<div class="row justify-content-center"><div class="m-1 hover-blue d-flex justify-content-center font-electro font-weight-bold" style="width:22px;height:22px;border:rgb(85,85,85) 1px solid;font-size: 9pt">{0}</div></div>';
+    let x_value=-1,y_value=-1,z_value=-1;
    //Creating wall selector UI
     window.wall_selector_resize = function(){
         let i;
+        html_result = "";
         for(i=0; i<x;i++)
            html_result += html_grid.format(i);
         ob_x.innerHTML = html_result;
@@ -20,41 +20,40 @@ window.addEventListener('load',()=>{
         html_result ="";
         for(i=0; i<z;i++)
            html_result += html_grid.format(i);
-        ob_z.innerHTML = html_result;    
+        ob_z.innerHTML = html_result; 
+           
+        for(i=0; i<y; i++){
+            ob_y.children[i].firstChild.addEventListener('click',element=>{
+                if(y_value === -1){
+                  y_value = Array.from(ob_y.children).indexOf(element.target.parentNode); //return index
+                  element.target.style.backgroundColor = "red";
+                  setBlock();
+                }
+            });
+        }
+            
+        for(i=0; i<x; i++){
+            ob_x.children[i].firstChild.addEventListener('click',element=>{
+                if(x_value === -1){
+                    x_value = Array.from(ob_x.children).indexOf(element.target.parentNode); //return index
+                    element.target.style.backgroundColor = "red";
+                    setBlock();
+                }
+            });
+        }
+        for(i=0; i<z; i++){
+            ob_z.children[i].firstChild.addEventListener('click',element=>{
+                if(z_value === -1){
+                    z_value = Array.from(ob_z.children).indexOf(element.target.parentNode); //return index
+                    element.target.style.backgroundColor = "red";
+                    setBlock();
+                }
+            });
+        }
     }
     wall_selector_resize();
 
-    //Add functionality to the grid
-   let x_value=-1,y_value=-1,z_value=-1;
-   for(i=0; i<x; i++){
-       ob_x.children[i].firstChild.addEventListener('click',element=>{
-           if(x_value === -1){
-             x_value = Array.from(ob_x.children).indexOf(element.target.parentNode); //return index
-             element.target.style.backgroundColor = "red";
-             setBlock();
-           }
-       });
-   }
-
-   for(i=0; i<y; i++){
-       ob_y.children[i].firstChild.addEventListener('click',element=>{
-           if(y_value === -1){
-             y_value = Array.from(ob_y.children).indexOf(element.target.parentNode); //return index
-             element.target.style.backgroundColor = "red";
-             setBlock();
-           }
-       });
-   }
-
-   for(i=0; i<z; i++){
-       ob_z.children[i].firstChild.addEventListener('click',element=>{
-           if(z_value === -1){
-             z_value = Array.from(ob_z.children).indexOf(element.target.parentNode); //return index
-             element.target.style.backgroundColor = "red";
-             setBlock();
-           }
-       });
-   }
+    
    coords_label = document.getElementById('coords-label');
    let pyramid_icon_path = static_path+"imgs/pyramid-icon-24.png",
            html_coord = `<div class="row justify-content-center">
@@ -97,6 +96,8 @@ window.addEventListener('load',()=>{
             clean_selector_display()
        }
    }
+
+
    function clean_selector_display(){
     let i;    
     for(i=0;i<x;i++){

@@ -11,13 +11,7 @@ class SnakeEnvironment{
     }
 
     read_environment(){
-        `  
-            Read Apple Position in the Grid: 
-            Read Danger Positions in the Grid:
-                Walls, Body Parts (snake tail)
-            Read Current Cell of Snake:
-                Blank, Danger, Apple
-        `
+    
         let env_sensor = {"applePos":[
              apple.object.position.x,
              apple.object.position.y,

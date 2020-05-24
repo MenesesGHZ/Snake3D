@@ -1,6 +1,7 @@
 class SnakeAgent{
     constructor() {
         this.actions = ['a', 'w', 's', 'd', 'none'];
+        this.directions = {"100":"x","-100":"-x","010":"y","0-10":"-y","001":"z","00-1":"-z"}
         this.currentCell = "b";
     }
     read_state(env_elements){
@@ -18,7 +19,7 @@ class SnakeAgent{
             direction,scope;
 
         for(let i=0;i<this.actions.length;i++){
-            direction = snake.directionController["AI"][this.actions[i]]
+            direction = snake.directionController["FIRST_P"][this.actions[i]]
             if(direction[0]!==0){
                   scope = pos_x+direction[0];
                   if(scope >x-1 || scope<0 || this.will_position_in_tail([scope,pos_y,pos_z]) ){
@@ -42,8 +43,8 @@ class SnakeAgent{
         if(env_elements["applePos"][0] ===  pos_x && env_elements["applePos"][1] ===  pos_y && env_elements["applePos"][2] ===  pos_z){
             this.currentCell = "a";
         }
-
-        return "{0}{1}{2}{3}{4}{5}{6}{7}".format(
+      
+        return "{0}{1}{2}{3}{4}{5}{6}{7}{8}".format(
             Math.sign(apple.object.position.x - pos_x),
             Math.sign(apple.object.position.y - pos_y),
             Math.sign(apple.object.position.z - pos_z),
@@ -51,7 +52,8 @@ class SnakeAgent{
             cell_if_action["w"],
             cell_if_action["s"],
             cell_if_action["d"],
-            cell_if_action["none"]
+            cell_if_action["none"], 
+            this.directions["{0}{1}{2}".format(...snake.currentDirection[0])]
         );
     }
 
@@ -94,6 +96,3 @@ class SnakeAgent{
     }
 
 }
-
-
-
