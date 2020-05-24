@@ -47,9 +47,6 @@ window.addEventListener('load',()=>{
 
 document.getElementById('feature-player-mode').addEventListener('click',()=>{
     snake.clear(0.01,true);
-
-   
-
     scene.position.set(0,0,0); 
     
     camera.position.set(
@@ -57,12 +54,7 @@ document.getElementById('feature-player-mode').addEventListener('click',()=>{
         snake.body[0].position.y,
         snake.body[0].position.z
         );
-    camera.lookAt(
-        snake.body[0].position.x + 2*snake.currentDirection[0][0],
-        snake.body[0].position.y + 2*snake.currentDirection[0][1],
-        snake.body[0].position.z + 2*snake.currentDirection[0][2]
-    );
-
+    camera.rotation.set(0,Math.PI,0)
     camera_control.enabled = false;
     camera_control.autoRotate = false;
     document.getElementById('control-orbit-controls-input').checked = false;
@@ -71,18 +63,15 @@ document.getElementById('feature-player-mode').addEventListener('click',()=>{
 });
 
 document.getElementById('trigger-AI').addEventListener('click',()=>{
-    if(snake.user_mode) {
         scene.position.set(-(x-1)/2,-(y-1)/2,-(z-1)/2);
-        snake.user_mode = false;
+        let speed = [0.05,0.1,0.5,1][parseInt(document.getElementById("feature-input-speed").value)-1];
+        snake.clear(speed,false);
         camera.position.set(3.7, 3.7, 3.7);
         camera_control = new THREE.OrbitControls(camera, renderer.domElement);
         camera_control.enabled = true;
         camera_control.autoRotate = true;
         document.getElementById('control-orbit-controls-input').checked = true;
         document.getElementById('control-auto-rotation-input').checked = true;
-    }else{
-        //Download policy FILE
-    }
     play = true;
 });
 

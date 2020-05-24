@@ -30,15 +30,19 @@ window.addEventListener('DOMContentLoaded', ()=>{
          this.lastPosition = [-1,-1,-1];
          this.tempDir = [];
          this.lastKeyCode = "none";
+        this.cameraTransitionConstant = Math.PI/32;
+        this.cameraControllerSign = {
+            "100": {"010":+1,"0-10":-1,"001":-1,"00-1":+1},
+            "-100": {"010":-1,"0-10":+1,"001":+1,"00-1":-1},
+            "010": {"100":-1,"-100":+1,"001":+1,"00-1":-1},
+            "0-10": {"100":+1,"-100":-1,"001":-1,"00-1":+1},
+            "001": {"100":+1,"-100":-1,"010":-1,"0-10":+1},
+            "00-1": {"100":-1,"-100":+1,"010":+1,"0-10":-1}
+            };
+        this.cameraRotationVec = new THREE.Vector3(0,0,0);
         this.cameraChanging = false;
-        this.cameraTransitionFactor = 0.1;
-        this.cameraCurrentPoint = [
-            this.body[0].position.x + this.currentDirection[0][0]*2,
-            this.body[0].position.y + this.currentDirection[0][1]*2,
-            this.body[0].position.z + this.currentDirection[0][2]*2
-        ];
-        this.cameraPastPoint = [0,0,0];
-        this.cameraTransitionSign = [0,0,0];
+        this.cameraTransitionCounter = 0;
+        this.cameraCurrentSign = 0;
       };
 
      oppositeController(keyCode_1,direction){
@@ -54,21 +58,14 @@ window.addEventListener('DOMContentLoaded', ()=>{
      }
      
      changeSnakeCamera(){
-            if( this.cameraTransitionFactor >= 1 ){
-                this.cameraTransitionFactor = 0.1;
+            camera.rotateOnWorldAxis(this.cameraRotationVec,this.cameraCurrentSign*this.cameraTransitionConstant)   
+            this.cameraTransitionConstant = Math.PI/32;
+            this.cameraTransitionCounter += 1;       
+            if( this.cameraTransitionCounter === 16 ){
+                this.cameraRotationVec.set( false,false,false );
                 this.cameraChanging = false;
-                camera.lookAt(
-                   ...this.cameraCurrentPoint
-                );
-            }
-            /*
-            camera.lookAt(
-                this.cameraPastPoint[0]+2*this.cameraTransitionSign[0]*this.cameraTransitionFactor,
-                this.cameraPastPoint[1]+2*this.cameraTransitionSign[1]*this.cameraTransitionFactor,
-                this.cameraPastPoint[2]+2*this.cameraTransitionSign[2]*this.cameraTransitionFactor
-                );
-           this.cameraTransitionFactor += 0.05; */   
-
+                this.cameraTransitionCounter = 0;
+            }  
         }
     
       move(){
@@ -89,38 +86,31 @@ window.addEventListener('DOMContentLoaded', ()=>{
                        }else{  
                            if (this.lastPosition[0] !== Math.round(this.body[0].position.x) ||
                                this.lastPosition[1] !== Math.round(this.body[0].position.y)  ||
-                              this.lastPosition[2]  !== Math.round(this.body[0].position.z)) {
-
-                                    this.lastPosition = [
+                               this.lastPosition[2] !== Math.round(this.body[0].position.z)) {
+                               this.lastPosition = [
                                         Math.round(this.body[0].position.x),
                                         Math.round(this.body[0].position.y),
                                         Math.round(this.body[0].position.z),
                                     ];
                                 if(snake.user_mode){
-                                        this.cameraChanging = 
-                                                this.currentDirection[0][0] !== this.chosenDirection[0] ||
-                                                this.currentDirection[0][1] !== this.chosenDirection[1] ||
-                                                this.currentDirection[0][2] !== this.chosenDirection[2];
-                                        this.cameraPastPoint = this.cameraCurrentPoint;
+                                    this.cameraChanging = 
+                                        this.currentDirection[0][0] !== this.chosenDirection[0] ||
+                                        this.currentDirection[0][1] !== this.chosenDirection[1] ||
+                                        this.currentDirection[0][2] !== this.chosenDirection[2];
+                                    if(this.cameraChanging){
+                                        this.cameraRotationVec.set(
+                                            this.currentDirection[0][0] === this.chosenDirection[0],
+                                            this.currentDirection[0][1] === this.chosenDirection[1],
+                                            this.currentDirection[0][2] === this.chosenDirection[2]
+                                        );
+                                        this.cameraCurrentSign = 
+                                            this.cameraControllerSign["{0}{1}{2}".format(...this.currentDirection[0])]["{0}{1}{2}".format(...this.chosenDirection)]
+                                        }
                                     }
                                     this.currentDirection[0] = this.chosenDirection;
                                     this.speed = this.chosenSpeed;
                                     this.directionController["FIRST_P"]["none"] = this.chosenDirection;
-                                    this.oppositeController(this.lastKeyCode,this.tempDir); 
-                                    this.cameraCurrentPoint = [
-                                        this.body[0].position.x + this.currentDirection[0][0]*2,
-                                        this.body[0].position.y + this.currentDirection[0][1]*2,
-                                        this.body[0].position.z + this.currentDirection[0][2]*2
-                                    ];
-                                    if(this.cameraChanging){
-                                        this.cameraTransitionSign = [
-                                            Math.sign(Math.round(this.cameraCurrentPoint[0] - this.lastPosition[0])),
-                                            Math.sign(Math.round(this.cameraCurrentPoint[1] - this.lastPosition[1])),
-                                            Math.sign(Math.round(this.cameraCurrentPoint[2] - this.lastPosition[2])),
-                                        ];
-                                    }
-                                    camera.lookAt(...this.cameraCurrentPoint);
-  
+                                    this.oppositeController(this.lastKeyCode,this.tempDir);        
                                 }   
                         }       
                     }      
@@ -132,7 +122,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
         }
         if(snake.user_mode){
             camera.position.set(...Object.values(this.body[0].position));
-            //if(this.cameraChanging) this.changeSnakeCamera();
+            if(this.cameraChanging) this.changeSnakeCamera();
         }  
     }
   
@@ -151,10 +141,14 @@ window.addEventListener('DOMContentLoaded', ()=>{
       }
 
       checkSnakeState(){
-               this.isValidTransition[0] =  //Check if the current position is valid to change direction
+               this.isValidTransition[0] = 
                    Math.abs(this.body[0].position.x - Math.round(this.body[0].position.x)) < this.translationError &&
                    Math.abs(this.body[0].position.y - Math.round(this.body[0].position.y)) < this.translationError &&
-                   Math.abs(this.body[0].position.z - Math.round(this.body[0].position.z)) < this.translationError;
+                   Math.abs(this.body[0].position.z - Math.round(this.body[0].position.z)) < this.translationError &&
+                   (this.lastPosition[0] !== Math.round(this.body[0].position.x) || 
+                    this.lastPosition[1] !== Math.round(this.body[0].position.y) ||
+                    this.lastPosition[2] !== Math.round(this.body[0].position.z));
+
                if (this.isValidTransition[0]) {
                    if(!this.user_mode) this.send_time_step_signal();
                    this.isValidEating =
@@ -246,8 +240,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 function restart_game(){
     if(!snake.user_mode) receive_update_signal();
-    else camera.position.set(snake.body[0].position.x, snake.body[0].position.y, snake.body[0].position.z);
     snake.clear(snake.chosenSpeed,snake.user_mode);
+    if(snake.user_mode){
+        camera.position.set(snake.body[0].position.x, snake.body[0].position.y, snake.body[0].position.z);
+        camera.rotation.set(0,Math.PI,0);
+    }
     walls.clear();
     apple.clear();
     delete_labeled_walls();
