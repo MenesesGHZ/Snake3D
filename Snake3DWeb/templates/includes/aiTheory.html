@@ -8,7 +8,8 @@
             <div class="m-2 font-times">
                 <p>Here we shall explain how we applied
                     one of the most common introductory methods on reinforcement learning
-                    to solve a goal-directed learning task using a Monte Carlo method.</p>
+                    to solve a goal-directed learning task using a Monte Carlo method. All the knowledge
+                    acquired was recovered from the book at below. </p>
             </div>
         </div>
     </div>
@@ -17,101 +18,108 @@
     </div>
     <div class="row mx-4">
         <p class="font-times">
-            The main point that most of the methods that have been developed on
+            The main point of most of the methods that have been developed on
             reinforcement learning field, it is that an certain agent must be capable to learn the 
-            dynamic of the environment that is confronting in base of the interaction
+            dynamic of the environment which is confronting in base of the interaction
             with the environment itself. This is one of tree paradigms of machine learning. 
         </p>
         <p class="font-times">
-            The Snake 3D AI scnerium yields a sitatuation which involve take a decision(action) 
-            in base of the situtation(state) that the current learning agent is. Being aware 
-            about that each action that the agent could take, could raise on future different states
+            The Snake 3D AI scenario yields a sitatuation that involves take a decision(action) 
+            in base of the situtation(state) about the current learning agent is. Being aware 
+            about each action the agent could take, could raise on future different states
             and different signals(rewards). This give us an overview about
             the Markov Decision Proccess, which is a mathematical framework that describe 
             general equations to solve this problem of having this sequential interaction base 
             on discrete time steps.
-            MDPs an abstraction of goal-directed learning with only tree main aspects, 
+            MDPs is an abstraction of goal-directed learning with only tree main aspects, 
             that are states \(S\), actions \(A\), and rewards \(R\).
             A sequential interaction can be described as \(s_0,a_0,r_1,s_1,a_1,r_2,\dots s_{T-1},a_{T-1},r_{T}\) where
             \(s_i \in S\), \(a_i \in A\), \(r_i \in R\) and \(T\) is the time step of the terminal state
             or absorbing state.
         </p>
         <p class="font-times">
-            In this case we have a finite Markov Decision Process which involve that the quantity of states that 
-            the learning agent can confront is less than inifnity, this same caracteristic aplies to the set of
-            actions that the agent could perfom, and to the set of rewards that agent could obtain.
-            Thus a way to solve this finite MDPs we prefer to implement Monte Carlo Methods. Even Though
-            other alterntives as a temporal diference learning.
+            In this case we have a finite Markov Decision Process which involves the quantity of states that 
+            an learning agent can confront is less than inifnity, this same caracteristic aplies to the set of
+            actions that an agent could perfom, and to the set of rewards that an agent could obtain.
+            Thus a way to solve this finite MDPs we prefered to implement Monte Carlo Methods. Even Though
+            other alterntives as a temporal diference learning can apply.
         </p>
         <p class="font-times">
             Monte Carlo Methods is a way to solve the sequential action selection that we have previously 
-            seen when we do not have the state-transition probabilities. Whereas one of the best atritubtes that Monte Carlo
-            methods have, it is the fact that they only need experience samples to learn. 
-            It learns in an episodic form and it is base on the MDP framework 
-             therefore we are going to use a set of States, Actions and Rewards to make the evaluations.
-            In first place we need to determine the value of an action \(a_i\) in a certain state \(s_i\), given by
-            the expresion \(q(s,a)\). In this case Monte Carlo methods calculates \(q(s,a)\) base on the expected return which is 
-            the average of all the returns that agent has obtained. The return itself is express with the next formula
+            talked, when we do not have the state-transition probabilities. Whereas one of the best atritubtes that Monte Carlo
+            methods have, it is the fact they only need experience's samples to learn. 
+            It learns at the end of an episodic step, and it is base on the MDP framework.
+             Therefore we are going to use a set of States, Actions and Rewards to make this experience's samples.
+            First we needed to determine the value of an action \(a_i\) in a certain state \(s_i\), given by
+            the expresion \(q(s,a)\). In this case Monte Carlo methods calculates \(q_*(s,a)\) base on the expected return which is 
+            the average of all the returns the agent has obtained. The return itself is interpreted with the next formula
             \[ Gt = \sum_{k=t+1}^{T} \gamma^{k-t-1} \cdot R_k\]
-            Where the \(\gamma \) constant indicates the discount rate factor which can have a value between 0 and 1.
+            Where the \(\gamma \) constant indicates the discount rate factor, which can have a value between 0 and 1.
              And it is going to determine how much is important the future acumulative reward. 
             Thus the value of an action given a state under an policy is equal to
             \[q_{\pi}(s,a) = \mathbb{E}[Gt | S_t = s] \] 
-            However we do not have any policy, where informally a policy is 
-            the way that an agent must behave or act in a certain state. In general when 
-            we do not know the dynamic of the environment is denoted as 
+            However we did not have any policy, where informally a policy is 
+            the way that an agent must behave or act in a certain state. In despite of not been able
+            to determine the value of state \(v(s)\) directly, 
+            we discovered our policy associating the value of each action with each state.
+            So the value on an action given a state is denoted by:
             \( \pi(s) =  \arg\max_{a} q_{\pi}(s,a)\).
-            Thus we are going to start with an arbitrary policy \(\pi_0\).
-            So we are going to evaluate our policy by selecting greedy each time step and then base on 
-            the returns obtained we improve at the end of the episode to get the new evaluated policy until we reach an optimal policy
+            Thus we started with an arbitrary policy \(\pi_0\).
+            We evaluated our policy by selecting greedy each time step and then base on 
+            the returns obtained we improved at the end of the episode to get the new evaluated policy until we reached an optimal policy
             denoted by \(\pi_*\).  
         </p>
         <p class="font-times">
             At this point we are going to explain and describe how we estructure our states, actions,
              and rewards, that are implemented in this Snake 3D AI. 
-            We toght that it could be right to set the state structure by the snake position followed
+            We thought it could be right to set-up the state structure by the snake position followed
             by the apple position, and also adding the current direction of the snake. Initially if we analyze the environment it is easy to see that we 
             count with \(4^3\) posible positions for the snake to be, and \(4^3\) posible positions 
             for the apple. 
             Also analyzing the posibles directions that the snake could perform are 5, in perspective from its current direction.
-             The total amount of states that the snake could confront is equal to
-
+             The total amount of states the snake could confront is equal to
             \[|S| = \textrm{Snake Positions} \cdot \textrm{Apple Positions} \cdot \textrm{Posible Directions}\]
             \[|S| = 4^3 \cdot 4^3 \cdot 5 = 20,480 \]
-            Then we realize that in the moment that the snake grid grows, it is going to be a lot 
-            more posible states, and than means that it will take more time and computation to achieve 
+            Then we realized that in the moment the snake's grid grows, it is going to be a lot 
+            more posible states, and means that it will take more time and computation to achieve 
             the optimal policy. Therefore our goal was to find the way to implement
-             our Snake's states maintaining the Markov property and avoiding this rate of grow.
+             our snake's states maintaining the Markov property, and avoiding this rate of grow.
             At the end the best way that we found for the states's structure was to only describing
-            the direction that the agent must go in order to reach the apple, and also telling to 
+            the direction the agent must go in order to reach the apple, also telling
             the agent if the next position it is a losing position or not by each 
-            posible directions to go.
+            posible directions to go, and the snake's direction.
             Where now the amount of posible states is followed by
         </p>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
         <p>
-            \[|S| = \textrm{Directions to Apple} \cdot \textrm{Boolean states each action} \]
-            \[|S| = 3^3 \cdot 2^5 = 864\]
+            \[|S| = \textrm{Direction to Apple} \cdot \textrm{Boolean Next Positions} \cdot \textrm{Current Direction} \]
+            \[|S| = 3^3 \cdot 2^5 \cdot 6 = 5,184\]
         </p>
     </div>
-    <div class="row">     
+    <div class="row mx-4">     
         <p class="font-times">
-            The set of action that the agent can perform is represented as \( A = \{(\textrm{'a','right'}),(\textrm{'w','up'}),
-            (\textrm{'s','down'}),(\textrm{'d','left'}),(\textrm{'none','current direction'})\)
+            The set of action the agent can perform is represented as 
         </p> 
+    </div>
+    <div class="row justify-content-center">
+        <p>
+            \[ A = \{(\textrm{'a',right}),(\textrm{'w',up}),
+            (\textrm{'s',down}),(\textrm{'d',left}),(\textrm{'',current direction})\}\]
+        </p>
     </div>
 
     <div class="row mx-4">
         <p class="font-times">
             As an instance about how the state's structure is
-            \[s_i = \textrm{'001bbdbb'}\] 
-            The tree first characters \(\textrm{001}\) are telling that the snake is at the same \(x\) and \(y\) coordinates that the apple,
+            \[s_i = \textrm{'001bbdbbx'}\] 
+            The tree first characters \(\textrm{001}\) are telling the snake is at the same \(x\) and \(y\) coordinates that the apple,
             but its \(z\) position is before than the apple's \(z\), thus the agent must learn 
             that going to an positive \(z\) direction will reach the apple. 
             Also the rest characters \( \textrm{ bbdbb}\) are refering about what is 
-            the type of cell that the agent can confront, being 'b' as blank cell, or 'd' as a danger cell, 
-            if the agent take an \(a_i\) respectivly.
+            the type of cell the agent can confront, being 'b' as blank cell, or 'd' as a danger cell, 
+            if the agent take an \(a_i\) respectivly. And the las one character is defining the snake current direction which in 
+            this case is only going positive trough the x axis.
             The set of rewards are the next ones
             \[R = \{(\textrm{blank},-0.5),(\textrm{danger},-2),(\textrm{apple},2)\}\]
             Meaning that if the agent is in a blank cell therefore he is going to obtain a reward of \(-0.5\) and so on.

@@ -1,8 +1,9 @@
-let score_el,episode_el, length_el;
+let score_el,episode_el, length_el,gridSize_el;
 window.addEventListener('load',()=>{
     score_el = document.getElementById('description-score');
     episode_el = document.getElementById('description-iteration');
     length_el = document.getElementById('description-snake-length');
+    gridSize_el = document.getElementById('description-grid-size');
 });
 
 function right_bar_update(length=null){
@@ -16,4 +17,5 @@ function right_bar_update(length=null){
         length_el.innerHTML = 1;
     }
 }
+
 

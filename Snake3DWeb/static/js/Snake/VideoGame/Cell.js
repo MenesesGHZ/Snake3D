@@ -127,18 +127,21 @@ window.addEventListener("load",()=>{
     document.getElementById('input-resize-x').addEventListener('change',element=>{
         new_x = element.target.value;
         resize_grid(new_x,y,z);
+        gridSize_el.innerHTML = "[ {0}, {1}, {2} ]".format(new_x,y,z);
         calibrate_cell();
     });
 
     document.getElementById('input-resize-y').addEventListener('change',element=>{
         new_y = element.target.value;
         resize_grid(x,new_y,z);
+        gridSize_el.innerHTML = "[ {0}, {1}, {2} ]".format(x,new_y,z);
         calibrate_cell();
     });
 
     document.getElementById('input-resize-z').addEventListener('change',element=>{
         new_z = element.target.value;
         resize_grid(x,y,new_z);
+        gridSize_el.innerHTML = "[ {0}, {1}, {2} ]".format(x,y,new_z);
         calibrate_cell()
     });
     function calibrate_cell(){
