@@ -83,8 +83,4 @@ window.addEventListener('load',()=>{
 
 
 
-
-
-
-
 });

@@ -1,4 +1,5 @@
-                   <div class="container-fluid bg-light shadow-lg h-100 d-none" id="features-nav">
+{% load static %}
+        <div class="container-fluid bg-light shadow-lg h-100 d-none" id="features-nav">
                        <div class="row h-25">
                            <div class="col-12 d-flex align-items-center justify-content-center ">
                               <p class="m-0 font-electro" style="font-size: 18pt; letter-spacing: 2px">
@@ -20,7 +21,15 @@
                               </p>
                           </div>
                       </div>
-
+                     
+                      <div class="row h-10 ">
+                        <div class="col-12 d-flex justify-content-center align-items-center">
+                            <p class="m-0 font-electro" style="color: rgba(0,0,0,0.4);">
+                                See Snake Metrics
+                            </p>
+                        </div>
+                    </div>
+                    <!--
                        <div class="row h-10 cursor-pointer feature">
                           <div class="col-12 d-flex justify-content-center align-items-center">
                               <p class="m-0 font-electro" id="feature-metrics">
@@ -28,6 +37,7 @@
                               </p>
                           </div>
                       </div>
+                    -->
                        <div class="row h-10 cursor-pointer feature">
                           <div class="col-12 d-flex justify-content-center align-items-center">
                               <p class="m-0 font-electro" id="feature-player-mode">
@@ -43,4 +53,40 @@
                               Go Back
                            </p>
                        </div>
+                  </div>
+                  <div class="modal fade" id="controlsModal" tabindex="-1" role="dialog" aria-labelledby="controlsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row justify-content-between">
+                                    <img src="{% static 'imgs/snake-icon.png' %}" alt="img" width="30px" height="auto">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                </div>
+                                <div class="row my-3 justify-content-between">
+                                    <p class="font-electro" style="font-size: 18pt;">
+                                        First Person Controls
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p class="font-times">a: Left</p>
+                                </div>
+                                <div class="row">
+                                    <p class="font-times">w: Up </p>
+                                </div>
+                                <div class="row">
+                                    <p class="font-times">s: Down</p>
+                                </div>
+                                <div class="row">
+                                    <p class="font-times">d: Right </p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <img src="{% static 'imgs/arrow-key.png' %}" alt="img">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>

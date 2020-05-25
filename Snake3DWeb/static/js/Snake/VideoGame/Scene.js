@@ -6,8 +6,8 @@ let scene = null,
 
 
 window.addEventListener('load',()=>{
-    //let rx = document.getElementById('rx');
-    scene = new THREE.Scene();
+    let eventType = 'ontouchstart' in window ? 'touchstart' : 'click';
+        scene = new THREE.Scene();
     let renderer = new THREE.WebGLRenderer({ antialias: true, alpha:true }),
         canvas = document.getElementById('canvas'),
         frame_relation = canvas.offsetWidth/canvas.offsetHeight;
@@ -46,7 +46,7 @@ window.addEventListener('load',()=>{
 
 
 document.getElementById('feature-player-mode').addEventListener('click',()=>{
-    snake.clear(0.02,true);
+    snake.clear(0.015,true);
     scene.position.set(0,0,0);
     camera.position.set(
         snake.body[0].position.x,
@@ -58,13 +58,16 @@ document.getElementById('feature-player-mode').addEventListener('click',()=>{
     camera_control.autoRotate = false;
     episode_el.innerHTML = 0;
     score_el.innerHTML = 0;
-    method_el.innerHTML = "Keyboard Pressing";
+    method_el.innerHTML = "Keyboard Pressing :)";
+    $("#controlsModal").modal('show');
     document.getElementById('control-orbit-controls-input').checked = false;
     document.getElementById('control-auto-rotation-input').checked = false;
     play = true;
 });
 
-document.getElementById('trigger-AI').addEventListener('click',()=>{
+let triggerAI = document.getElementsByClassName('trigger-AI');
+for(let i=0; i<triggerAI.length;i++){
+    triggerAI[i].addEventListener(eventType,()=>{
         scene.position.set(-(x-1)/2,-(y-1)/2,-(z-1)/2);
         let speed = [0.05,0.1,0.5,1][parseInt(document.getElementById("feature-input-speed").value)-1];
         snake.clear(speed,false);
@@ -72,15 +75,15 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
         camera_control = new THREE.OrbitControls(camera, renderer.domElement);
         camera_control.enabled = true;
         camera_control.autoRotate = true;
-        episode_el.innerHTML = 0;
+        episode_el.innerHTML = environment.episode_step;
         score_el.innerHTML = environment.max_score;
-        console.log(environment.max_score);
-        alert('A');
         method_el.innerHTML = "Monte Carlo";
         document.getElementById('control-orbit-controls-input').checked = true;
         document.getElementById('control-auto-rotation-input').checked = true;
-    play = true;
-});
+        play = true;
+    });
+    }
+
 
 
 

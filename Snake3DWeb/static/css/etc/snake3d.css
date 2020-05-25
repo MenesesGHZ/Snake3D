@@ -81,7 +81,7 @@ p{
 .feature:hover{
     text-decoration-color: black;
 }
-#trigger-AI{
+.trigger-AI{
     background-color: #ffc300;
     color:black;
     font-size: 18pt;
@@ -95,7 +95,7 @@ p{
     cursor: pointer;
 }
 
-#trigger-AI:hover{
+.trigger-AI:hover{
     background-color: black;
     color:white;
 }
@@ -123,3 +123,17 @@ p{
 
 
 
+@media screen and (max-width: 992px) {
+    .no-mobile {
+      display: none;
+    }
+    .only-mobile{
+        display: block;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    .only-mobile{
+        display: none;
+    }
+  }

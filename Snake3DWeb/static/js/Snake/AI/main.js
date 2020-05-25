@@ -27,7 +27,7 @@ function time_step_signal(){
 
 
 function receive_update_signal(){
-  update_statistic_data();  
+  //update_statistic_data();  
   policy.update_policy(environment.markov_trajectory);
   environment.markov_trajectory = [];
   environment.time_step = 0;

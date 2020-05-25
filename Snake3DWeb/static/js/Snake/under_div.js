@@ -3,12 +3,12 @@ let  graph_el_1 = null,
      graph_el_3 = null,
      displaying_graphs = false;
 window.addEventListener('load',()=> {
-    let html_el = document.getElementsByTagName('html')[0],
+    
+    let html_el = document.getElementsByTagName('html')[0]
         under_div = document.getElementById('under-div'),
-        snake_metrics = document.getElementById('snake-metrics'),
         snake_theory = document.getElementById('snake-theory');
-
-
+        /*
+        snake_metrics = document.getElementById('snake-metrics'),
     function graph_1() {
         let trace1 = {
             x:[],
@@ -21,7 +21,6 @@ window.addEventListener('load',()=> {
             yaxis: {title: "Time Step"},
             xaxis: {title: "Episode Step"}
         };
-
         let data = [trace1];
         Plotly.newPlot('graph-1', data, layout);
     }
@@ -71,20 +70,22 @@ window.addEventListener('load',()=> {
             graph_2();
             graph_3();
         });
+
     document.getElementById('metric-input-step').addEventListener('input',(element)=>{
         metric_step = element.currentTarget.value;
     });
+    */
 
     document.getElementById("theory-div").addEventListener('click', () => {
             html_el.style.overflowY = "visible";
             under_div.classList.remove('d-none');
-            snake_metrics.classList.add('d-none');
+            //snake_metrics.classList.add('d-none');
             snake_theory.classList.remove('d-none');
         });
 
 });
 
-
+/*
 let metric_step = 4;
 function update_statistic_data() {
         if (displaying_graphs && environment.time_step % metric_step === 0) {
@@ -93,6 +94,7 @@ function update_statistic_data() {
             Plotly.extendTraces(graph_el_3, {x:[[environment.episode_step]], y: [[snake.length-1]]}, [0],11);
         }
 }
+*/
 
 
 
