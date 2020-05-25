@@ -40,7 +40,7 @@ function receive_update_signal(){
 
 function read_learning(){
   let rawFile = new XMLHttpRequest();
-      let file_path = static_path + "js/Snake/AI/policy2.json"
+      let file_path = static_path + "js/Snake/AI/brain.json"
         rawFile.open("GET",file_path,false);
           rawFile.onreadystatechange = function() {
               if(rawFile.readyState === 4) {

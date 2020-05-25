@@ -4,6 +4,7 @@ window.addEventListener('load',()=>{
     episode_el = document.getElementById('description-iteration');
     length_el = document.getElementById('description-snake-length');
     gridSize_el = document.getElementById('description-grid-size');
+    method_el = document.getElementById('description-method')
 });
 
 function right_bar_update(length=null){

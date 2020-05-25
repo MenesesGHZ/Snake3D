@@ -60,8 +60,9 @@ window.addEventListener('load',()=> {
 
     document.getElementById('feature-metrics').addEventListener('click', () => {
             html_el.style.overflowY = "visible";
-            under_div.classList.remove('d-none');
+            snake_theory.classList.add('d-none');
             snake_metrics.classList.remove('d-none');
+            under_div.classList.remove('d-none');
             graph_el_1 = document.getElementById('graph-1');
             graph_el_2 = document.getElementById('graph-2');
             graph_el_3 = document.getElementById('graph-3');
@@ -77,6 +78,7 @@ window.addEventListener('load',()=> {
     document.getElementById("theory-div").addEventListener('click', () => {
             html_el.style.overflowY = "visible";
             under_div.classList.remove('d-none');
+            snake_metrics.classList.add('d-none');
             snake_theory.classList.remove('d-none');
         });
 

@@ -46,9 +46,8 @@ window.addEventListener('load',()=>{
 
 
 document.getElementById('feature-player-mode').addEventListener('click',()=>{
-    snake.clear(0.01,true);
-    scene.position.set(0,0,0); 
-    
+    snake.clear(0.02,true);
+    scene.position.set(0,0,0);
     camera.position.set(
         snake.body[0].position.x,
         snake.body[0].position.y,
@@ -57,6 +56,9 @@ document.getElementById('feature-player-mode').addEventListener('click',()=>{
     camera.rotation.set(0,Math.PI,0)
     camera_control.enabled = false;
     camera_control.autoRotate = false;
+    episode_el.innerHTML = 0;
+    score_el.innerHTML = 0;
+    method_el.innerHTML = "Keyboard Pressing";
     document.getElementById('control-orbit-controls-input').checked = false;
     document.getElementById('control-auto-rotation-input').checked = false;
     play = true;
@@ -70,6 +72,11 @@ document.getElementById('trigger-AI').addEventListener('click',()=>{
         camera_control = new THREE.OrbitControls(camera, renderer.domElement);
         camera_control.enabled = true;
         camera_control.autoRotate = true;
+        episode_el.innerHTML = 0;
+        score_el.innerHTML = environment.max_score;
+        console.log(environment.max_score);
+        alert('A');
+        method_el.innerHTML = "Monte Carlo";
         document.getElementById('control-orbit-controls-input').checked = true;
         document.getElementById('control-auto-rotation-input').checked = true;
     play = true;
