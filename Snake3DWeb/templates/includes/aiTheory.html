@@ -45,10 +45,10 @@
             other alterntives as a temporal diference learning can apply.
         </p>
         <p class="font-times">
-            Monte Carlo Methods is a way to solve the sequential action selection that we have previously 
-            talked, when we do not have the state-transition probabilities. Whereas one of the best atritubtes that Monte Carlo
+            Monte Carlo Methods are a way to solve the sequential action selection that we have previously 
+            mentioned, when we do not have the state-transition probabilities. Whereas one of the best atritubtes that Monte Carlo
             methods have, it is the fact they only need experience's samples to learn. 
-            It learns at the end of an episodic step, and it is base on the MDP framework.
+            It learns at the end of each episodic step, and it is base on the MDP framework.
              Therefore we are going to use a set of States, Actions and Rewards to make this experience's samples.
             First we needed to determine the value of an action \(a_i\) in a certain state \(s_i\), given by
             the expresion \(q(s,a)\). In this case Monte Carlo methods calculates \(q_*(s,a)\) base on the expected return which is 
@@ -86,7 +86,7 @@
              our snake's states maintaining the Markov property, and avoiding this rate of grow.
             At the end the best way that we found for the states's structure was to only describing
             the direction the agent must go in order to reach the apple, also telling
-            the agent if the next position it is a losing position or not by each 
+            the agent if the next position it is a loosing position or not by each 
             posible directions to go, and the snake's direction.
             Where now the amount of posible states is followed by
         </p>
@@ -113,12 +113,12 @@
         <p class="font-times">
             As an instance about how the state's structure is
             \[s_i = \textrm{'001bbdbbx'}\] 
-            The tree first characters \(\textrm{001}\) are telling the snake is at the same \(x\) and \(y\) coordinates that the apple,
-            but its \(z\) position is before than the apple's \(z\), thus the agent must learn 
+            The tree first characters \(\textrm{001}\) are telling the snake is at the same \(x\) and \(y\) coordinates the apple,
+            but its \(z\) position is before than the apple's \(z\). Thus the agent must learn 
             that going to an positive \(z\) direction will reach the apple. 
             Also the rest characters \( \textrm{ bbdbb}\) are refering about what is 
-            the type of cell the agent can confront, being 'b' as blank cell, or 'd' as a danger cell, 
-            if the agent take an \(a_i\) respectivly. And the las one character is defining the snake current direction which in 
+            the type of cell the agent can confront, being 'b' as blank cell, or 'd' as a danger cell.
+            If the agent take an \(a_i\) respectivly. And the last one character is defining the snake current direction which in 
             this case is only going positive trough the x axis.
             The set of rewards are the next ones
             \[R = \{(\textrm{blank},-0.5),(\textrm{danger},-2),(\textrm{apple},2)\}\]

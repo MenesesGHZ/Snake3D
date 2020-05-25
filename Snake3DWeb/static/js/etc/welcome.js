@@ -7,12 +7,31 @@ window.addEventListener('load',()=>{
                     We are two students from CETYS University that are currently studying 
                     computational science in fourth semester. This platform was a final project
                     of computer graphics asignature, but we wanted
-                    to do more than just apply some graphics oriented. The team was conformed by Gerardo Hern&#225;ndez Meneses  
-                    and Pablo Diaz Ochoa.
+                    to develop more than an oriented graphic project.
                 </p>
             </div>
         </div>
      `;
+    welcome_text += ` 
+    <div class="row mt-3 mb-2 justify-content-center">
+        <p class="font-times"> Developer Team: </p>
+    </div>
+    <div class="row justify-content-around mx-4 ">
+        <p class="font-times">
+        Gerardo Hern&#225;ndez Meneses 
+        </p> 
+        <p class="font-times" style="color:#961bff">
+            AI and Game Programmer
+        </p> 
+    </div>
+    <div class="row justify-content-around mx-4">
+        <p class="font-times">
+        Pablo Diaz Ochoa
+        </p> 
+        <p class="font-times" style="color:#961bff">
+           Game Programmer
+        </p> 
+    </div>`;
     welcome_text += `
     <div class="row my-4 justify-content-center align-items-center">
     <a href="https://github.com/MenesesGHZ/Snake3D">
