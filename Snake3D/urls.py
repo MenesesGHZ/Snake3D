@@ -19,7 +19,18 @@ from django.urls import path
 from . import settings
 from Snake3DWeb.views import Snake3D
 
+#tresstogo api
+from django.urls import include
+from rest_framework import routers
+from Snake3DWeb.views import api_email
+
+router = routers.DefaultRouter()
+router.register(r'email-api', api_email, basename='email-api')
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Snake3D.as_view(), name="snake3d"),
+     path('email-api/',api_email,name="email-api"),
 ] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)  # MEDIA_URL, MEDIA_ROOT
