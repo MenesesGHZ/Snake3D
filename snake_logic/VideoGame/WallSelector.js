@@ -55,7 +55,7 @@ window.addEventListener('load',()=>{
 
     
    coords_label = document.getElementById('coords-label');
-   let pyramid_icon_path = static_path+"imgs/pyramid-icon-24.png",
+   let pyramid_icon_path = "./static/imgs/pyramid-icon-24.png",
            html_coord = `<div class="row justify-content-center">
                              <div class="col-10 d-flex align-items-center justify-content-around font-electro">
                                 <img src="${pyramid_icon_path}" alt="pyramid-icon" width="22" height="22">

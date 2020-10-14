@@ -6,5 +6,9 @@
   <hr width="35%">
 </div>
 <div align="center">
-  <a href="https://www.snake-3d.com/">www.snake-3d.com</a>
+  <a href="https://www.snake-3d.com/">git.url.some.com</a>
 </div>
+
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

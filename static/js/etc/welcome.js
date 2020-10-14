@@ -43,9 +43,9 @@ window.addEventListener('load',()=>{
     welcome_text += `
     <div class="row my-4 justify-content-center align-items-center">
     <a href="https://github.com/MenesesGHZ/Snake3D">
-    <img src="{0}imgs/github-icon.png" alt="img"  width="auto" height="auto">
+    <img src="./static/imgs/github-icon.png" alt="img"  width="auto" height="auto">
     </a>
-</div>`.format(static_path);
+</div>`;
 
     let warning_text = `<div class="row justify-content-center align-items-center">
                     <div class="col-11">

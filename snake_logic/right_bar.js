@@ -7,7 +7,7 @@ window.addEventListener('load',()=>{
     method_el = document.getElementById('description-method')
 });
 
-function right_bar_update(length=null){
+window.right_bar_update = function(length=null){
     if(length!==null ){
         length_el.innerHTML = length;
         if( parseInt(score_el.innerHTML)<length-1){
