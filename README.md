@@ -1,12 +1,11 @@
 # Snake3D
-<div align="center">
-<img src="https://github.com/MenesesGHZ/Snake3D/blob/master/Snake3DWeb/static/imgs/snake-icon-128.png" alt="main-image" width="auto" height="auto">
+
+<div align="center" width="100%">
+  <img src="https://github.com/MenesesGHZ/Snake3D-JS/blob/master/static/imgs/snake_3d.gif" alt="main-image" width="350px" height="auto">
 </div>
-<div align="center">
-  <hr width="35%">
-</div>
-<div align="center">
-  <a href="https://www.snake-3d.com/">git.url.some.com</a>
+
+<div align="center" width="100%">
+  <a href="https://menesesghz.github.io/Snake3D-JS">https://menesesghz.github.io/Snake3D-JS</a>
 </div>
 
 
