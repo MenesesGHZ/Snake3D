@@ -7,7 +7,3 @@
 <div align="center" width="100%">
   <a href="https://menesesghz.github.io/Snake3D-JS">https://menesesghz.github.io/Snake3D-JS</a>
 </div>
-
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
